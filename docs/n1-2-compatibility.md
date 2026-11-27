@@ -393,3 +393,40 @@ Use the upstream source recipe and declared input checksum already recorded abov
 verify the actual resulting biblatex version, then request approval of its matching
 Biber and exact archives before execution. Do not substitute the candidate into
 the existing compatibility unit or infer package identity from the year label.
+
+### Complete official acquisition and verification hold
+
+The bounded acquisition completed on its first attempt from the official URL.
+The archive is retained outside Git at the selected artifact store under
+`quarantine/d79dce7a8e8449a99a5030b328847905/attempt-0.tar`.
+Actual size: 2,881,562,112 bytes. Locally measured archive SHA-256:
+`425685e124746c15ba9bb8e0596bdaad98fce886afa347fbcf9ec0e9acd7fe79`.
+Tar inspection found 134,980 regular members, no duplicate names or special
+members. Embedded metadata records SVNREV 62885, GITHASH
+`082081a375be008c2e049cd7cf1137314f888b18`, and the internal fingerprint
+`6ffe055852f8faf66c0acbe1a7fb27f87b869a90bad1204f3bf4d9683f597c7c`.
+The fingerprint agrees with the prior successful CI cache namespace, but is not
+an independently published archive checksum. The embedded Git reference could
+not be resolved as a commit/tree in the archived upstream bundle repository.
+The user confirmed having no independent checksum reference. These observations
+are not promoted into verification or an approved runtime lock. The acquisition
+receipt is committed; the large archive remains quarantined and was not compiled,
+converted, uploaded or published.
+
+[CI run 46051321188](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46051321188)
+checks source `d1b721460c0b4e23cfe3df97a06bc6a2b18879fa`. The independent
+regression job passed all 26 tests. The Linux job also passed 26 tests, then
+stopped with `Provisioning blocked: local bundle and reviewed bundle lock are
+required; remote fallback is disabled`. This primary diagnostic is directly
+visible in the job output and summary. The failed provisioning result is retained;
+no compatibility pass is inferred from the test job's success.
+
+Implementation status is deliberately partial at the verification gate:
+local ZIP verification, source-lock-gated candidate packaging, manifest binding,
+revised cache policy tests, independent regression execution, primary CI
+summaries and historical evidence retention are implemented. Actual ZIP
+promotion, approved lock pins, dependency-asset publication, verified CI cache
+activation, all-three-platform compilation, OS-enforced network denial and
+independent rendered-page inspection remain unimplemented or not_run pending
+that gate. There is no claim that a new local bundle has compiled successfully.
+N1.2 is **not ready for acceptance**.

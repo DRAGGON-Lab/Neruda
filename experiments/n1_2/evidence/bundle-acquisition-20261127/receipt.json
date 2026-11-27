@@ -1,0 +1,31 @@
+{
+  "url": "https://data1.fullyjustified.net/tlextras-2022.0r0.tar",
+  "status": "quarantined; archive checksum not independently corroborated",
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "downloaded; independent checksum still required",
+      "bytes": 2881562112
+    }
+  ],
+  "timestamp": "2026-11-27T18:43:50.611713+00:00",
+  "bytes": 2881562112,
+  "measured_sha256": "425685e124746c15ba9bb8e0596bdaad98fce886afa347fbcf9ec0e9acd7fe79",
+  "metadata": {
+    "SVNREV": {
+      "size": 6,
+      "prefix": "62885\n"
+    },
+    "GITHASH": {
+      "size": 41,
+      "prefix": "082081a375be008c2e049cd7cf1137314f888b18\n"
+    },
+    "SHA256SUM": {
+      "size": 64,
+      "prefix": "6ffe055852f8faf66c0acbe1a7fb27f87b869a90bad1204f3bf4d9683f597c7c"
+    }
+  },
+  "member_count": 134980,
+  "duplicate_names": 0,
+  "special_members": 0
+}
