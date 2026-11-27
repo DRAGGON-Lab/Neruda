@@ -68,3 +68,16 @@ verified Tectonic into the same directory. This is not an automatic runner step.
 See the compatibility report for exact source/derived hashes and the observed
 signature and HTTP 429 limitations. Do not repair signatures or install system
 tools as part of this procedure. All build cases retain the existing runner CLI.
+
+## Provenance and cache refusal behavior
+
+Git warnings are retained in `git_diagnostics`, separately from revision and
+porcelain dirty-state stdout. Unavailable/invalid Git metadata prevents compilation
+with exit 2 and an exported not_run receipt.
+
+Warm/offline reuse requires an exact current file inventory match to the successful
+cold receipt. Do not modify the cache between cases. Added, missing or changed
+files, links and unsupported/unreadable entries are refused before compilation.
+A warm build changing the inventory requires a fresh cold experiment; a later
+receipt does not automatically authorize the changed cache. Existing evidence
+and cache contents are preserved on refusal.

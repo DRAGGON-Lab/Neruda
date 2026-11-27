@@ -7,6 +7,7 @@ from pathlib import Path
 import platform
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -25,6 +26,44 @@ def execute(argv, cwd=None, env=None, timeout=600):
     result = subprocess.run(argv, cwd=cwd, env=env, text=True,
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=timeout)
     return result.returncode, result.stdout
+
+
+def source_metadata():
+    metadata = {"source_revision": None, "dirty_state": None, "git_diagnostics": {}}
+    for field, arguments in (("source_revision", ["rev-parse", "--verify", "HEAD^{commit}"]),
+                             ("dirty_state", ["status", "--porcelain"])):
+        try:
+            result = subprocess.run(["/usr/bin/git", *arguments], cwd=HERE,
+                                    env={"PATH": "/usr/bin:/bin"}, text=True,
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=60)
+            diagnostic = {"exit_code": result.returncode, "stderr": result.stderr}
+            value = result.stdout.strip() if field == "source_revision" else result.stdout
+            if result.returncode == 0 and (field != "source_revision" or re.fullmatch(r"[0-9a-f]{40}", value)):
+                metadata[field] = value
+            else:
+                diagnostic.update(stdout=result.stdout, error="Git failed or returned invalid metadata")
+        except (OSError, subprocess.TimeoutExpired) as error:
+            diagnostic = {"exit_code": None, "error": str(error)}
+        metadata["git_diagnostics"][field] = diagnostic
+    return metadata
+
+
+def cache_inventory(cache):
+    """Hash regular files only; refuse links and special entries without following them."""
+    inventory = {}
+    def visit(directory):
+        for path in sorted(directory.iterdir()):
+            mode = path.lstat().st_mode
+            if stat.S_ISDIR(mode):
+                visit(path)
+            elif stat.S_ISREG(mode):
+                inventory[str(path.relative_to(cache))] = digest(path)
+            else:
+                raise ValueError(f"unsupported cache entry: {path}")
+    if cache.is_symlink() or not cache.is_dir():
+        raise ValueError("cache must be a regular directory")
+    visit(cache)
+    return inventory
 
 
 POLICY = "isolated-v1"
@@ -112,21 +151,23 @@ def main(argv=None):
     run = work / args.case
     if run.exists():
         parser.error(f"run already exists: {run}; choose a fresh work root, do not delete evidence")
+    metadata = source_metadata()
     try:
+        if metadata["source_revision"] is None or metadata["dirty_state"] is None:
+            raise ValueError("Git provenance unavailable; see git_diagnostics")
         tools = preflight(args.tool_dir.resolve())
     except ValueError as error:
         print(f"not_run: {error}", file=sys.stderr)
         with tempfile.TemporaryDirectory(prefix="neruda-probe-evidence-") as temporary:
             evidence = Path(temporary)
             (evidence / "receipt.json").write_text(json.dumps({
+                **metadata,
                 "status": "not_run", "compilation": "not_run", "case": args.case,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 "architecture": platform.machine(), "platform": platform.platform(), "environment_policy": POLICY,
                 "inputs": {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides") for p in sorted((HERE / kind).rglob("*")) if p.is_file()},
                 "tools": {name: {"sha256": digest(args.tool_dir.resolve() / name)} for name in ("tectonic", "biber") if (args.tool_dir.resolve() / name).is_file()},
-                "dirty_state": execute(["/usr/bin/git", "status", "--porcelain"], HERE, {"PATH": "/usr/bin:/bin"})[1],
                 "diagnostic": str(error), "bundle_url": BUNDLE,
-                "source_revision": execute(["/usr/bin/git", "rev-parse", "HEAD"], HERE, {"PATH": "/usr/bin:/bin"})[1].strip(),
                 "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py")},
             }, indent=2) + "\n")
             attempt = "preflight-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
@@ -153,17 +194,24 @@ def main(argv=None):
                 or cold.get("compilation") != "pass" or cold.get("tools") != tools
                 or cold.get("inputs") != current_inputs or cold.get("cache") != str(cache)):
             parser.error("cold receipt must describe a successful build with identical inputs and tools")
+        try:
+            recorded = cold.get("cache_inventory")
+            if not isinstance(recorded, dict) or any(not isinstance(k, str) or not isinstance(v, str) or not re.fullmatch(r"[0-9a-f]{64}", v) for k, v in recorded.items()):
+                parser.error("cold receipt has missing or malformed cache inventory")
+            if cache_inventory(cache) != recorded:
+                parser.error("cache integrity mismatch against successful cold inventory")
+        except (OSError, ValueError) as error:
+            parser.error(f"cache integrity check failed: {error}")
     if args.case in ("cold", "offline-empty") and cache.exists():
         parser.error("cold/empty-cache case refuses a preexisting cache")
     run.mkdir(parents=True)
     cache.mkdir(exist_ok=True)
     receipt = {
+        **metadata,
         "environment_policy": POLICY,
         "timestamp": datetime.now(timezone.utc).isoformat(), "case": args.case,
         "platform": platform.platform(), "architecture": platform.machine(),
         "tools": tools, "bundle_url": BUNDLE, "cache": str(cache),
-        "source_revision": execute(["/usr/bin/git", "rev-parse", "HEAD"], HERE, {"PATH": "/usr/bin:/bin"})[1].strip(),
-        "dirty_state": execute(["/usr/bin/git", "status", "--porcelain"], HERE, {"PATH": "/usr/bin:/bin"})[1],
         "inputs": {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides")
                    for p in sorted((HERE / kind).rglob("*")) if p.is_file()},
         "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py")},
@@ -202,8 +250,12 @@ def main(argv=None):
         receipt["diagnostic"] = str(error)
         raise
     finally:
-        receipt["cache_inventory"] = {str(p.relative_to(cache)): digest(p)
-                                      for p in sorted(cache.rglob("*")) if p.is_file()}
+        try:
+            receipt["cache_inventory"] = cache_inventory(cache)
+        except (OSError, ValueError) as error:
+            failed = True
+            receipt.update(cache_inventory=None, status="fail", compilation="fail",
+                           cache_diagnostic=str(error))
         (run / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
         attempt = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + platform.machine() + "-" + args.case + "-" + uuid.uuid4().hex[:8]
         export_evidence(run, args.evidence_root.resolve() / attempt, {

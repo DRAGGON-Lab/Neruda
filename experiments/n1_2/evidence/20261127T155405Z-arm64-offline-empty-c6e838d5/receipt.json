@@ -1,0 +1,103 @@
+{
+  "source_revision": "d176b4cc5d0fc31270189e9bcb9f3bdf1c9e5673",
+  "dirty_state": " M experiments/n1_2/run.py\n M experiments/n1_2/test_runner.py\n",
+  "git_diagnostics": {
+    "source_revision": {
+      "exit_code": 0,
+      "stderr": "git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\n"
+    },
+    "dirty_state": {
+      "exit_code": 0,
+      "stderr": "git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\n"
+    }
+  },
+  "environment_policy": "isolated-v1",
+  "timestamp": "2026-11-27T15:54:05.597602+00:00",
+  "case": "offline-empty",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "architecture": "arm64",
+  "tools": {
+    "tectonic": {
+      "path": "<TOOLS>/tectonic",
+      "version": "Tectonic 0.17.0",
+      "sha256": "b52b5a730e2b0b33087304f7720f649603953f270a6b1c88bb031e1ae01f7f9c"
+    },
+    "biber": {
+      "path": "<TOOLS>/biber",
+      "version": "biber version: 2.17",
+      "sha256": "ec2e851a60a36ff9aa756120c728ffec7a8727e4a1a6094e504b0863f2bb7bd4"
+    }
+  },
+  "bundle_url": "https://data1.fullyjustified.net/tlextras-2022.0r0.tar",
+  "cache": "<WORK>/empty-cache",
+  "inputs": {
+    "article/Tectonic.toml": "8f5fc4094afc5e613b259677461c4fc3921a39e4313dc12e1dfbbae1c5238ecb",
+    "article/src/main.tex": "82aa4d7be5120980658b2af27f3adef43c126f332126170e7f927a5d4c12e8e6",
+    "article/src/references.bib": "832c4cd0c1fe24f53461f1affbf60bbff82f9776e61061ba55273bc21dc7270b",
+    "slides/Tectonic.toml": "173f4f29f48a99b53b24535286552103f7bdac3645b81985415345793521fa05",
+    "slides/src/content.tex": "9bde1becc555b8df8b9ee8a363cc24665fd035436fa69294d49d6792fa4ff87a",
+    "slides/src/handout.tex": "6987c5af18b74b3126eeb75f9303931e5efe61d6e10f1d9a2f60f9d06b7bc339",
+    "slides/src/main.tex": "8a09abe2b6fbc81ca3570053fec728216274281c03d163cc5aee74021949c15e",
+    "slides/src/references.bib": "832c4cd0c1fe24f53461f1affbf60bbff82f9776e61061ba55273bc21dc7270b"
+  },
+  "harness": {
+    "run.py": "eee984959e1512ca1f17506671f58760669eec1f15e2e7964eba8a26add80709",
+    "test_runner.py": "618b273dc03f5b272b5da3b19c6f715501930d8f037d6d29d87066617dc2241f"
+  },
+  "builds": [
+    {
+      "kind": "article",
+      "command": [
+        "<TOOLS>/tectonic",
+        "-X",
+        "build",
+        "--keep-logs",
+        "--keep-intermediates",
+        "--only-cached"
+      ],
+      "exit_code": 1,
+      "pdfs": {}
+    },
+    {
+      "kind": "slides",
+      "command": [
+        "<TOOLS>/tectonic",
+        "-X",
+        "build",
+        "--keep-logs",
+        "--keep-intermediates",
+        "--only-cached"
+      ],
+      "exit_code": 1,
+      "pdfs": {}
+    }
+  ],
+  "visual_review": "not_run",
+  "status": "fail",
+  "limitations": [
+    "PDF inspection and font/bundle content identity require independent review",
+    "only-cached is an engine option, not an OS network sandbox"
+  ],
+  "environment": {
+    "PATH": "<WORK>/offline-empty/isolation/bin",
+    "HOME": "<WORK>/offline-empty/isolation/home",
+    "XDG_CONFIG_HOME": "<WORK>/offline-empty/isolation/config",
+    "XDG_DATA_HOME": "<WORK>/offline-empty/isolation/data",
+    "XDG_CACHE_HOME": "<WORK>/offline-empty/isolation/cache",
+    "TMPDIR": "<WORK>/offline-empty/isolation/tmp",
+    "TMP": "<WORK>/offline-empty/isolation/tmp",
+    "TEMP": "<WORK>/offline-empty/isolation/tmp",
+    "PAR_GLOBAL_TMPDIR": "<WORK>/offline-empty/isolation/par",
+    "TECTONIC_CACHE_DIR": "<WORK>/empty-cache",
+    "TEXMFHOME": "<WORK>/offline-empty/isolation/texmf",
+    "TEXMFCONFIG": "<WORK>/offline-empty/isolation/texmf",
+    "TEXMFVAR": "<WORK>/offline-empty/isolation/texmf",
+    "TEXMFCACHE": "<WORK>/offline-empty/isolation/texmf",
+    "LC_ALL": "C",
+    "LANG": "C",
+    "TZ": "UTC",
+    "SOURCE_DATE_EPOCH": "1786060800"
+  },
+  "compilation": "fail",
+  "cache_inventory": {}
+}

@@ -191,3 +191,40 @@ Manual thinning is therefore a **candidate provisioning strategy** with a passin
 isolated version check. It does not resolve publisher checksum corroboration,
 signature verification or the bundle service failure. No compiler/bibliography/
 bundle pins changed, and N1.2 compatibility acceptance remains pending.
+
+## Source provenance and cache-integrity corrections
+
+Follow-up to `d176b4cc5d0fc31270189e9bcb9f3bdf1c9e5673` (2026-11-27).
+Git stdout and stderr are captured separately for revision and dirty state.
+Only exit-zero, full 40-character hexadecimal commit output is accepted as
+`source_revision`; warnings and errors are preserved under `git_diagnostics`.
+Unavailable metadata is null and prevents compilation (exit 2, not_run receipt).
+The same metadata capture is used for build and preflight-failure receipts.
+
+Five historical receipts contain contaminated revision fields: the three
+`preflight-20261127T145018Z-fb7df49b`, `preflight-20261127T145109Z-9ef18396`,
+`preflight-20261127T145146Z-e69ecef2` receipts, plus
+`20261127T152659Z-arm64-cold-20aca5dd` and
+`20261127T152728Z-arm64-offline-empty-6f2080ea`. They remain unchanged as
+historical evidence; their revision strings must not be treated as valid SHAs.
+
+Warm/offline cases now compare every current regular cache file and SHA-256
+against the successful cold receipt's inventory before creating the case or
+compiling. Added, removed or modified files, links, special/unreadable entries
+and missing/malformed inventories are refusals. The baseline is always the
+successful cold inventory: even a recorded warm build changing the cache
+requires a fresh cold experiment before further reuse. The runner never repairs
+or renews the cache baseline. Post-build inventory errors retain a failed receipt.
+
+Verification: 18 unittest tests pass, including separate Git diagnostics and
+metadata failure paths, populated/empty cache reuse, cache mutations and final
+inventory failure. `git diff --check` passes. A fresh offline-empty run under
+`.tools/n1_2/metadata-check.024d8404`, using the existing thinned tools, exits 1
+as expected without a cached bundle. Its new exported receipt has a validated
+commit SHA and separately recorded Git warnings; no bundle download was needed.
+The run records its dirty state and input/harness hashes. No PDFs were produced.
+
+These corrections do not complete N1.2: Linux, successful cold/warm/offline builds,
+actual biblatex/font/bundle identity, resolved references and bibliography,
+rendered-page inspection, independent review and packaging acceptance remain
+pending. ADR-002 remains proposed. No tool versions or provisioning changed.

@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import run
 
@@ -170,6 +170,101 @@ class RunnerExecution(unittest.TestCase):
             self.assertTrue((root / "public/manifest.json").exists())
             with self.assertRaises(FileExistsError):
                 run.export_evidence(source, root / "public", {})
+
+
+class IntegrityRegressions(unittest.TestCase):
+    invoke = RunnerExecution.invoke
+    success = staticmethod(RunnerExecution.success)
+    def test_git_warning_is_separate_in_both_receipt_paths(self):
+        def git(argv, **kwargs):
+            self.assertEqual(kwargs["stderr"], subprocess.PIPE)
+            return subprocess.CompletedProcess(argv, 0, "a" * 40 + "\n" if "rev-parse" in argv else " M fixture.tex\n", "git warning\n")
+        for failed_preflight in (False, True):
+            with self.subTest(failed_preflight=failed_preflight), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                with patch.object(run.subprocess, "run", side_effect=git):
+                    if failed_preflight:
+                        with patch.object(run, "preflight", side_effect=ValueError("missing tools")), contextlib.redirect_stderr(io.StringIO()):
+                            code = run.main(["--tool-dir", str(root / "tools"), "--work-root", str(root / "work"), "--case", "cold", "--evidence-root", str(root / "evidence")])
+                        self.assertEqual(code, 2)
+                    else:
+                        self.assertEqual(self.invoke(root), 0)
+                receipt = json.loads(next((root / "evidence").glob("*/receipt.json")).read_text())
+                self.assertEqual(receipt["source_revision"], "a" * 40)
+                self.assertEqual(receipt["dirty_state"], " M fixture.tex\n")
+                self.assertEqual(receipt["git_diagnostics"]["source_revision"]["stderr"], "git warning\n")
+
+    def test_invalid_git_metadata_refuses_compilation(self):
+        failures = [subprocess.CompletedProcess([], 1, "a" * 40, "fatal"),
+                    subprocess.CompletedProcess([], 0, "", ""),
+                    subprocess.CompletedProcess([], 0, "warning\n" + "a" * 40, ""),
+                    subprocess.CompletedProcess([], 0, "not-a-sha", ""),
+                    FileNotFoundError("missing Git"), subprocess.TimeoutExpired(["git"], 60)]
+        for failure in failures:
+            with self.subTest(failure=str(failure)), tempfile.TemporaryDirectory() as directory:
+                root=Path(directory)
+                with patch.object(run.subprocess, "run", side_effect=failure if isinstance(failure, Exception) else None, return_value=failure):
+                    self.assertEqual(self.invoke(root), 2)
+                receipt=json.loads(next((root / "evidence").glob("*/receipt.json")).read_text())
+                self.assertIsNone(receipt["source_revision"])
+                self.assertEqual(receipt["compilation"], "not_run")
+                self.assertFalse((root / "work").exists())
+
+    def test_cache_integrity_and_malformed_inventory_refused(self):
+        for case in ("warm", "offline"):
+            for change in ("added", "removed", "modified", "file-link", "directory-link", "missing-inventory", "malformed-inventory", "unreadable", "special"):
+                with self.subTest(case=case, change=change), tempfile.TemporaryDirectory() as directory:
+                    root=Path(directory)
+                    self.assertEqual(self.invoke(root),0)
+                    cache=root / "work/cache"; entry=cache / "fixture"
+                    entry.write_bytes(b"original")
+                    receipt_path=root / "work/cold/receipt.json"
+                    receipt=json.loads(receipt_path.read_text());receipt["cache_inventory"]=run.cache_inventory(cache)
+                    if change=="added": (cache / "extra").touch()
+                    elif change=="removed": entry.unlink()
+                    elif change=="modified": entry.write_bytes(b"modified")
+                    elif change=="file-link": entry.unlink();entry.symlink_to(receipt_path)
+                    elif change=="directory-link": (cache / "link").symlink_to(root, target_is_directory=True)
+                    elif change=="missing-inventory": del receipt["cache_inventory"]
+                    elif change=="malformed-inventory": receipt["cache_inventory"]={"fixture": "not-a-digest"}
+                    if change=="special": run.os.mkfifo(cache / "fifo")
+                    receipt_path.write_text(json.dumps(receipt))
+                    executor=Mock(side_effect=self.success)
+                    original_digest=run.digest
+                    def unreadable(path):
+                        if path.resolve() == entry.resolve(): raise PermissionError("unreadable")
+                        return original_digest(path)
+                    with patch.object(run, "digest", side_effect=unreadable) if change=="unreadable" else contextlib.nullcontext():
+                        with self.assertRaises(SystemExit):
+                            self.invoke(root,case,executor)
+                    executor.assert_not_called()
+                    self.assertFalse((root / "work" / case).exists())
+
+    def test_populated_cache_reuse_and_warm_changes(self):
+        for changed in (False, True):
+          with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            def populate(argv,cwd=None,env=None):
+                (Path(env["TECTONIC_CACHE_DIR"]) / "fixture").write_bytes(b"original")
+                return self.success(argv,cwd,env)
+            self.assertEqual(self.invoke(root,executor=populate),0)
+            def warm(argv,cwd=None,env=None):
+                if changed: (Path(env["TECTONIC_CACHE_DIR"]) / "new").touch()
+                return self.success(argv,cwd,env)
+            self.assertEqual(self.invoke(root,"warm",warm),0)
+            if changed:
+                with self.assertRaises(SystemExit):self.invoke(root,"offline")
+            else:
+                self.assertEqual(self.invoke(root,"offline"),0)
+
+    def test_failed_inventory_still_preserves_receipt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            with patch.object(run,"cache_inventory",side_effect=PermissionError("unreadable cache")):
+                self.assertEqual(self.invoke(root),1)
+            receipt=json.loads((root / "work/cold/receipt.json").read_text())
+            self.assertEqual(receipt["compilation"],"fail")
+            self.assertIsNone(receipt["cache_inventory"])
 
 
 if __name__ == "__main__":
