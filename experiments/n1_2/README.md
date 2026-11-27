@@ -84,7 +84,7 @@ and cache contents are preserved on refusal.
 
 ## Linux compatibility job
 
-The approved `.github/workflows/n1-2-compatibility.yml` job uses Ubuntu 22.04 and
+The approved `.github/workflows/n1-2-compatibility.yml` job uses Ubuntu 24.04 and
 runs `python3 experiments/n1_2/linux_ci.py --root .tools/n1_2/linux-ci` after the
 regression suite. This experimental CI helper downloads the exact reviewed Linux
 archives, verifies SHA-256 before extracting one regular x86_64 ELF executable
@@ -100,3 +100,9 @@ job never claims visual acceptance. Archive/binary caches and raw tool directori
 are excluded. The workflow checks out the PR head with credentials persistence
 disabled and read-only repository permissions. Changing action/archive pins
 requires review. Selected evidence must be committed before artifact expiry.
+
+Ubuntu 22.04 was attempted first and could not start the pinned GNU Tectonic
+binary (requires GLIBC_2.39). The user approved a fresh Ubuntu 24.04 environment;
+no existing system libraries were upgraded. Documentation/evidence-only changes
+do not retrigger the compatibility job. Runner image identity is recorded in
+provisioning receipts; the distribution label is not an immutable image digest.

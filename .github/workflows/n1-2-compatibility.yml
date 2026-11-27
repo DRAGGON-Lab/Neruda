@@ -3,7 +3,9 @@ name: N1.2 Linux compatibility investigation
 on:
   pull_request:
     paths:
-      - 'experiments/n1_2/**'
+      - 'experiments/n1_2/*.py'
+      - 'experiments/n1_2/article/**'
+      - 'experiments/n1_2/slides/**'
       - '.github/workflows/n1-2-compatibility.yml'
   workflow_dispatch:
 
@@ -12,7 +14,7 @@ permissions:
 
 jobs:
   linux-x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Check out exact source revision
@@ -24,6 +26,7 @@ jobs:
         run: |
           printf 'Runner image: %s / %s\n' "$ImageOS" "$ImageVersion"
           uname -a
+          getconf GNU_LIBC_VERSION
           python3 --version
       - name: Run behavioral regression tests
         run: python3 -m unittest discover -s experiments/n1_2 -p 'test_*.py' -v

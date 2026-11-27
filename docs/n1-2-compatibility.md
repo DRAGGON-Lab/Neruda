@@ -286,3 +286,26 @@ checkout v4.2.2 `11bd71901bbe5b1630ceea73d27597364c9af683`, upload-artifact
 v4.6.2 `ea165f8d65b6e75b540449e92b4886f43607fa02`.
 Actual Linux results must be recorded from the Actions run; workflow configuration
 and local tests alone do not establish Linux execution or compatibility.
+
+### First actual Linux result and approved follow-up
+
+[Actions run 46030742564](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46030742564)
+checked out `8e9e09aa0d89ab2231def87a998ad6688efb4462` on Ubuntu 22.04.5,
+image `ubuntu22 / 20261122.372.1`, Python 3.10.12. All 21 tests passed.
+Both archive digests matched the reviewed values and extraction succeeded.
+Tectonic then failed before version output: the binary requires GLIBC_2.36,
+GLIBC_2.38 and GLIBC_2.39 symbols missing from this runner. Cold and offline-empty
+were not_run (runner exit 2); warm/offline were skipped. This is an observed
+binary/environment incompatibility, not a compiler build failure or PDF result.
+
+The uploaded artifact (ID `15214147468`, ZIP SHA-256
+`51742756c5592170e7943dfe80d29b9185694b960b83ce96e3552f2a293af9c4`)
+was retrieved, checksum-verified and preserved under
+`experiments/n1_2/evidence/linux-run-46030742564`. Its embedded export checksums
+were verified. No PDFs were present. The job's failure was retained rather than
+converted into a successful compatibility result.
+
+The user explicitly approved a fresh Ubuntu 24.04 runner with the same archives
+and checksums. This changes the environment candidate, not the compiler or
+bibliography pins. No system-library repair or package install is performed.
+The follow-up receipt records the runner image identity; actual results follow.

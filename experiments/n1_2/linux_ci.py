@@ -1,6 +1,7 @@
 """Explicit provisioning and compatibility experiment for an ephemeral Linux runner."""
 import argparse
 import json
+import os
 from pathlib import Path
 import platform
 import shutil
@@ -57,6 +58,7 @@ def main(argv=None):
     receipt = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         **run.source_metadata(), "platform": platform.platform(),
+        "runner_image": {name: os.environ.get(name) for name in ("ImageOS", "ImageVersion", "RUNNER_OS", "RUNNER_ARCH")},
         "python": sys.version, "harness_sha256": run.digest(Path(__file__)),
         "status": "not_run", "archives": {},
     }
