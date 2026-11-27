@@ -57,3 +57,14 @@ All version/build processes use a constructed environment and private Biber shim
 with `--noconf`. Native Apple Silicon is a validation target alongside Intel Mac
 and Linux; see the compatibility report for observed blockers and the bounded
 newer-bundle comparison. No support is inferred from archive availability.
+
+## Candidate manual Biber arm64 provisioning
+
+For the reviewed Biber 2.17 universal archive only, manual `lipo -thin arm64`
+can bypass its unsupported universal-loader operation. Preserve the original;
+use a fresh directory and verify derived architecture, slice checksum, signature
+status and isolated exact-version output before builds. Copy the unchanged,
+verified Tectonic into the same directory. This is not an automatic runner step.
+See the compatibility report for exact source/derived hashes and the observed
+signature and HTTP 429 limitations. Do not repair signatures or install system
+tools as part of this procedure. All build cases retain the existing runner CLI.

@@ -1,0 +1,14 @@
+{
+  "article.console.log": {
+    "raw_sha256": "2f95c51dd0b99806e30975522c62708b167a8fe17d61acf9127251a7c803469c",
+    "export_sha256": "2f95c51dd0b99806e30975522c62708b167a8fe17d61acf9127251a7c803469c"
+  },
+  "receipt.json": {
+    "raw_sha256": "b23fc95fb1eb496282dd06f4e1aeacd2617ffc89a37deb8836dedcb9b680dcb0",
+    "export_sha256": "c1cd51e3061eda9a457771a48dc1ce65a09d3ce06d4eb39d85b62eace7fe3ad1"
+  },
+  "slides.console.log": {
+    "raw_sha256": "2f95c51dd0b99806e30975522c62708b167a8fe17d61acf9127251a7c803469c",
+    "export_sha256": "2f95c51dd0b99806e30975522c62708b167a8fe17d61acf9127251a7c803469c"
+  }
+}

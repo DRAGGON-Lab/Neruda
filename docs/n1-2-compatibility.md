@@ -143,3 +143,51 @@ Recommendation: keep ADR-002 proposed and production pins unchanged. The 2024
 recipe is a bounded investigation candidate, not a validated replacement.
 Apple Silicon is a required validation target with a recorded blocker, not a
 supported platform. N1.2 and downstream acceptance remain incomplete.
+
+## Native arm64 manual-thinning experiment
+
+Follow-up at source revision `767ade93e118cf5a8d8a77767c6ec45027fef7a7`,
+2026-11-27. User authorized manual thinning while preserving originals and pins.
+Command Line Tools were already installed; no installation or repair occurred.
+The selected `/usr/bin/lipo` advertises `-thin`; its SHA-256 is
+`ed6f5284033aa2aae6a58427c25ba3ab119947b40365627b24e5d51a4b70a1cd`.
+
+`/usr/bin/lipo <ORIGINAL_TOOLS>/biber -thin arm64 -output <THIN_TOOLS>/biber`
+exited 0 in a fresh `.tools/n1_2/arm64-thin.a3201eaf` directory. Python
+`Path.chmod(0o755)` made the result executable and `shutil.copy2` copied the
+unchanged Tectonic executable. `file` and `lipo -archs` report arm64 only.
+
+| Executable | SHA-256 |
+|---|---|
+| Original universal Biber | `d894bfb75f2df1935fbcf452e8a79fd80de5c859ade4842d8e0681306b509681` |
+| Derived arm64 Biber | `ec2e851a60a36ff9aa756120c728ffec7a8727e4a1a6094e504b0863f2bb7bd4` |
+| Unchanged Tectonic | `b52b5a730e2b0b33087304f7720f649603953f270a6b1c88bb031e1ae01f7f9c` |
+
+The derived bytes match the arm64 slice independently read from the universal
+binary. Original executable hashes remain unchanged. Archive identities remain
+those above; Biber's archive digest is still locally measured only. Derived
+`codesign --verify --strict` returned 1 (invalid signature). The original universal executable also fails this signature check, so the failure
+is not attributed to thinning. No re-signing,
+quarantine removal or execution-policy change was made. Isolated execution still
+returned exact `biber version: 2.17` and `Tectonic 0.17.0`, both exit 0.
+This demonstrates loader bypass and version startup, not bibliography semantics.
+
+The runner used `--tool-dir .tools/n1_2/arm64-thin.a3201eaf` and fresh work roots:
+
+| Case | Work root under `.tools/n1_2/` | Result |
+|---|---|---|
+| Sandboxed cold | `thin-work.1120ad8b` | exit 1; bundle-index request could not be sent |
+| Network-enabled cold | `thin-network.9ee75246` | exit 1; HTTP 429 for article and slides |
+| Empty-cache offline | `thin-work.1120ad8b` | exit 1; expected failure without cached bundle |
+
+Sanitized receipts, console logs and provisioning identity/commands are retained
+under the tracked evidence directory. Raw work roots remain ignored and intact.
+Warm/offline reuse and the successful poisoned-environment comparison are
+not_run because neither cold run compiled. No PDFs were produced; bibliography,
+consumed fonts/bundle, visual inspection and independent review remain not_run.
+The 13 runner regression tests and whitespace check pass.
+
+Manual thinning is therefore a **candidate provisioning strategy** with a passing
+isolated version check. It does not resolve publisher checksum corroboration,
+signature verification or the bundle service failure. No compiler/bibliography/
+bundle pins changed, and N1.2 compatibility acceptance remains pending.
