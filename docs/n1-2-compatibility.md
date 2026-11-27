@@ -254,7 +254,7 @@ No warm/offline reuse was attempted against this failed cold receipt.
 | Native macOS arm64 cold compilation | fail: unchanged bundle-index HTTP 429 |
 | Cache integrity/refusal behavior | Regression-tested; real successful cold/warm/offline matrix blocked |
 | Empty-cache offline behavior | Expected failure demonstrated in preserved prior evidence |
-| Linux x86_64 | not_run: no Docker/Podman/Lima/Colima/QEMU Linux runtime found locally; environment selection requested |
+| Linux x86_64 | Actual Actions attempts recorded below: Ubuntu 22.04 cannot start compiler; Ubuntu 24.04 passes tool startup but compilation fails HTTP 429 |
 | Intel macOS | Historical attempts only; no fresh validated platform result |
 | Actual biblatex, bibliography, consumed fonts/bundle | not_run: blocked before compilation |
 | PDF identities and all-page visual inspection | not_run: no PDFs |
@@ -309,3 +309,36 @@ The user explicitly approved a fresh Ubuntu 24.04 runner with the same archives
 and checksums. This changes the environment candidate, not the compiler or
 bibliography pins. No system-library repair or package install is performed.
 The follow-up receipt records the runner image identity; actual results follow.
+
+### Ubuntu 24.04 execution result
+
+[Actions run 46031054171](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46031054171)
+checked out `984e62dfd5b6aa3d52f07199920e57f8a70f2a14` on image
+`ubuntu24 / 20261122.23.1`, Python 3.12.3. All 21 tests passed. Both reviewed
+archive digests matched, and isolated probes returned exact `Tectonic 0.17.0`
+and `biber version: 2.17`. The environment change resolved the observed compiler
+startup incompatibility without changing binaries or installing system packages.
+
+The cold article and slide builds exited 1 fetching the unchanged bundle index:
+HTTP 429. The job therefore skipped warm/offline reuse. Empty-cache offline also
+exited 1, with an `only cached` notice followed by a bundle-index HTTP 429
+message; this is an empty-cache failure, **not proof of blocked network access**.
+The engine flag remains distinct from an OS network sandbox. No PDFs were
+produced, so bibliography resolution, actual biblatex/font identity, consumed
+bundle identity and all-page review remain not_run. Neither native Mac nor Linux
+is yet a fully validated supported platform.
+
+Artifact ID `15213164503`, ZIP SHA-256
+`cf085dc0b312a6d8e0ec8c831ad1b523e7a5666a676bce5458ef522ebf50d910`,
+was downloaded and verified. Sanitized provisioning receipts, build logs, case
+summary and export manifests are committed under
+`experiments/n1_2/evidence/linux-run-46031054171`. All retained manifest checksums
+and host-path checks pass. The Actions job remains failed, accurately reflecting
+the blocked compatibility matrix. Its image/provisioning approval remains scoped
+to investigation, not compatibility or release acceptance.
+
+The remaining critical dependency is now demonstrated on two execution hosts:
+the pinned bundle service must become available, or a separately reviewed,
+verified replacement-bundle experiment must be authorized. Repeated downloads,
+cache repair, library replacement and tool-version substitution were not used
+to manufacture a passing build. N1.3 remains gated on N1.2 acceptance.
