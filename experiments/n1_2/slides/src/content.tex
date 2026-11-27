@@ -1,0 +1,33 @@
+\usepackage{fontspec,unicode-math,mathtools,siunitx,booktabs,csquotes,listings,tikz}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+\title{Synthetic compatibility demonstration}
+\author{No research authorship asserted}
+\date{Compatibility experiment}
+\begin{document}
+\begin{frame}\titlepage\end{frame}
+\begin{frame}{A deterministic mapping has checkable outputs}
+\begin{equation}\label{eq:affine}y(x)=a x+b.\end{equation}
+\begin{description}
+\item[$y$] Function from real inputs to real outputs.
+\item[$x$] Dimensionless real input.
+\item[$a$] Dimensionless slope, two.
+\item[$b$] Dimensionless intercept, one.
+\end{description}
+\end{frame}
+\begin{frame}{Exact values illustrate the mapping}
+\begin{tabular}{rr}\toprule Input & Output\\\midrule
+0 & 1\\1 & 3\\2 & 5\\\bottomrule\end{tabular}
+\pause
+\par These synthetic values have no sampling uncertainty.
+Unicode: café. Unit typography: \SI{10}{\micro\metre}.
+\end{frame}
+\begin{frame}{The build exercises references and bibliography}
+Equation~\ref{eq:affine} is an illustration, not an empirical finding.
+The interface is documented by Tectonic \cite{tectonic-interface}.
+\end{frame}
+\appendix
+\begin{frame}{Documentation}\printbibliography[heading=none]\end{frame}
+\end{document}
