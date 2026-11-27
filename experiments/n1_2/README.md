@@ -81,3 +81,22 @@ files, links and unsupported/unreadable entries are refused before compilation.
 A warm build changing the inventory requires a fresh cold experiment; a later
 receipt does not automatically authorize the changed cache. Existing evidence
 and cache contents are preserved on refusal.
+
+## Linux compatibility job
+
+The approved `.github/workflows/n1-2-compatibility.yml` job uses Ubuntu 22.04 and
+runs `python3 experiments/n1_2/linux_ci.py --root .tools/n1_2/linux-ci` after the
+regression suite. This experimental CI helper downloads the exact reviewed Linux
+archives, verifies SHA-256 before extracting one regular x86_64 ELF executable
+per archive, and invokes the existing runner with a fresh work root. The Biber
+archive digest is locally measured, not independently publisher-corroborated.
+No system package installation or cache repair is performed.
+
+Cold failure skips warm/offline cases but still attempts empty-cache offline.
+A failing compatibility matrix fails the job. Sanitized provisioning/build
+receipts and logs are uploaded even on failure, retained for 30 days. Successful
+synthetic PDFs are retained with checksums for subsequent all-page review; the
+job never claims visual acceptance. Archive/binary caches and raw tool directories
+are excluded. The workflow checks out the PR head with credentials persistence
+disabled and read-only repository permissions. Changing action/archive pins
+requires review. Selected evidence must be committed before artifact expiry.

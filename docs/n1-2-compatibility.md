@@ -1,6 +1,6 @@
 # N1.2 compatibility report
 
-Status: **partial; not accepted**. Observations: 2026-11-27.
+Status: **engineering work through `fc00ab6` approved; compatibility acceptance pending**. Observations: 2026-11-27.
 Base Neruda revision: `7bdf17ce40577a15877ac8fe0d79ee9a9b4f985c`.
 Fixtures and runner were introduced for review in PR #11 at
 `025ce44c61555c2186525e428820cd83d8934718`; no release identity is asserted.
@@ -42,7 +42,7 @@ then used to create `.tools/n1_2/inspection-py313`; `uv pip install --python
 .tools/n1_2/inspection-py313/bin/python 'PyMuPDF==1.26.6'` succeeded. The unused
 Python 3.9 environment is retained; no cache repair or version change occurred.
 
-## Evidence and current limits
+## Initial evidence and limits (historical)
 
 | Check | Status | Method / result |
 |---|---|---|
@@ -228,3 +228,61 @@ These corrections do not complete N1.2: Linux, successful cold/warm/offline buil
 actual biblatex/font/bundle identity, resolved references and bibliography,
 rendered-page inspection, independent review and packaging acceptance remain
 pending. ADR-002 remains proposed. No tool versions or provisioning changed.
+
+## Maintainer approval and continuation — 2026-11-27
+
+The user approved the engineering work through
+`fc00ab60105a4cb51454a70bd75ffbafa560be31` and authorized continuation of the
+remaining N1.2 investigation. The scoped decision is recorded in ADR-002.
+Compatibility/platform acceptance remains pending the outstanding actual builds,
+cache experiments, bibliography/font identity and rendered-page review.
+
+### Continuation results after approval
+
+A fresh network-enabled native cold run used the unchanged thinned tools:
+`python3 experiments/n1_2/run.py --tool-dir .tools/n1_2/arm64-thin.a3201eaf --work-root .tools/n1_2/continued-cold.778a8b16 --case cold`.
+Both article and slides again returned exit 1 fetching the pinned bundle index
+with HTTP 429. The run's source revision is `fc00ab6`; dirty state records the
+approval documentation additions. No PDFs were produced. All prior artifacts
+and the new raw work root remain intact; sanitized receipts/logs are tracked.
+No warm/offline reuse was attempted against this failed cold receipt.
+
+| Current acceptance area | Status after continuation |
+|---|---|
+| Completed engineering corrections | Human approval recorded through `fc00ab6`; 18 regression tests pass |
+| Native macOS arm64 compiler/Biber startup | Exact Tectonic 0.17.0 and Biber 2.17 previously observed; tools unchanged |
+| Native macOS arm64 cold compilation | fail: unchanged bundle-index HTTP 429 |
+| Cache integrity/refusal behavior | Regression-tested; real successful cold/warm/offline matrix blocked |
+| Empty-cache offline behavior | Expected failure demonstrated in preserved prior evidence |
+| Linux x86_64 | not_run: no Docker/Podman/Lima/Colima/QEMU Linux runtime found locally; environment selection requested |
+| Intel macOS | Historical attempts only; no fresh validated platform result |
+| Actual biblatex, bibliography, consumed fonts/bundle | not_run: blocked before compilation |
+| PDF identities and all-page visual inspection | not_run: no PDFs |
+| Archive verification | Tectonic archive verified; Biber publisher digest/signature limitations remain |
+| Candidate compatibility unit / packaging ADR | Not accepted; ADR-002 remains proposed for these decisions |
+
+Additional read-only upstream investigation found no alternate official 2022
+bundle download in the archived bundle repository's GitHub releases. Its releases
+API returned a 2021 release with listing/digest assets, not the required 2022
+bundle. This does not prove that no mirror exists; no verified equivalent was
+established. No bundle pin, third-party mirror or bibliography version was changed.
+
+Next executable dependency: supply a clean Linux execution environment and/or
+restore access to the pinned bundle. A replacement-bundle experiment remains a
+separate candidate investigation requiring verified inputs and reviewed exact
+provisioning commands; it is not silently substituted for this failed run.
+
+### Approved Linux job preparation
+
+The user selected GitHub Actions and explicitly approved the prepared Ubuntu
+22.04 workflow, including isolated provisioning of the pinned Linux tools and
+execution with Biber's uncorroborated publisher-digest limitation. ADR-002 records
+the exact approval scope. `linux_ci.py` provides checksum/member/ELF checks,
+provisioning receipts, conditional cache-matrix execution and reviewed artifact
+selection. No production installer or system package installation is introduced.
+The existing 18 regressions plus three archive-verification tests pass locally.
+Pinned action tag identities were verified through the official repositories:
+checkout v4.2.2 `11bd71901bbe5b1630ceea73d27597364c9af683`, upload-artifact
+v4.6.2 `ea165f8d65b6e75b540449e92b4886f43607fa02`.
+Actual Linux results must be recorded from the Actions run; workflow configuration
+and local tests alone do not establish Linux execution or compatibility.
