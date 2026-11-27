@@ -2,7 +2,10 @@
 
 Status: **partial; not accepted**. Observations: 2026-11-27.
 Base Neruda revision: `7bdf17ce40577a15877ac8fe0d79ee9a9b4f985c`.
-Fixtures and runner are uncommitted additions; no release identity is asserted.
+Fixtures and runner were introduced for review in PR #11 at
+`025ce44c61555c2186525e428820cd83d8934718`; no release identity is asserted.
+Subsequent remediation receipts record HEAD, dirty state and exact input/harness
+hashes; a dirty run is not represented as an immutable committed revision.
 Upstream reference: `906a18074080635271b87cb29a063498ea75b3b0`.
 LaTexProjects and its dirty working tree were not modified.
 
@@ -70,3 +73,73 @@ Next action: retry with the unchanged pinned unit when the bundle service allows
 the download, using a new work root. Then run the cache matrix, inspect every
 page and repeat on a clean Linux runner. Retain all failed attempts. N1.3 and
 downstream tasks remain blocked on accepted compatibility.
+
+## PR #11 remediation — native Apple Silicon
+
+The remediation host reports `Darwin arm64`. Both historical temporary receipt
+paths above and `.tools/n1_2` were absent in this checkout. Their observations
+remain historical narrative; original receipts cannot be reconstructed here.
+
+The runner now constructs a minimal environment for version probes and builds:
+private HOME/XDG/TeX/PAR/temp directories, deterministic locale/time, no inherited
+Perl/font/loader/search overrides, and a private PATH containing only the Biber
+shim. The shim passes `--noconf`, preventing configuration discovery via host
+`kpsewhich`. Fixtures request Latin Modern font files rather than family names.
+This is environment isolation, not an OS filesystem or network sandbox. Actual
+consumed font identities and absence of native font fallback remain unverified
+until successful compilation and inspection.
+
+With separately approved downloads/extraction, measured archives were:
+
+| Archive | SHA-256 / verification |
+|---|---|
+| Tectonic 0.17.0 aarch64-apple-darwin | `a3f1cac7c5678f01661a92212f58480ae3b0634115d880dbc59e2953ded45667`; matches official release metadata |
+| Biber 2.17 darwin_universal | `182e1efa074d8a2a23a8893f2a22440d4e463cce55e4ed02076ac4c0ee0614b2`; measured only; publisher JSON endpoint returned 404 |
+
+`file` identifies arm64 Tectonic and arm64/x86_64 Biber slices. `otool -L`
+shows Apple system libraries/frameworks in their load commands; this does not
+prove the contents of PAR's subsequently unpacked libraries.
+
+Native command:
+`python3 experiments/n1_2/run.py --tool-dir .tools/n1_2/arm64/bin --work-root experiments/n1_2/artifacts --case cold`.
+Tectonic's exact version probe passed. Biber's universal loader failed before
+its version output, calling `/usr/bin/lipo -extract_family`; this host's `lipo`
+help lists `-extract` and `-thin`, but not `-extract_family`. Diagnostic: cannot
+find the extracted thin binary, errno 2. Exit 2, compilation **not_run**.
+No system tool repair, binary thinning or Rosetta fallback was attempted.
+
+Sanitized native preflight receipts are tracked in
+[`experiments/n1_2/evidence`](../experiments/n1_2/evidence/), with raw/export
+checksums. Existing exports are never overwritten. Test-generated evidence is
+confined to temporary test directories and is not compiler evidence.
+The expanded suite has 13 passing tests, covering successful output handling,
+timeouts, cold-receipt acceptance/refusal, environment poisoning and export
+redaction. Real successful builds, warm/offline compilation, bibliography/font
+identity, PDF inspection and independent review remain **not_run**. Intel macOS
+results above are historical; Linux remains untested.
+
+### Bounded replacement comparison
+
+Retain Tectonic 0.17.0 for both candidates. The historical candidate remains
+`tlextras-2022.0r0` with Biber 2.17/biblatex 3.17: historical HTTP 429 plus the
+new native universal-loader blocker prevent acceptance.
+
+The alternative is the upstream
+[texlive2024-0312 recipe at Tectonic 0.17.0](https://github.com/tectonic-typesetting/tectonic/blob/tectonic%400.17.0/bundles/bundles/texlive2024-0312/bundle.toml).
+Its declared bundle identity is
+`8fae742a1d9453fc3abfe7c6971363696f611ade1266c17788ccb5c18ffd1312`;
+its input is the historical `texlive-20240312-texmf.tar` with declared hash
+`87f7f5fd9618689cd9ae436ad37cefe43fabf1f2f457ac3860ec2aa854578d20`.
+These are recipe declarations, not locally verified bundle/archive measurements.
+Unlike the historical hosted bundle, this candidate requires verified bundle
+construction and its prerequisites; no independently verified hosted artifact
+was established. Do not substitute a third-party mirror or download a latest
+Biber independently of the bundled biblatex version. Inspect the resulting
+biblatex version, select its publisher-documented matching Biber and verify its
+native executable before the full cache/build/render matrix. Bundle creation
+and any additional installation require exact reviewed commands and approval.
+
+Recommendation: keep ADR-002 proposed and production pins unchanged. The 2024
+recipe is a bounded investigation candidate, not a validated replacement.
+Apple Silicon is a required validation target with a recorded blocker, not a
+supported platform. N1.2 and downstream acceptance remain incomplete.

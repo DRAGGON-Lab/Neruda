@@ -1,0 +1,7 @@
+{
+  "receipt.json": {
+    "raw_sha256": "ad3e74004f54edf07f4c83626c5e909e6b0e4b0725f4e0987fc929f3e98331a5",
+    "export_sha256": "56500fe210a507e3145a92f2a8c06f9490d44af66fca8f753a264afc8be702a6",
+    "sanitization_note": "Additional username-hex path redaction; raw digest retained."
+  }
+}

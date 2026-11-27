@@ -41,3 +41,19 @@ Linux x86_64 must repeat this procedure on a fresh runner with verified Linux
 archives; local macOS success cannot substitute for that evidence. A CI workflow
 is deferred until provisioning is established, rather than publishing an untested
 installer or implying successful Linux coverage.
+
+## Durable evidence and isolation
+
+`--evidence-root PATH` defaults to tracked `experiments/n1_2/evidence/`.
+Every attempted build and failed preflight exports a unique sanitized receipt;
+builds also export console/TeX/Biber logs. `manifest.json` records raw and exported
+SHA-256 identities. Operational receipts and caches remain in the work root;
+only operational receipts authorize warm/offline reuse. Public receipts contain
+path tokens and must not be used as operational receipts. Review exports before
+committing; the exporter only targets public synthetic fixture runs and is not
+a general secret scanner for arbitrary documents or diagnostics.
+
+All version/build processes use a constructed environment and private Biber shim
+with `--noconf`. Native Apple Silicon is a validation target alongside Intel Mac
+and Linux; see the compatibility report for observed blockers and the bounded
+newer-bundle comparison. No support is inferred from archive availability.
