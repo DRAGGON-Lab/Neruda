@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-11-27T16:10:43.517343+00:00",
+  "source_revision": "2c1836b3e4fde13584a2e5029a0c97fd73aae5e1",
+  "dirty_state": "",
+  "git_diagnostics": {
+    "source_revision": {
+      "exit_code": 0,
+      "stderr": ""
+    },
+    "dirty_state": {
+      "exit_code": 0,
+      "stderr": ""
+    }
+  },
+  "platform": "Linux-7.0.0-1018-aws-x86_64-with-glibc2.39",
+  "runner_image": {
+    "ImageOS": "ubuntu24",
+    "ImageVersion": "20261122.23.1",
+    "RUNNER_OS": "Linux",
+    "RUNNER_ARCH": "X64"
+  },
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "harness_sha256": "628200e5ad54402405f16795a8871646a2f7f9c44069516689f605240cb0b166",
+  "status": "pass",
+  "archives": {
+    "tectonic": {
+      "url": "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-gnu.tar.gz",
+      "expected_sha256": "1a715688baf591e650c8aeb160ae934e181685eecbb38b317de30b269ac5d606",
+      "actual_sha256": "1a715688baf591e650c8aeb160ae934e181685eecbb38b317de30b269ac5d606",
+      "verification": "official GitHub release digest",
+      "executable_sha256": "2b3a86250906c92ed0a3ae8aaa454ec55bd6cede8593b3e549640177f6aecaa3"
+    },
+    "biber": {
+      "url": "https://downloads.sourceforge.net/project/biblatex-biber/biblatex-biber/2.17/binaries/Linux/biber-linux_x86_64.tar.gz",
+      "expected_sha256": "129d2e0332a57e985ffa253e5e9fbd28ef99af5a068d1b141145211969aa8999",
+      "actual_sha256": "129d2e0332a57e985ffa253e5e9fbd28ef99af5a068d1b141145211969aa8999",
+      "verification": "locally measured official download; not publisher-corroborated",
+      "executable_sha256": "ff87e30fbc1958acf16a1772973d40eeb7635a9d5ea59f5162df549802c611df"
+    }
+  }
+}

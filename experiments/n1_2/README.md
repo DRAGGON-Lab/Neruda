@@ -13,14 +13,15 @@ alone do not establish binary provenance.
 
 ```sh
 python3 -m unittest discover -s experiments/n1_2 -p 'test_*.py' -v
-python3 experiments/n1_2/run.py --tool-dir .tools/n1_2/bin --work-root /private/tmp/neruda-n1-2-native-20261127 --case cold
+python3 experiments/n1_2/run.py --tool-dir .tools/n1_2/bin --bundle "$NERUDA_BUNDLE_ZIP" --bundle-lock "$NERUDA_BUNDLE_LOCK" --work-root /private/tmp/neruda-n1-2-native-20261127 --case cold
 ```
 
 After a successful cold run, invoke the same command with `--case warm`,
 `--case offline`, and `--case offline-empty`. Each case preserves its own source
 copy, console logs, intermediate files and JSON receipt; existing case directories
-are refused. Warm/offline reuse only this experiment's cache. The empty-cache
-offline case is expected to fail, and is recorded as a failed build. The engine's
+are refused. Warm/offline reuse only this experiment's cache. With a verified local ZIP, the empty-cache
+offline case is expected to compile. Missing-bundle refusal is a separate
+negative dependency test; historical remote-bundle failures remain unchanged. The engine's
 `--only-cached` switch is not a system-level network isolation proof.
 
 Exit 2 means preflight/refusal, exit 1 means build failure, and exit 0 means the
@@ -106,3 +107,23 @@ binary (requires GLIBC_2.39). The user approved a fresh Ubuntu 24.04 environment
 no existing system libraries were upgraded. Documentation/evidence-only changes
 do not retrigger the compatibility job. Runner image identity is recorded in
 provisioning receipts; the distribution label is not an immutable image digest.
+
+## Required local bundle gate
+
+Set `NERUDA_BUNDLE_ZIP` and `NERUDA_BUNDLE_LOCK` to independently reviewed inputs
+before the example command. No live runtime lock is committed while the original
+archive identity remains unverified. The runtime lock has `version`, `sha256`,
+`content_fingerprint` and `verification_reference` fields. A reference string is
+provenance to review, not cryptographic proof by itself. The verifier does not
+replace that human review. A raw `.tar` path is refused; the source-lock-gated
+`pack_bundle.py` prepares a ZIP candidate, never an approved runtime lock.
+
+Compiler caches and bundles are separate. Local resources can populate an empty
+compiler cache without remote fetching. Cache inventory equality and dependency
+identity still gate warm/offline reuse. The runner's compiler flag is not an OS
+network isolation mechanism. Real OS-enforced offline validation is pending the
+verified bundle; do not claim acceptance from mocked tests.
+
+The local master store is outside this repository at the maintainer-selected
+`Neruda_artifacts` sibling directory. Do not commit large archives or publish a
+GitHub dependency asset without review and explicit publication approval.

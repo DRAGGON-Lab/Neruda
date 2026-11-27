@@ -3,12 +3,24 @@ import contextlib
 import io
 import json
 import subprocess
+import zipfile
 from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
 import run
+
+
+def local_bundle(root):
+    path = root / "bundle.zip"
+    lock = root / "bundle.lock.json"
+    if not path.exists():
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr(zipfile.ZipInfo("SHA256SUM"), "a" * 64)
+        lock.write_text(json.dumps({"version": run.bundle.VERSION, "sha256": run.bundle.sha256(path),
+                                   "content_fingerprint": "a" * 64, "verification_reference": "synthetic test fixture only"}))
+    return ["--bundle", str(path), "--bundle-lock", str(lock)]
 
 
 class RunnerBoundaries(unittest.TestCase):
@@ -19,7 +31,7 @@ class RunnerBoundaries(unittest.TestCase):
             (root / "cache").symlink_to(root / "foreign", target_is_directory=True)
             with patch.object(run, "preflight", return_value={}):
                 with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
-                    run.main(["--tool-dir", str(root), "--work-root", str(root), "--case", "warm"])
+                    run.main(local_bundle(root) + ["--tool-dir", str(root), "--work-root", str(root), "--case", "warm"])
             self.assertFalse((root / "warm").exists())
 
     def test_arbitrary_pdfs_do_not_count_as_required_outputs(self):
@@ -32,7 +44,7 @@ class RunnerBoundaries(unittest.TestCase):
             with patch.object(run, "preflight", return_value={"tectonic": {"path": "mock"}}):
                 with patch.object(run, "execute", side_effect=fake_execute):
                     with contextlib.redirect_stdout(io.StringIO()):
-                        code = run.main(["--tool-dir", str(root), "--work-root", str(root), "--case", "cold", "--evidence-root", str(root / "evidence")])
+                        code = run.main(local_bundle(root) + ["--tool-dir", str(root), "--work-root", str(root), "--case", "cold", "--evidence-root", str(root / "evidence")])
             self.assertEqual(code, 1)
 
     def test_missing_tools_do_not_create_work_directory(self):
@@ -73,7 +85,7 @@ class RunnerBoundaries(unittest.TestCase):
 class RunnerExecution(unittest.TestCase):
     def invoke(self, root, case="cold", executor=None):
         with patch.object(run, "preflight", return_value={"tectonic": {"path": "/approved/tectonic"}}), patch.object(run, "execute", side_effect=executor or self.success), contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-            return run.main(["--tool-dir", str(root / "tools"), "--work-root", str(root / "work"), "--case", case, "--evidence-root", str(root / "evidence")])
+            return run.main(local_bundle(root) + ["--tool-dir", str(root / "tools"), "--work-root", str(root / "work"), "--case", case, "--evidence-root", str(root / "evidence")])
 
     @staticmethod
     def success(argv, cwd=None, env=None, **kwargs):
@@ -98,7 +110,7 @@ class RunnerExecution(unittest.TestCase):
             self.assertEqual(len(list((root / "evidence").iterdir())), 3)
 
     def test_invalid_cold_receipts_refused_before_output(self):
-        for field in ("compilation", "tools", "inputs", "cache", "harness", "bundle_url", "environment_policy", "malformed", "missing", "list"):
+        for field in ("compilation", "tools", "inputs", "cache", "harness", "bundle", "environment_policy", "malformed", "missing", "list"):
             with self.subTest(field=field), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 self.invoke(root)

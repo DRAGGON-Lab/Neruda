@@ -13,7 +13,16 @@ permissions:
   contents: read
 
 jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - run: python3 -m unittest discover -s experiments/n1_2 -p 'test_*.py' -v
   linux-x86_64:
+    needs: regression
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:

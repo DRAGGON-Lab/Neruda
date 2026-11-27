@@ -342,3 +342,54 @@ the pinned bundle service must become available, or a separately reviewed,
 verified replacement-bundle experiment must be authorized. Repeated downloads,
 cache repair, library replacement and tool-version substitution were not used
 to manufacture a passing build. N1.3 remains gated on N1.2 acceptance.
+
+## Reliable local-bundle work: implementation and current gate
+
+The two additional artifacts from run `46031329144` were independently downloaded
+and checked against GitHub's reported ZIP SHA-256 values:
+
+| Artifact | ZIP SHA-256 | Observed result |
+|---|---|---|
+| 15213808737, attempt 1 | `f510a71e2eb1addb5dd744f6876860d8c82f8b64a9801544763ab6a08f41a59b` | Article failed fetching amstext.sty; presentation and handout compiled |
+| 15214503126, attempt 2 | `663ac25b56fa7acd586ce50e06fd792ea91ed7042de6efc1a1cabab02ec7de6f` | Both projects failed fetching bundle index |
+
+They are retained unchanged under `evidence/artifact-15213808737` and
+`evidence/artifact-15214503126`. Export-manifest and PDF checksums were verified.
+The positive logs identify biblatex 3.17 and Biber 2.17, including successful
+bibliography output for slides and handout. Their PDF hashes are
+`d2ee9d7731fce7d36db20f2f79b6b469fc816631bbfff62b996ed5c10f944e97`
+and `c5739a7d75ec7d8b320902cd9af924285e7a700a9218b0742644466a1b307eb5`.
+Logs report six presentation and five handout pages; independent rendered-page
+inspection remains pending. Warnings include unicode-math command replacement,
+hyperref PDF-string handling and nested color changes; successful exit alone
+is not visual acceptance. HTTP 429 is not evidence of bibliography incompatibility.
+
+Tectonic 0.17.0 source at `8c0126a9653239a2e6e0a5274af9b8510f643030`
+confirms local ZIP, TTB and directory backends. Its indexed-tar backend is
+HTTP-range based; the build command ignores its --bundle option. The runner now
+binds staged manifests to a verified ZIP instead. Streaming SHA-256 and ZIP CRC,
+member and internal-fingerprint checks happen before compiler invocation.
+Missing/invalid resources produce preserved preflight diagnostics and exit 2.
+A source-lock-gated converter prepares byte-preserving ZIP candidates without
+publishing or endorsing them. No real usable bundle lock exists yet.
+
+Twenty-six behavioral tests pass locally. They cover the existing integrity and
+source-provenance behavior plus missing/corrupt/mismatched local resources,
+manifest binding without remote fallback, successful synthetic empty-cache local
+selection and verified-source packaging. These synthetic tests do not demonstrate
+real compilation. The CI regression job is independent of provisioning. The
+provisioning job now reports its primary blocker directly in the job summary;
+full matrix results and compiler errors are summarized when compilation runs.
+
+Current implementation remains gated: acquire the complete original bundle and
+independently verify its archive identity before preparing a real ZIP/runtime
+lock, dependency asset/cache, three-platform local-resource matrix or OS-enforced
+offline checks. Full PDFs, actual consumed fonts and all-page review are still
+outstanding. No new supported platform or release is declared.
+
+If the original bundle cannot be independently verified, the replacement proposal
+is a separate investigation of upstream texlive2024-0312 with Tectonic 0.17.0.
+Use the upstream source recipe and declared input checksum already recorded above;
+verify the actual resulting biblatex version, then request approval of its matching
+Biber and exact archives before execution. Do not substitute the candidate into
+the existing compatibility unit or infer package identity from the year label.

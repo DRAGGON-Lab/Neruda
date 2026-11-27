@@ -45,6 +45,8 @@ def extract(archive, destination, name, expected):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", required=True, type=Path)
+    parser.add_argument("--bundle", type=Path)
+    parser.add_argument("--bundle-lock", type=Path)
     args = parser.parse_args(argv)
     if platform.system() != "Linux" or platform.machine() != "x86_64":
         parser.error("requires native Linux x86_64")
@@ -65,6 +67,7 @@ def main(argv=None):
     try:
         if receipt["source_revision"] is None or receipt["dirty_state"] is None:
             raise ValueError("Git provenance unavailable")
+        run.bundle.verify(args.bundle, args.bundle_lock)
         for name, (url, expected, verification) in ARCHIVES.items():
             archive = root / (name + ".tar.gz")
             with urlopen(url, timeout=60) as response, archive.open("xb") as target:
@@ -85,7 +88,11 @@ def main(argv=None):
             str(Path.home()): "<HOME>",
         })
     if receipt["status"] != "pass":
-        print("Linux provisioning failed; see preserved public receipt", file=sys.stderr)
+        message = "Provisioning blocked: " + receipt.get("diagnostic", "unknown failure")
+        print(message, file=sys.stderr)
+        if os.environ.get("GITHUB_STEP_SUMMARY"):
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+                summary.write("## N1.2 provisioning blocked\n\n" + message + "\n\nCompilation: not_run. No remote bundle fallback.\n")
         return 1
     outcomes = {}
     for case in ("cold", "warm", "offline", "offline-empty"):
@@ -94,13 +101,14 @@ def main(argv=None):
             continue
         try:
             outcomes[case] = run.main([
+                "--bundle", str(args.bundle), "--bundle-lock", str(args.bundle_lock),
                 "--tool-dir", str(tools), "--work-root", str(root / "work"),
                 "--evidence-root", str(public / "builds"), "--case", case,
             ])
         except SystemExit as error:
             outcomes[case] = error.code
     pdfs = {}
-    for case in ("cold", "warm", "offline"):
+    for case in ("cold", "warm", "offline", "offline-empty"):
         for kind, output in (("article", "article"), ("slides", "slides"), ("slides", "handout")):
             source = root / "work" / case / kind / "build" / output / (output + ".pdf")
             if source.is_file() and not source.is_symlink():
@@ -113,7 +121,17 @@ def main(argv=None):
                "limitations": ["Biber publisher checksum corroboration pending",
                                "Successful compilation requires separate log and all-page review"]}
     (public / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    return 0 if all(outcomes.get(case) == 0 for case in ("cold", "warm", "offline")) and outcomes.get("offline-empty") == 1 else 1
+    if os.environ.get("GITHUB_STEP_SUMMARY"):
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as report:
+            report.write("## N1.2 compatibility matrix\n\n| Case | Exit/result |\n|---|---|\n")
+            for case, result in outcomes.items():
+                report.write(f"| {case} | {result} |\n")
+            for log in sorted((public / "builds").rglob("*.console.log")):
+                errors = [line for line in log.read_text().splitlines() if "error:" in line or "caused by:" in line]
+                if errors:
+                    report.write("\n" + log.name + " diagnostics:\n\n```text\n" + "\n".join(errors[-8:]) + "\n```\n")
+            report.write("\nVisual review: not_run. Expected offline-empty exit is 0 with a verified local bundle.\n")
+    return 0 if all(outcomes.get(case) == 0 for case in ("cold", "warm", "offline")) and outcomes.get("offline-empty") == 0 else 1
 
 
 if __name__ == "__main__":

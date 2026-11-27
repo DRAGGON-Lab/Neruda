@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import uuid
+import bundle
 from datetime import datetime, timezone
 
 HERE = Path(__file__).resolve().parent
@@ -66,7 +67,7 @@ def cache_inventory(cache):
     return inventory
 
 
-POLICY = "isolated-v1"
+POLICY = "local-bundle-v2"
 
 
 def environment(root, cache, tools):
@@ -140,6 +141,8 @@ def main(argv=None):
     parser.add_argument("--tool-dir", required=True, type=Path)
     parser.add_argument("--work-root", required=True, type=Path)
     parser.add_argument("--evidence-root", type=Path, default=HERE / "evidence")
+    parser.add_argument("--bundle", type=Path)
+    parser.add_argument("--bundle-lock", type=Path)
     parser.add_argument("--case", required=True, choices=("cold", "warm", "offline", "offline-empty"))
     args = parser.parse_args(argv)
     work = args.work_root.resolve()
@@ -155,8 +158,9 @@ def main(argv=None):
     try:
         if metadata["source_revision"] is None or metadata["dirty_state"] is None:
             raise ValueError("Git provenance unavailable; see git_diagnostics")
+        dependency = bundle.verify(args.bundle, args.bundle_lock)
         tools = preflight(args.tool_dir.resolve())
-    except ValueError as error:
+    except (ValueError, OSError) as error:
         print(f"not_run: {error}", file=sys.stderr)
         with tempfile.TemporaryDirectory(prefix="neruda-probe-evidence-") as temporary:
             evidence = Path(temporary)
@@ -168,7 +172,7 @@ def main(argv=None):
                 "inputs": {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides") for p in sorted((HERE / kind).rglob("*")) if p.is_file()},
                 "tools": {name: {"sha256": digest(args.tool_dir.resolve() / name)} for name in ("tectonic", "biber") if (args.tool_dir.resolve() / name).is_file()},
                 "diagnostic": str(error), "bundle_url": BUNDLE,
-                "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py")},
+                "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py", "bundle.py")},
             }, indent=2) + "\n")
             attempt = "preflight-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
             export_evidence(evidence, args.evidence_root.resolve() / attempt, {
@@ -189,8 +193,8 @@ def main(argv=None):
         current_inputs = {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides")
                           for p in sorted((HERE / kind).rglob("*")) if p.is_file()}
         if (not isinstance(cold, dict) or cold.get("environment_policy") != POLICY
-                or cold.get("bundle_url") != BUNDLE
-                or cold.get("harness") != {name: digest(HERE / name) for name in ("run.py", "test_runner.py")}
+                or cold.get("bundle") != dependency
+                or cold.get("harness") != {name: digest(HERE / name) for name in ("run.py", "test_runner.py", "bundle.py")}
                 or cold.get("compilation") != "pass" or cold.get("tools") != tools
                 or cold.get("inputs") != current_inputs or cold.get("cache") != str(cache)):
             parser.error("cold receipt must describe a successful build with identical inputs and tools")
@@ -206,15 +210,16 @@ def main(argv=None):
         parser.error("cold/empty-cache case refuses a preexisting cache")
     run.mkdir(parents=True)
     cache.mkdir(exist_ok=True)
+    resource = work / "dependencies" / "bundle.zip"
     receipt = {
         **metadata,
         "environment_policy": POLICY,
         "timestamp": datetime.now(timezone.utc).isoformat(), "case": args.case,
         "platform": platform.platform(), "architecture": platform.machine(),
-        "tools": tools, "bundle_url": BUNDLE, "cache": str(cache),
+        "tools": tools, "bundle": dependency, "cache": str(cache),
         "inputs": {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides")
                    for p in sorted((HERE / kind).rglob("*")) if p.is_file()},
-        "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py")},
+        "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py", "bundle.py")},
         "builds": [], "visual_review": "not_run", "status": "partial",
         "limitations": ["PDF inspection and font/bundle content identity require independent review",
                         "only-cached is an engine option, not an OS network sandbox"],
@@ -223,9 +228,21 @@ def main(argv=None):
     receipt["environment"] = env
     failed = False
     try:
+        resource.parent.mkdir(exist_ok=True)
+        if not resource.exists():
+            with args.bundle.open("rb") as source, resource.open("xb") as target:
+                shutil.copyfileobj(source, target)
+        bundle.verify(resource, args.bundle_lock)
         for kind in ("article", "slides"):
             project = run / kind
             shutil.copytree(HERE / kind, project)
+            manifest = project / "Tectonic.toml"
+            local_path = Path(os.path.relpath(resource, project)).as_posix()
+            contents, count = re.subn(r'(?m)^bundle = .+$', 'bundle = ' + json.dumps(local_path), manifest.read_text())
+            if count != 1:
+                raise ValueError("expected exactly one document bundle setting")
+            manifest.write_text(contents)
+            receipt.setdefault("realized_manifests", {})[kind] = digest(manifest)
             command = [tools["tectonic"]["path"], "-X", "build", "--keep-logs", "--keep-intermediates"]
             if args.case.startswith("offline"):
                 command.append("--only-cached")
