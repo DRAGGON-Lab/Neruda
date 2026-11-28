@@ -25,6 +25,9 @@ The final local matrix uses the exact driver digest recorded in each receipt and
 the harness digest in its summary. It ran against HEAD
 `6e3624da58f31eb1904cfadd858118ebbf2a907e` with explicitly recorded dirty state;
 this is not an immutable release or a claim that uncommitted code is reviewed.
+The exact driver and matrix harness were subsequently published in `9b7fe3b`;
+their file-content SHA-256 values match the recorded native test identities. Historical
+receipts retain their actual execution revision and dirty state.
 
 | Scenario | Article | Presentation | Handout |
 |---|---|---|---|
@@ -72,8 +75,13 @@ raw and sanitized exports. Operational caches/seals remain local and cannot be
 reconstructed or authorized from sanitized receipts. A durable copy and verified
 installer/native executable are in the maintainer-selected
 `Neruda_artifacts/texlive-2026-native-20261127` store.
+The later `Neruda_artifacts/texlive-2026-validation-20261128` snapshot preserves
+the latest public evidence, raw native matrix and Linux acquisition results,
+alongside quarantined comparison media; the earlier snapshot remains intact.
 
-Regression verification: 16 driver tests plus 43 N1.2 tests pass locally; the first Ubuntu run passed the prior 57-test suite. YAML syntax and handwritten-source whitespace checks
+Regression verification: 16 driver tests plus 43 N1.2 tests pass locally and in
+[Ubuntu run 46088531399](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46088531399).
+The first Ubuntu run passed the prior 57-test suite. YAML syntax and handwritten-source whitespace checks
 pass. Literal compiler logs retain their original whitespace; the unrestricted
 whitespace scan flags those machine-generated data files. Generated `build/` trees are now excluded from historical fixture hashing
 and copying, preventing stale PDFs and caches from contaminating Tectonic tests.

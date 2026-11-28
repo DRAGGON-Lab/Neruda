@@ -1,0 +1,9 @@
+{
+  "commit": "ec277a9b276dc9ed1a534954c10698a2a5356ab8",
+  "run": "https://github.com/DRAGGON-Lab/Neruda/actions/runs/46088531399",
+  "artifact": "https://github.com/DRAGGON-Lab/Neruda/actions/runs/46088531399/artifacts/15239812745",
+  "regression": "59 pass",
+  "provisioning": "fail: HTTP-200 HTML instead of signed checksum; explicit diagnostic confirmed in job output",
+  "compilation": "not_run",
+  "artifact_export_checksums": "all verified against downloaded manifest"
+}

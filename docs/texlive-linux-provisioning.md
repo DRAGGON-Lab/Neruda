@@ -114,3 +114,15 @@ a separately reviewed authenticated copy of the same signed snapshot. No such
 alternative has been provisioned or approved. A current CTAN mirror or March 1 ISO
 would change the reviewed unit; neither is an automatic fallback. Do not repeat
 large installation attempts while this signature endpoint remains blocked.
+
+[Run 46088531399](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46088531399)
+tested `ec277a9b276dc9ed1a534954c10698a2a5356ab8`: **all 59 tests passed**.
+Provisioning then refused the HTML response at the signed-checksum endpoint with
+the explicit diagnostic directly in the job output; the job exited 1 as required.
+The [second artifact](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46088531399/artifacts/15239812745)
+and [checked-in evidence](../experiments/n1_2/evidence/texlive-linux-20261128/46088531399/)
+preserve the result and download identity. Every exported file matched its manifest.
+Additional read-only checks found HTML at the installer, compressed database and
+`archive/geometry.tar.xz` endpoints too; retaining earlier signature files alone
+would not solve current package access. No further installation run is warranted
+until source access is resolved.

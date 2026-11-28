@@ -1,0 +1,22 @@
+{
+  "key-import.log": {
+    "raw_sha256": "1d685e4c03a9bde79593e51fe2442c2ee8b172670a91013901300cd09112e005",
+    "export_sha256": "960c8ab241f005b499de891dc7d8558addb95b25f1bab45b223e1e82f56f74ba"
+  },
+  "gpg-version.log": {
+    "raw_sha256": "bf75fc5e0ab2a8f9637a44c62114ed3b58e0724459edae42348f9ce734f998ad",
+    "export_sha256": "4d5ecdafac4e0bdcdc06e9c267db721ac67af183eb67364ab769fd6a7a65c58f"
+  },
+  "texlive.asc.download.json": {
+    "raw_sha256": "d19ae20fdc933a846b1931506ce2c7b0b95739e39a68216254149985810d3839",
+    "export_sha256": "d19ae20fdc933a846b1931506ce2c7b0b95739e39a68216254149985810d3839"
+  },
+  "install-tl-unx.tar.gz.sha512.download.json": {
+    "raw_sha256": "dbf36716a56d3adf4298612c6a32c785eaca97187135026caf7dde57754072f1",
+    "export_sha256": "dbf36716a56d3adf4298612c6a32c785eaca97187135026caf7dde57754072f1"
+  },
+  "provisioning.json": {
+    "raw_sha256": "aa072ebaf7fe4e232de619301ec046a99d682d06eef60e38e74ecc17561aec45",
+    "export_sha256": "aa072ebaf7fe4e232de619301ec046a99d682d06eef60e38e74ecc17561aec45"
+  }
+}

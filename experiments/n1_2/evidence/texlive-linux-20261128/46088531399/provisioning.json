@@ -1,0 +1,14 @@
+{
+  "status": "fail",
+  "phase": "verify installer and repository metadata",
+  "compilation": "not_run",
+  "harness_sha256": "d9ea048e5f3ce7ad4d1c7af1201a52f03dfc3dec9cac28dcb7594523f9c8261a",
+  "platform": "Linux-7.0.0-1018-aws-x86_64-with-glibc2.39",
+  "libc": [
+    "glibc",
+    "2.39"
+  ],
+  "image_os": "ubuntu24",
+  "image_version": "20261122.23.1",
+  "error": "dependency endpoint returned HTML instead of an artifact: https://texlive.info/tlnet-archive/2026/03/22/tlnet/install-tl-unx.tar.gz.sha512; possible access challenge; raw response and download identity retained; no installer was executed"
+}
