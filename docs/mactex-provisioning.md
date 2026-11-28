@@ -63,11 +63,12 @@ Linux candidate `texlive2026-20260301.iso` publisher SHA-512 retrieved separatel
 4a9071bb567c3bdd6443378dedc8e485aea4a2f1203ec8ed7c17f6787093b9c37636a037032c0be63352e3d0bf98cf5616dab19fdcd7cb83f766b3e085b620ff
 ```
 
-The ISO has not been downloaded and its signature has not been verified. Shared
-package identity remains untested. No Linux provisioning workflow is published.
-
-Local verification: 16 driver regressions and 41 N1.2 regressions pass on Python
-3.9. Real native compilation/cache results are documented in ADR-003.
+The ISO was subsequently downloaded and inspected for metadata comparison.
+Its GPG verification is pending, and the March 1 snapshot differs from the
+installed Mac resources. The separate [Linux provisioning record](texlive-linux-provisioning.md)
+documents both Ubuntu attempts and the deferred March 22 snapshot work.
+Native compilation and current regression results are in the
+[N1.2a acceptance report](n1-2a-acceptance.md).
 
 The agent's `sudo -n true` required a password. The maintainer entered credentials
 locally and completed installation. Previous selection links and path-file contents
@@ -90,3 +91,8 @@ Derived SHA-256: `a1a2784931d9156a9d4cc8cb609912d533f04365d2e4aa7b902001a2f1a650
 `codesign --verify --verbose=2` reports an invalid signature on the derived slice.
 No resigning, quarantine removal, Rosetta or system-binary replacement occurred.
 The installed source and derived hashes are pinned separately.
+The publisher signature applies to the MacTeX installer. The derived executable
+is verified by its observed native architecture, exact hash and successful
+execution. A hash identifies the local derivative and does not confer a valid
+Apple code signature. If a host rejects execution, retain the diagnostic and
+seek a reviewed native source or provisioning procedure.

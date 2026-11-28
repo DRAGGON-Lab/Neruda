@@ -117,6 +117,13 @@ def export_evidence(run, destination, replacements):
         if path.name != "receipt.json" and path.suffix not in (".log", ".blg"):
             continue
         content = path.read_text(errors="replace")
+        if path.name == "receipt.json":
+            receipt = json.loads(content)
+            dirty = receipt.pop("dirty_state", None)
+            if "git_diagnostics" in receipt:
+                receipt["git_diagnostics"].pop("dirty_state", None)
+            receipt["source_dirty"] = None if dirty is None else bool(dirty)
+            content = json.dumps(receipt, indent=2) + "\n"
         for source, token in sorted(replacements.items(), key=lambda item: -len(item[0])):
             content = content.replace(source, token)
         content = re.sub(r"par-[0-9a-f]+/", "par-<USER>/", content)
@@ -141,6 +148,8 @@ def preflight(tool_dir):
                 code, output = execute([str(path), "--version"], cwd=root, env=env, timeout=60)
         except subprocess.TimeoutExpired as error:
             raise ValueError(f"{name} --version exceeded 60 seconds") from error
+        except OSError as error:
+            raise ValueError(f"could not launch {name} --version: {error}") from error
         if code or output.strip() != expected:
             raise ValueError(f"{name} version mismatch: expected {expected!r}, got {output.strip()!r}")
         tools[name] = {"path": str(path), "version": output.strip(), "sha256": digest(path)}
@@ -159,8 +168,11 @@ def main(argv=None):
     parser.add_argument("--case", required=True, choices=("cold", "warm", "offline", "offline-empty"))
     args = parser.parse_args(argv)
     work = args.work_root.resolve()
-    if args.evidence_root.resolve() == work / args.case or work / args.case in args.evidence_root.resolve().parents:
+    evidence_root = args.evidence_root.resolve()
+    if evidence_root.is_relative_to((work / args.case).resolve()):
         parser.error("evidence root must be outside the case directory")
+    if any(evidence_root.is_relative_to((work / name).resolve()) for name in ("cache", "empty-cache")):
+        parser.error("evidence root must be outside the operational caches")
     # Never mutate caller inputs or reuse output from another attempt.
     if work == HERE or work in HERE.parents or HERE in work.parents and work.name != "artifacts":
         parser.error("work root must be outside fixture source (or the ignored artifacts directory)")

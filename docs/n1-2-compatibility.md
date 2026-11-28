@@ -1,5 +1,10 @@
 # N1.2 compatibility report
 
+This report preserves the original N1.2 evidence from PR #11. Current native
+acceptance is tracked in the [N1.2a review](n1-2a-acceptance.md). The Linux,
+Intel macOS and earlier Tectonic investigations remain traceable through
+[N1.2b](https://github.com/DRAGGON-Lab/Neruda/issues/12).
+
 ## New candidate: TeX Live / LuaLaTeX
 
 Native Apple Silicon validation **passes locally; cross-platform acceptance is
@@ -93,13 +98,14 @@ The March 1 ISO is a different snapshot (including geometry 5.9 versus 6.0 and
 latexmk 4.87 versus 4.88). The TUG-documented March 22 archive matches all 4,478
 installed packages with shared runtime files. Signed-metadata authentication must
 run in CI before any archive code is executed. The maintainer approved publishing
-and running the [prepared Ubuntu procedure](texlive-linux-provisioning.md).
-At this report update execution is pending, so no new CI success or evidence link
-is asserted. Native Intel/Linux execution, editor GUI validation, independent review
-and maintainer acceptance remain open.
-N1.2 remains **not ready for acceptance**.
+and running the [Ubuntu procedure](texlive-linux-provisioning.md), which records
+both blocked executions. The new native-only review and its remaining acceptance
+checks are recorded separately. Intel Mac and Linux execution are deferred.
 
 ## Historical Tectonic compatibility evidence
+
+The acceptance and dependency statements below describe the original combined
+investigation. The live roadmap now gates native development on N1.2a.
 
 Status: **engineering work through `fc00ab6` approved; compatibility acceptance pending**. Observations: 2026-11-27.
 Base Neruda revision: `7bdf17ce40577a15877ac8fe0d79ee9a9b4f985c`.

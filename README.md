@@ -4,7 +4,7 @@
 
 Neruda is DRAGGON Lab's LaTeX-first infrastructure for building traceable scientific manuscripts, presentations and figures. It treats scientific documents as versioned, reviewable build products: content, bibliography, mathematical notation, figure source, data references, compiler and generated artifacts have explicit identities.
 
-**Status:** compatibility investigation in progress. The native MacTeX/LuaLaTeX candidate has local article, slide, handout and offline-build evidence; cross-platform validation and maintainer acceptance remain pending. There is no supported standalone package or release. [LaTexProjects](https://github.com/Gonza10V/LaTexProjects) remains the migration reference.
+**Status:** Apple Silicon first, portability by design. The native MacTeX/LuaLaTeX candidate has local article, slide, handout and offline-build evidence. Native compatibility awaits independent review and maintainer acceptance. Cross-platform validation is deferred to [N1.2b](https://github.com/DRAGGON-Lab/Neruda/issues/12). [LaTexProjects](https://github.com/Gonza10V/LaTexProjects) remains the migration reference.
 
 ## Planned capabilities
 
@@ -36,7 +36,7 @@ The driver never installs dependencies or silently selects another compiler.
 
 ## Local development
 
-After bootstrap approval and merge, clone using authorized Git access and inspect the actual checkout:
+Clone using authorized Git access and inspect the actual checkout:
 
 ```sh
 git clone https://github.com/DRAGGON-Lab/Neruda.git
@@ -47,9 +47,9 @@ git status --short
 
 Use only the implemented candidate commands and explicitly verified dependencies.
 Do not invoke upstream script names as native commands or install tools without
-approval. N1.2 retains the historical Tectonic 0.17.0/Biber 2.17/biblatex 3.17
-investigation and evaluates the approved MacTeX/LuaLaTeX alternative. Current
-results and remaining acceptance checks are in the compatibility report.
+approval. [N1.2a](https://github.com/DRAGGON-Lab/Neruda/issues/2) reviews the
+native stack. The compatibility report preserves the historical Tectonic
+investigation alongside the native results.
 
 ### Planned layout
 
@@ -69,7 +69,12 @@ Style/template/scaffold modules remain planned; candidate tools, scripts and tes
 
 ### Toolchain and testing
 
-No Neruda compiler wrapper, Makefile, Docker Compose or CI test runner exists yet. Use a clean local/CI environment to validate standalone workflows; an optional reviewed container may be useful for compatibility or reproducibility, but is not a product dependency. Installing, repairing or changing compiler/bibliography dependencies, checksums, environment or lockfiles requires explicit approval. Shell escape remains disabled by default. The historical upstream commands are listed in the inventory as references only.
+The Python driver provides non-installing preflight, build and output checks.
+Both behavioral regression suites run on pull requests. Run native integrity and
+build checks on a Mac with the provisioned pins. The Linux TeX Live and historical
+Tectonic workflows run by explicit dispatch for authorized investigations.
+Installing, repairing or changing the toolchain or locks requires explicit approval.
+The candidate disables shell escape.
 
 Future release checks include safe scaffolding (no overwrite/path traversal), version checks and missing-tool diagnostics, clean paper and slide builds without ANDES, unresolved references/citations checks, explicit figure provenance and visual inspection of every page/slide. A successful compilation alone is not scientific validity or publication readiness.
 

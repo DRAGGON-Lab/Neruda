@@ -132,7 +132,13 @@ def public_export(root):
         if source.suffix == '.pdf':
             shutil.copyfile(source, target)
         else:
-            text = sanitize_text(source.read_text(errors='replace'), replacements)
+            text = source.read_text(errors='replace')
+            if source.name == 'receipt.json':
+                receipt = json.loads(text)
+                dirty = receipt.pop('dirty_state', None)
+                receipt['source_dirty'] = None if dirty is None else bool(dirty)
+                text = json.dumps(receipt, indent=2) + '\n'
+            text = sanitize_text(text, replacements)
             target.write_text(text)
         manifest[str(relative)] = {'raw_sha256': latex.digest(source), 'export_sha256': latex.digest(target)}
     (public / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')

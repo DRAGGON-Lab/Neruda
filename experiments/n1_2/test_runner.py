@@ -24,6 +24,36 @@ def local_bundle(root):
 
 
 class RunnerBoundaries(unittest.TestCase):
+    def test_evidence_refuses_both_cache_roots_and_descendants(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            work = root / 'work'
+            for relative in ('cache', 'cache/export', 'empty-cache', 'empty-cache/export'):
+                with self.subTest(relative=relative), contextlib.redirect_stderr(io.StringIO()) as error:
+                    with self.assertRaises(SystemExit) as result:
+                        run.main(['--tool-dir', str(root / 'tools'), '--work-root', str(work),
+                                  '--case', 'cold', '--evidence-root', str(work / relative)])
+                    self.assertEqual(result.exception.code, 2)
+                    self.assertIn('outside the operational caches', error.getvalue())
+            self.assertFalse(work.exists())
+
+    def test_launch_failure_records_not_run_and_diagnostic(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            tools = root / 'tools'
+            tools.mkdir()
+            binary = tools / 'tectonic'
+            binary.write_text('invalid executable')
+            binary.chmod(0o700)
+            with patch.object(run.bundle, 'verify'), contextlib.redirect_stderr(io.StringIO()):
+                code = run.main(['--tool-dir', str(tools), '--work-root', str(root / 'work'),
+                                 '--case', 'cold', '--evidence-root', str(root / 'evidence')])
+            self.assertEqual(code, 2)
+            receipt = json.loads(next((root / 'evidence').glob('*/receipt.json')).read_text())
+            self.assertEqual(receipt['compilation'], 'not_run')
+            self.assertIn('could not launch tectonic --version', receipt['diagnostic'])
+            self.assertFalse((root / 'work').exists())
+
     def test_foreign_cache_symlink_is_refused(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -173,12 +203,18 @@ class RunnerExecution(unittest.TestCase):
             root = Path(directory)
             source = root / "raw"
             source.mkdir()
-            (source / "receipt.json").write_text('{"path": "/private/person/tools"}')
+            raw = {"path": "/private/person/tools", "dirty_state": "?? private.tex\n",
+                   "git_diagnostics": {"dirty_state": {"stdout": "?? private.tex\n"}}}
+            (source / "receipt.json").write_text(json.dumps(raw))
             (source / "console.log").write_text("/private/person/tools: HTTP 429")
             (source / "binary").write_bytes(b"excluded")
             run.export_evidence(source, root / "public", {"/private/person": "<HOME>"})
             self.assertEqual((root / "public/console.log").read_text(), "<HOME>/tools: HTTP 429")
             self.assertFalse((root / "public/binary").exists())
+            public = (root / "public/receipt.json").read_text()
+            self.assertNotIn("private.tex", public)
+            self.assertTrue(json.loads(public)["source_dirty"])
+            self.assertEqual(json.loads((source / "receipt.json").read_text()), raw)
             self.assertTrue((root / "public/manifest.json").exists())
             with self.assertRaises(FileExistsError):
                 run.export_evidence(source, root / "public", {})
@@ -203,7 +239,8 @@ class IntegrityRegressions(unittest.TestCase):
                         self.assertEqual(self.invoke(root), 0)
                 receipt = json.loads(next((root / "evidence").glob("*/receipt.json")).read_text())
                 self.assertEqual(receipt["source_revision"], "a" * 40)
-                self.assertEqual(receipt["dirty_state"], " M fixture.tex\n")
+                self.assertTrue(receipt["source_dirty"])
+                self.assertNotIn("dirty_state", receipt)
                 self.assertEqual(receipt["git_diagnostics"]["source_revision"]["stderr"], "git warning\n")
 
     def test_invalid_git_metadata_refuses_compilation(self):

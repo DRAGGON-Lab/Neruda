@@ -26,7 +26,7 @@ Neruda owns reusable infrastructure; research projects own manuscripts, sources,
 |---|---|---|
 | `tex/` | Shared semantic macros, quantities, math and versioned DRAGGON style/Beamer theme | Package dependencies, source license/branding review, verified rendered templates |
 | `templates/` | Minimal article and 16:9 slide starters, modular source, metadata, bibliography and evidence layout | Cleared extraction inventory, placeholder/synthetic content review, no working papers copied |
-| `tools/` | Reviewed compiler, bibliography and bundle compatibility pins and archive checksums | N1.2 real platform/clean-build evidence and explicit install approvals |
+| `tools/` | Platform-specific executable pins, shared package and font identities, distribution verification | N1.2a native compatibility and N1.2b portable provisioning |
 | `scripts/` | Non-installing preflight, safe scaffold, explicit build/log checks | N1.3 tests for existing/unsafe destinations, missing tools, failures and source preservation |
 | Figure interface | Explicit script/notebook/TikZ generation with versioned inputs and output artifacts | Data/code/environment provenance; no shell escape for hidden generation |
 | Evidence interface | Project-level claim/evidence references, data/source identities, figure and build receipts | A3.1/N2.1 cross-repository contract; validate valid/invalid fixtures |
@@ -72,9 +72,16 @@ Adapt the physical layout as needed but maintain stable semantic references and 
 The maintainer has selected a dated MacTeX/TeX Live + LuaLaTeX + latexmk
 candidate for validation and daily build tooling; see
 [ADR-003](docs/decisions/ADR-003.md) and the [candidate interface](docs/latex-stack.md).
-It is not yet a supported toolchain. ADR-002 and its Tectonic evidence are retained.
+Native acceptance is pending. Keep provisioning and executable pins specific to
+each platform. The project-owned LaTeX and Python driver use explicit local
+dependencies and can travel with a project snapshot. ADR-002 records the earlier
+Tectonic investigation.
 
-Reference upstream: LaTexProjects Tectonic 0.17.0, `tlextras-2022.0r0`, Biber 2.17 (matched biblatex 3.17), no shell escape. Current checked source declares Tectonic manifest v2 and uses Unicode/fontspec/unicode-math. Shared style rejects pdfTeX. Historical wrapper paths and pinned archive coverage are not portable guarantees; see [inventory](upstream/LaTexProjects.md). In N1.2 choose a minimal compatibility unit and document exact supported OS/architecture, binaries/archives, hashes, cache/network policy, font and bibliography dependencies. CI and local commands must agree. Validate against clean workspaces and supported configurations, including paths containing spaces if supported; no host-local fallback or project-specific workshop environment. Preserve upstream projects untouched.
+The [extraction inventory](upstream/LaTexProjects.md) records the upstream
+Tectonic manifests and Unicode/fontspec/unicode-math requirements. For each
+provisioned platform capture executable and archive identities, cache and network
+policy, and actual fonts and bibliography dependencies. Keep historical workshop
+paths and host caches out of the build environment. Preserve upstream projects.
 
 No mandatory Docker Compose or container deployment. A reviewed reproducible build container may be introduced if clean native environments cannot meet requirements or CI needs it; record image pin and evidence. Do not assume a global TeX or Python environment. Each figure-generation project owns its dependencies and locks. Avoid installing unreviewed binaries, disabling security controls or changing the toolchain without permission. Treat third-party TeX, fonts, images, bibliography and publisher files as untrusted inputs with applicable terms.
 
@@ -90,14 +97,21 @@ No mandatory Docker Compose or container deployment. A reviewed reproducible bui
 
 ```mermaid
 flowchart LR
-    A[N1.1 audit and docs] --> B[N1.2 compatibility spike]
+    A[N1.1 audit and docs] --> B[N1.2a native compatibility]
     B --> C[N1.3 standalone infrastructure]
     C --> D[N1.4 CI and verification]
     D --> E[N1.5 standalone pilot]
+    E --> P[Cross-platform release gate]
+    R[N1.2b deferred portability] --> P
     F[ANDES A3.1 evidence contract] --> G[N2.1 shared interface]
     A --> G
     G --> H[N2 integrated authoring]
     E --> H
 ```
 
-This is a scope/dependency sketch; the approved backlog governs exact task edges. N1.1 introduces no code or build workflow. Remaining decisions: clean platform support and compiler/bib/bundle/font pin; portable scaffold location and template packaging; license/branding clearance; path safety, version and cache verification; independent build and visual review; shared evidence schema. Historical upstream CI is evidence of intended behavior, not a current verified build. Keep standalone toolchain independent of ANDES; align optional authoring via N2.1. See [PRODUCT.md](PRODUCT.md) for release outcomes.
+The [N1 epic](https://github.com/DRAGGON-Lab/Neruda/issues/3) records the task
+edges. N1.5 retains clean-build, citation, all-page review, rollback and exact
+release approval requirements for the declared platform scope. Complete N1.2b
+before expanding that scope across platforms. N1.3 still needs source and
+branding clearance and bounded scaffold/template contracts. Standalone builds
+remain independent of ANDES. N2.1 governs the optional shared evidence interface.

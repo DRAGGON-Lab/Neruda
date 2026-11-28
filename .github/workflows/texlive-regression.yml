@@ -1,12 +1,6 @@
 name: TeX Live candidate regression
 on:
   pull_request:
-    paths:
-      - 'scripts/latex.py'
-      - 'tests/test_latex.py'
-      - 'experiments/n1_2/*.py'
-      - 'tools/texlive*'
-      - '.github/workflows/texlive-regression.yml'
   workflow_dispatch:
 permissions:
   contents: read
