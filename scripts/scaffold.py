@@ -3,11 +3,14 @@
 import argparse
 from contextlib import ExitStack
 import errno
+import hashlib
+import json
 import os
 from pathlib import Path
 import re
 import signal
 import stat
+import subprocess
 import sys
 
 
@@ -24,6 +27,8 @@ COMMON = {
 PROFILES = {
     "article": (
         "README.md",
+        "figures/source/build.py",
+        "figures/source/scaling.json",
         "src/main.tex",
         "src/metadata.tex",
         "src/sections/introduction.tex",
@@ -100,6 +105,32 @@ def bundled_files(profile, root):
         except OSError as error:
             raise OSError(f"invalid bundled source {source}: {error}") from error
     return files
+
+
+def origin_manifest(profile, root, files):
+    env = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+    env["GIT_OPTIONAL_LOCKS"] = "0"
+    revision = dirty = None
+    try:
+        def git(*args):
+            return subprocess.run(["/usr/bin/git", *args], cwd=root, env=env,
+                                  capture_output=True, timeout=30)
+        top = git("rev-parse", "--show-toplevel")
+        if top.returncode == 0 and Path(os.fsdecode(top.stdout).rstrip("\n")).resolve() == root.resolve():
+            head = git("rev-parse", "--verify", "HEAD^{commit}")
+            status = git("status", "--porcelain")
+            if head.returncode == 0:
+                revision = os.fsdecode(head.stdout).strip()
+            if status.returncode == 0:
+                dirty = bool(status.stdout)
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+    hashes = {path.as_posix(): hashlib.sha256(contents).hexdigest() for path, contents in files.items()}
+    encoded = json.dumps(hashes, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    manifest = {"version": 1, "profile": profile, "template_revision": revision,
+                "template_dirty": dirty, "bundle_sha256": hashlib.sha256(encoded).hexdigest(),
+                "initial_files": dict(sorted(hashes.items()))}
+    return (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
 
 
 def remove_created(entries):
@@ -190,7 +221,9 @@ def main(argv=None, *, root=ROOT, checkpoint=lambda: None):
         with ExitStack() as stack:
             parent, directory = open_parent(stack, args.parent)
             destination = parent / args.name
-            create_project(directory, destination, bundled_files(args.profile, root), checkpoint)
+            files = bundled_files(args.profile, root)
+            files[Path('scaffold-origin.json')] = origin_manifest(args.profile, root, files)
+            create_project(directory, destination, files, checkpoint)
     except InvalidInput as error:
         parser.error(str(error))
     except (OSError, KeyboardInterrupt) as error:

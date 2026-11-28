@@ -1,0 +1,1 @@
+tex input <INPUT_VALIDATION>/projects with spaces/bibliography-free/src/scientific.dat: input changed during compilation or was outside the project snapshot

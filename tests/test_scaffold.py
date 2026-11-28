@@ -2,7 +2,9 @@
 
 from contextlib import redirect_stderr, redirect_stdout
 import errno
+import hashlib
 import io
+import json
 import os
 from pathlib import Path
 import shutil
@@ -25,7 +27,8 @@ SHARED = {
     "src/bib/references.bib": "templates/common/src/bib/references.bib",
 }
 ARTICLE = (
-    "README.md", "src/main.tex", "src/metadata.tex", "src/sections/introduction.tex",
+    "README.md", "figures/source/build.py", "figures/source/scaling.json",
+    "src/main.tex", "src/metadata.tex", "src/sections/introduction.tex",
     "src/sections/mathematical-concepts.tex", "src/sections/reproducibility.tex",
 )
 SLIDES = (
@@ -71,7 +74,20 @@ class ScaffoldTests(unittest.TestCase):
                  for path in destination.rglob("*") if path.is_file()}
         expected = {name: (root / source).read_bytes()
                     for name, source in EXPECTED[profile].items()}
+        manifest = json.loads(files.pop('scaffold-origin.json'))
         self.assertEqual(files, expected)
+        self.assertEqual((manifest['version'], manifest['profile']), (1, profile))
+        hashes = {path: hashlib.sha256(contents).hexdigest() for path, contents in expected.items()}
+        self.assertEqual(manifest['initial_files'], hashes)
+        canonical = json.dumps(hashes, sort_keys=True, separators=(",", ":")).encode()
+        self.assertEqual(manifest['bundle_sha256'], hashlib.sha256(canonical).hexdigest())
+        if root == self.root:
+            self.assertIsNone(manifest['template_revision'])
+            self.assertIsNone(manifest['template_dirty'])
+        else:
+            revision = subprocess.check_output(['/usr/bin/git', 'rev-parse', 'HEAD'],
+                                               cwd=root, text=True).strip()
+            self.assertEqual(manifest['template_revision'], revision)
 
     def assert_parent_intact(self, *expected):
         self.assertEqual(set(self.parent.iterdir()), {self.sentinel, *expected})
@@ -97,6 +113,21 @@ class ScaffoldTests(unittest.TestCase):
                 )
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assert_inventory(self.parent / profile, profile, root)
+
+    def test_article_figure_is_generated_explicitly_and_repeatably(self):
+        root = Path(scaffold.__file__).resolve().parents[1]
+        self.assertEqual(scaffold.main(self.args(), root=root), 0)
+        project = self.parent / "example"
+        generated = project / "src/figures/generated"
+        self.assertFalse(generated.exists())
+        results = []
+        for _ in range(2):
+            result = subprocess.run([sys.executable, "figures/source/build.py"], cwd=project,
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            results.append({path.name: path.read_bytes() for path in generated.iterdir()})
+        self.assertEqual(results[0], results[1])
+        self.assertTrue(results[0]["coordinate-scaling.png"].startswith(b"\x89PNG\r\n\x1a\n"))
 
     def test_invalid_names_and_traversal(self):
         for name in ("", "Upper", "under_score", "naïve", "a--b", "-foo", "foo-", "a/b",
@@ -197,6 +228,19 @@ class ScaffoldTests(unittest.TestCase):
         self.assertEqual(list(destination.iterdir()), [destination / "foreign.txt"])
         self.assertEqual((destination / "foreign.txt").read_bytes(), b"keep foreign")
         self.assert_parent_intact(destination)
+
+    def test_failure_writing_origin_rolls_back_scaffold(self):
+        write_file = scaffold.write_file
+
+        def fail_manifest(descriptor, contents):
+            if b'"bundle_sha256"' in contents:
+                os.write(descriptor, b"partial manifest")
+                raise OSError(errno.ENOSPC, "disk full")
+            write_file(descriptor, contents)
+
+        with patch.object(scaffold, "write_file", fail_manifest), redirect_stderr(io.StringIO()):
+            self.assertEqual(scaffold.main(self.args(), root=self.root), 1)
+        self.assert_parent_intact()
 
     def test_symlink_swapped_in_after_reservation_is_preserved(self):
         destination = self.parent / "example"

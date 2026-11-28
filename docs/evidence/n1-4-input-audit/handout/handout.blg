@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is '<STARTER_VALIDATION>/projects with spaces/model-slides/build/1795862483102552000-438f9607/handout.blg'
+[22] biber-darwin:342> INFO - === Sat Nov 28, 2026, 10:41:38
+[37] Biber.pm:421> INFO - Reading '<STARTER_VALIDATION>/projects with spaces/model-slides/build/1795862483102552000-438f9607/handout.bcf'
+[58] Biber.pm:1002> INFO - Found 1 citekeys in bib section 0
+[63] Biber.pm:4487> INFO - Processing section 0
+[67] Biber.pm:4678> INFO - Looking for bibtex file 'bib/references.bib' for section 0
+[69] bibtex.pm:1713> INFO - LaTeX decoding ...
+[70] bibtex.pm:1519> INFO - Found BibTeX data source 'bib/references.bib'
+[75] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[75] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[75] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[75] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[78] bbl.pm:676> INFO - Writing '<STARTER_VALIDATION>/projects with spaces/model-slides/build/1795862483102552000-438f9607/handout.bbl' with encoding 'UTF-8'
+[78] bbl.pm:779> INFO - Output to <STARTER_VALIDATION>/projects with spaces/model-slides/build/1795862483102552000-438f9607/handout.bbl

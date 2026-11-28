@@ -1,0 +1,434 @@
+{
+  "implementation_revision": "5b172cae78b51cba71834f50933d5e69f96b2e31",
+  "base_revision": "aac10eca973cfe2c11324d2e1bbb92c1310a38a7",
+  "environment": {
+    "macos": "27.2.1",
+    "macos_build": "26B131",
+    "arch": "arm64",
+    "python": "3.9.6",
+    "release": "mactex-20260324",
+    "versions": {
+      "biber": "2.21",
+      "biblatex": "3.21",
+      "latexmk": "4.88",
+      "lualatex": "LuaHBTeX 1.24.0"
+    },
+    "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+    "pdfkit_renderer_source_sha256": "64d9619bda3268dd01912cc144b4145aa388a043a3c1122439c718a51bb24c89"
+  },
+  "network_policy": "(version 1) (allow default) (deny network*)",
+  "network_exit_codes": {
+    "control": 0,
+    "ready": 0,
+    "denied": 6
+  },
+  "regression_suites": {
+    "driver": {
+      "status": "pass",
+      "count": 40
+    },
+    "experiment": {
+      "status": "pass",
+      "count": 45
+    }
+  },
+  "profiles": {
+    "article": {
+      "status": "pass",
+      "tex_warnings": [
+        "Package epstopdf Warning: Shell escape feature is not enabled."
+      ],
+      "repeat_pdf_bytes_match": true,
+      "input_identities": {
+        "entry": "src/main.tex",
+        "entry_sha256": "a31ab823eb7da3377091c0988928a08fb06de38beb1f51442afafa0438ef63de",
+        "driver_sha256": "118632f39a8b58ba66b4c146f2b1ab74553c4db83e52023e9abcaef7db858917",
+        "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+        "source_inputs": {
+          "src/main.tex": "a31ab823eb7da3377091c0988928a08fb06de38beb1f51442afafa0438ef63de",
+          "src/metadata.tex": "916e89a7a6f6b2d33b237941459753460afebbfd6f8edeb41532c0d536009105",
+          "src/neruda-article.sty": "e7814e6518be00c00805ac5b80320ba937f4917581704a5fb5ee6ab35f4e293e",
+          "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+          "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101",
+          "src/sections/introduction.tex": "fc7bdb95e5bd48ca6f1d71d23c5f73af91deb33348f7a4dc0c74fb1537412d23",
+          "src/sections/mathematical-concepts.tex": "fb273f4098a9a9176ca3d8fe709b28ca544cdd7432be8f06066066fa1251b8c3",
+          "src/sections/reproducibility.tex": "a2c6eedee39c8298b0dc9ffec6a4e7fa92f56c749940958baee637157137dba5"
+        },
+        "consumed_project_files": {
+          "src/figures/generated/coordinate-scaling.png": "be4c0addaa9b7c502b1987e87c12c25a88695418312db3f60d6b2b3d62db7a25",
+          "src/main.tex": "a31ab823eb7da3377091c0988928a08fb06de38beb1f51442afafa0438ef63de",
+          "src/metadata.tex": "916e89a7a6f6b2d33b237941459753460afebbfd6f8edeb41532c0d536009105",
+          "src/neruda-article.sty": "e7814e6518be00c00805ac5b80320ba937f4917581704a5fb5ee6ab35f4e293e",
+          "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+          "src/sections/introduction.tex": "fc7bdb95e5bd48ca6f1d71d23c5f73af91deb33348f7a4dc0c74fb1537412d23",
+          "src/sections/mathematical-concepts.tex": "fb273f4098a9a9176ca3d8fe709b28ca544cdd7432be8f06066066fa1251b8c3",
+          "src/sections/reproducibility.tex": "a2c6eedee39c8298b0dc9ffec6a4e7fa92f56c749940958baee637157137dba5",
+          "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101"
+        },
+        "verified_figures": {
+          "src/figures/generated/coordinate-scaling.png": {
+            "version": 1,
+            "generator": {
+              "path": "figures/source/build.py",
+              "sha256": "aa358a02da3f6e2ae2ff4d47cb8e632cc6736158abf78b47085d124cfc4a9d0c"
+            },
+            "data": {
+              "path": "figures/source/scaling.json",
+              "sha256": "747786b4724aa8d998c00078738136e1e3bbb3a3fec1071051895257112922bf"
+            },
+            "runtime": "CPython 3.9.6",
+            "output": {
+              "path": "src/figures/generated/coordinate-scaling.png",
+              "sha256": "be4c0addaa9b7c502b1987e87c12c25a88695418312db3f60d6b2b3d62db7a25"
+            }
+          }
+        }
+      },
+      "runs": [
+        {
+          "timestamp_utc": "2026-11-28T10:12:40Z",
+          "pdf_sha256": "01b13bc4a266968fc851587ea682928db62da5e906691f578de96fca8492a294",
+          "pdf_metadata": {
+            "version": "1.7",
+            "page_count": 1
+          },
+          "rendered_page_sha256": [
+            "4a42f1e2de35a267556fdd4911cd850f8b9d6a89b053e8bf39e37f05cba43017"
+          ]
+        },
+        {
+          "timestamp_utc": "2026-11-28T10:13:05Z",
+          "pdf_sha256": "01b13bc4a266968fc851587ea682928db62da5e906691f578de96fca8492a294",
+          "pdf_metadata": {
+            "version": "1.7",
+            "page_count": 1
+          },
+          "rendered_page_sha256": [
+            "4a42f1e2de35a267556fdd4911cd850f8b9d6a89b053e8bf39e37f05cba43017"
+          ]
+        }
+      ]
+    },
+    "presentation": {
+      "status": "pass",
+      "tex_warnings": [
+        "Package epstopdf Warning: Shell escape feature is not enabled."
+      ],
+      "repeat_pdf_bytes_match": true,
+      "input_identities": {
+        "entry": "src/main.tex",
+        "entry_sha256": "28f8284e7e4e23512cb748e5960cd2a8d476b977f8d09731fe23d6181e5dda30",
+        "driver_sha256": "118632f39a8b58ba66b4c146f2b1ab74553c4db83e52023e9abcaef7db858917",
+        "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+        "source_inputs": {
+          "src/beamerthemeNeruda.sty": "4f18eeb1d6a37bd6b149305de1e39739c38b9be680cfc6e7124d96f3dc3ef120",
+          "src/handout.tex": "b03ed5f817696042bbb2a6e16cb7f290d50d5b371fc7c1d16b778bec84fc2bba",
+          "src/main.tex": "28f8284e7e4e23512cb748e5960cd2a8d476b977f8d09731fe23d6181e5dda30",
+          "src/metadata.tex": "f328afa696d4309b7664a5735e18dac9afaefa3e8f0d36f8226012d3b4c60027",
+          "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+          "src/presentation.tex": "8a219a4d5047278b42c17c5ea01353345cf8196f54660339885f378f801998b0",
+          "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101",
+          "src/frames/check.tex": "808ffda79a8904c295bca3ef1b0808ccb85fb868559c85456adbf1452851de9d",
+          "src/frames/documentation.tex": "8bd535a3951861d99c5e319010f7231668fe521a66cb9a109f750203ca3a420c",
+          "src/frames/mapping.tex": "6f19a68fae8a47243715484a9302e6bf8057a5730e611428ba3bab40893fd6e7"
+        },
+        "consumed_project_files": {
+          "src/beamerthemeNeruda.sty": "4f18eeb1d6a37bd6b149305de1e39739c38b9be680cfc6e7124d96f3dc3ef120",
+          "src/frames/check.tex": "808ffda79a8904c295bca3ef1b0808ccb85fb868559c85456adbf1452851de9d",
+          "src/frames/documentation.tex": "8bd535a3951861d99c5e319010f7231668fe521a66cb9a109f750203ca3a420c",
+          "src/frames/mapping.tex": "6f19a68fae8a47243715484a9302e6bf8057a5730e611428ba3bab40893fd6e7",
+          "src/main.tex": "28f8284e7e4e23512cb748e5960cd2a8d476b977f8d09731fe23d6181e5dda30",
+          "src/metadata.tex": "f328afa696d4309b7664a5735e18dac9afaefa3e8f0d36f8226012d3b4c60027",
+          "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+          "src/presentation.tex": "8a219a4d5047278b42c17c5ea01353345cf8196f54660339885f378f801998b0",
+          "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101"
+        },
+        "verified_figures": {}
+      },
+      "runs": [
+        {
+          "timestamp_utc": "2026-11-28T10:12:40Z",
+          "pdf_sha256": "2b26259cdb7e5af3e027d2ac5432d437682c6dcf8178a763fbf757fa1a40b430",
+          "pdf_metadata": {
+            "version": "1.7",
+            "page_count": 5
+          },
+          "rendered_page_sha256": [
+            "7565cf67033c73857610c3a0eb4d815f17d8df750673a804835bca5457d0eba5",
+            "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+            "1779f693503ec521f8a49d2d353b3c7234c1c718cad71081126d707a68721cd1",
+            "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+            "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+          ]
+        },
+        {
+          "timestamp_utc": "2026-11-28T10:13:05Z",
+          "pdf_sha256": "2b26259cdb7e5af3e027d2ac5432d437682c6dcf8178a763fbf757fa1a40b430",
+          "pdf_metadata": {
+            "version": "1.7",
+            "page_count": 5
+          },
+          "rendered_page_sha256": [
+            "7565cf67033c73857610c3a0eb4d815f17d8df750673a804835bca5457d0eba5",
+            "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+            "1779f693503ec521f8a49d2d353b3c7234c1c718cad71081126d707a68721cd1",
+            "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+            "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+          ]
+        }
+      ]
+    },
+    "handout": {
+      "status": "pass",
+      "tex_warnings": [
+        "Package epstopdf Warning: Shell escape feature is not enabled."
+      ],
+      "repeat_pdf_bytes_match": true,
+      "input_identities": {
+        "entry": "src/handout.tex",
+        "entry_sha256": "b03ed5f817696042bbb2a6e16cb7f290d50d5b371fc7c1d16b778bec84fc2bba",
+        "driver_sha256": "118632f39a8b58ba66b4c146f2b1ab74553c4db83e52023e9abcaef7db858917",
+        "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+        "source_inputs": {
+          "src/beamerthemeNeruda.sty": "4f18eeb1d6a37bd6b149305de1e39739c38b9be680cfc6e7124d96f3dc3ef120",
+          "src/handout.tex": "b03ed5f817696042bbb2a6e16cb7f290d50d5b371fc7c1d16b778bec84fc2bba",
+          "src/main.tex": "28f8284e7e4e23512cb748e5960cd2a8d476b977f8d09731fe23d6181e5dda30",
+          "src/metadata.tex": "f328afa696d4309b7664a5735e18dac9afaefa3e8f0d36f8226012d3b4c60027",
+          "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+          "src/presentation.tex": "8a219a4d5047278b42c17c5ea01353345cf8196f54660339885f378f801998b0",
+          "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101",
+          "src/frames/check.tex": "808ffda79a8904c295bca3ef1b0808ccb85fb868559c85456adbf1452851de9d",
+          "src/frames/documentation.tex": "8bd535a3951861d99c5e319010f7231668fe521a66cb9a109f750203ca3a420c",
+          "src/frames/mapping.tex": "6f19a68fae8a47243715484a9302e6bf8057a5730e611428ba3bab40893fd6e7"
+        },
+        "consumed_project_files": {
+          "src/beamerthemeNeruda.sty": "4f18eeb1d6a37bd6b149305de1e39739c38b9be680cfc6e7124d96f3dc3ef120",
+          "src/frames/check.tex": "808ffda79a8904c295bca3ef1b0808ccb85fb868559c85456adbf1452851de9d",
+          "src/frames/documentation.tex": "8bd535a3951861d99c5e319010f7231668fe521a66cb9a109f750203ca3a420c",
+          "src/frames/mapping.tex": "6f19a68fae8a47243715484a9302e6bf8057a5730e611428ba3bab40893fd6e7",
+          "src/handout.tex": "b03ed5f817696042bbb2a6e16cb7f290d50d5b371fc7c1d16b778bec84fc2bba",
+          "src/metadata.tex": "f328afa696d4309b7664a5735e18dac9afaefa3e8f0d36f8226012d3b4c60027",
+          "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+          "src/presentation.tex": "8a219a4d5047278b42c17c5ea01353345cf8196f54660339885f378f801998b0",
+          "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101"
+        },
+        "verified_figures": {}
+      },
+      "runs": [
+        {
+          "timestamp_utc": "2026-11-28T10:12:40Z",
+          "pdf_sha256": "8d62a6b033e6411082cdfd0fdf8bfe1b36b7fbf9de96f0208643efbfd4e75bcc",
+          "pdf_metadata": {
+            "version": "1.7",
+            "page_count": 4
+          },
+          "rendered_page_sha256": [
+            "18e8981242b0c83d1f64c2af6bcdc0c5e4c5d0bd9e8fe23d694bd2e15a4a0633",
+            "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+            "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+            "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+          ]
+        },
+        {
+          "timestamp_utc": "2026-11-28T10:13:05Z",
+          "pdf_sha256": "8d62a6b033e6411082cdfd0fdf8bfe1b36b7fbf9de96f0208643efbfd4e75bcc",
+          "pdf_metadata": {
+            "version": "1.7",
+            "page_count": 4
+          },
+          "rendered_page_sha256": [
+            "18e8981242b0c83d1f64c2af6bcdc0c5e4c5d0bd9e8fe23d694bd2e15a4a0633",
+            "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+            "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+            "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+          ]
+        }
+      ]
+    }
+  },
+  "negative_cases": {
+    "broken-bibliography": {
+      "status": "pass",
+      "exit_code": 1,
+      "diagnostic": "bib/missing-demo.bib"
+    },
+    "broken-reference": {
+      "status": "pass",
+      "exit_code": 1,
+      "diagnostic": "no-such-equation"
+    },
+    "missing-biber": {
+      "status": "pass",
+      "exit_code": 2,
+      "diagnostic": "missing or non-executable pinned Biber override"
+    },
+    "altered": {
+      "status": "pass",
+      "exit_code": 1,
+      "diagnostic": "artifact hash mismatch: main.log"
+    },
+    "malformed": {
+      "status": "pass",
+      "exit_code": 1,
+      "diagnostic": "LuaLaTeX could not read PDF"
+    },
+    "legacy": {
+      "status": "pass",
+      "exit_code": 0,
+      "diagnostic": "{\"errors\": []}"
+    }
+  },
+  "exported_artifacts": {
+    "network-status.txt": {
+      "raw_sha256": "1063ab44645015d21d41cc81084241d23448d1723baacc2bb4e02d05b0266524",
+      "exported_sha256": "1063ab44645015d21d41cc81084241d23448d1723baacc2bb4e02d05b0266524"
+    },
+    "network-denied.log": {
+      "raw_sha256": "dd3fb2ae56be00e8805b357dd42849743a00e0293929ee28cf91dcbd67383606",
+      "exported_sha256": "dd3fb2ae56be00e8805b357dd42849743a00e0293929ee28cf91dcbd67383606"
+    },
+    "article-preflight.json": {
+      "raw_sha256": "0680a87f20f76fef6d1da2d2aa79df155ef23425cdc25f81dcbfdc7d2ab13eee",
+      "exported_sha256": "0680a87f20f76fef6d1da2d2aa79df155ef23425cdc25f81dcbfdc7d2ab13eee"
+    },
+    "slides-preflight.json": {
+      "raw_sha256": "0f2b7f7efe68bc9e3c10d065da859e08d56ee6ce97a6db02f917e00e033fc4ef",
+      "exported_sha256": "0f2b7f7efe68bc9e3c10d065da859e08d56ee6ce97a6db02f917e00e033fc4ef"
+    },
+    "figure-receipt.json": {
+      "raw_sha256": "bfe1ca84659b887dd4f95057be24c46143f6badc9492a6623f7019d17f71a386",
+      "exported_sha256": "bfe1ca84659b887dd4f95057be24c46143f6badc9492a6623f7019d17f71a386"
+    },
+    "article/main.pdf": {
+      "raw_sha256": "01b13bc4a266968fc851587ea682928db62da5e906691f578de96fca8492a294",
+      "exported_sha256": "01b13bc4a266968fc851587ea682928db62da5e906691f578de96fca8492a294"
+    },
+    "article/main.log": {
+      "raw_sha256": "d2099f583a73df021326d5a3d9ecbbb10b39a6a0ca42ad80d5c977187f3b6427",
+      "exported_sha256": "f4261aee5ece630d57ba32bf3360c5e5459052d7e675d4300b8ade6915b70474"
+    },
+    "article/main.blg": {
+      "raw_sha256": "a60b7a9bc04b01315fa98e26c725cf38e095fc728d705f011e955e6e27c870d7",
+      "exported_sha256": "531bc3ecf11abbf95b889840863e2f0b9c6b8fa7e3303bcdd7a9693496c25228"
+    },
+    "article/console.log": {
+      "raw_sha256": "78301148a91b323aff51b9138ad5858b6871b94943607ec3068384892ab498ab",
+      "exported_sha256": "d8906a594fe41fb789e7f9baa50a835a7d25345ea54092cd89059a7ddbd77534"
+    },
+    "article/receipt.json": {
+      "raw_sha256": "6fab65c25a9adb2be10510831770c6246e883a4fd65c848d6eec4dec51358624",
+      "exported_sha256": "9588bb5f0eb13907cf90add743bb2c8930fc07324312030991d9f5465df7cbe9"
+    },
+    "presentation/main.pdf": {
+      "raw_sha256": "2b26259cdb7e5af3e027d2ac5432d437682c6dcf8178a763fbf757fa1a40b430",
+      "exported_sha256": "2b26259cdb7e5af3e027d2ac5432d437682c6dcf8178a763fbf757fa1a40b430"
+    },
+    "presentation/main.log": {
+      "raw_sha256": "2d7cacd9d03e45f729d866440925783d6212d1ae84601c6976fcaaa6e45b3559",
+      "exported_sha256": "ce7af893aa380fd696065faa24250a328dff471bf280f911999708a237b42617"
+    },
+    "presentation/main.blg": {
+      "raw_sha256": "76998ae108a91d6e58b81cd49547fba6a7044cd089a6ecd8d818afbdd15debf6",
+      "exported_sha256": "1838fdd216c38f88bc8ae62a3fea1350b8faec44ffeff97b32572d97abde40be"
+    },
+    "presentation/console.log": {
+      "raw_sha256": "ac8cea384544f4471a15fd06acf62265fd08cc0ae1bad3bbe6c16b7c6ef76d99",
+      "exported_sha256": "ace9c4c3ef35d02fe44c8b948e5b570a3922f5af2a6b375e8e22b56236f97dea"
+    },
+    "presentation/receipt.json": {
+      "raw_sha256": "8e292a0e477fadea295241f11cc11bf310b53cb4e8ae2ec24d0387b40b0a59a9",
+      "exported_sha256": "e24b3bace7b5f4d4182a241b1061aa0fd7af048ca1194f783c6c11b0da36e1a7"
+    },
+    "handout/handout.pdf": {
+      "raw_sha256": "8d62a6b033e6411082cdfd0fdf8bfe1b36b7fbf9de96f0208643efbfd4e75bcc",
+      "exported_sha256": "8d62a6b033e6411082cdfd0fdf8bfe1b36b7fbf9de96f0208643efbfd4e75bcc"
+    },
+    "handout/handout.log": {
+      "raw_sha256": "168421e1ea206cfbba7394c953197e23600eb878fe334bd072d4dff40d8ef978",
+      "exported_sha256": "4edec4e08ed63541881bace6224f277229408ec22b26c3c3f07fd511ca0bcba7"
+    },
+    "handout/handout.blg": {
+      "raw_sha256": "e7510b48b44a64426159f856c9a6818c60cc07a3d99be63281bcc2500c0f8fc2",
+      "exported_sha256": "b2c7aba0409b3f64228139837fb5baacd5a30fdccede2b0a34645e7e30bc12ae"
+    },
+    "handout/console.log": {
+      "raw_sha256": "3d53b07515e4593c47ef8c9723082108a7999dc995a40c1e797550f6a1df67cb",
+      "exported_sha256": "9a7abc51edfab6471e79d064eca8f0bd038bbc5c82d1d66977592a6e7d0c1ed9"
+    },
+    "handout/receipt.json": {
+      "raw_sha256": "708213f9a52591dde5520634c39776c1ecbc130113c94d20d5a4894fd154a036",
+      "exported_sha256": "39a12c73e5147bb0b2f2a1261cb929380b41bab8cb81f1e315ca7eb8e7809e07"
+    },
+    "negative/broken-bibliography.stderr.txt": {
+      "raw_sha256": "169513660c4c0b23be45b491cc34a424e9c3ef3b12b899337ed29aeed19f0ceb",
+      "exported_sha256": "169513660c4c0b23be45b491cc34a424e9c3ef3b12b899337ed29aeed19f0ceb"
+    },
+    "negative/broken-bibliography/receipt.json": {
+      "raw_sha256": "b369d61e4228eec6acb8b506c9a4ded9527aec09a579d1071528e969ae7fd7ac",
+      "exported_sha256": "fb06d6fdc971345e4b427d3ba10a1896b55135e5728632abc768b5ce59cd74e9"
+    },
+    "negative/broken-bibliography/console.log": {
+      "raw_sha256": "e4d3c745fe56fe82f463f433673c5d97f7781c4c713ad29f0de190a7301ef3bd",
+      "exported_sha256": "4a57633e65de31f362df8ae627161cbd13169fe486ef36e2fd4ac37fd40ec1a7"
+    },
+    "negative/broken-bibliography/broken-bibliography.log": {
+      "raw_sha256": "21f1e3395e3783bcf3fe1bb31d1248c0ca963c1019e330fe442c4fd66bfd042c",
+      "exported_sha256": "e1e982b4700777d53d124eccbc4be26b943227fd94a8ddff4e60b0f21ed07695"
+    },
+    "negative/broken-reference.stderr.txt": {
+      "raw_sha256": "e0a888dbb437839c28cdf259cf919f2c0e5835e175abad69d261467a677eb7f7",
+      "exported_sha256": "e0a888dbb437839c28cdf259cf919f2c0e5835e175abad69d261467a677eb7f7"
+    },
+    "negative/broken-reference/receipt.json": {
+      "raw_sha256": "3d772d862c40512194ce1bdef37a8b0d48921b136915becdd29ba00f9e5b3b1a",
+      "exported_sha256": "d200d455c186b301dd09f3a88e12187597a44a7722026ecb7b11dbc5f8ffeeac"
+    },
+    "negative/broken-reference/console.log": {
+      "raw_sha256": "ef12aa8a8e10c7368bfcf8489f473de97d9cf000b459f825f653a23671343159",
+      "exported_sha256": "6f71c4e7d606642fbc99f8378cf239687604102d4d85d4061c45849ed0c13444"
+    },
+    "negative/broken-reference/broken-reference.log": {
+      "raw_sha256": "6f7e90e4dc27b4b30df0e8c2a65dcac2bc0c55e6e556e7fecb02e307d826c25e",
+      "exported_sha256": "1f86145c8591195b440581e5060bbeff3dacf0f9564743525cfd5db7622cad50"
+    },
+    "negative/broken-reference/broken-reference.blg": {
+      "raw_sha256": "12dbcd3cfa2395859cdbabb230786b8b7fa719532a49aa1a3e4ae626c50aeff5",
+      "exported_sha256": "ee40e70ed27eaf781cd0fbb4901b6d1fc082c4edf55227a4ca5e8280a82e887c"
+    },
+    "negative/missing-biber.stderr.txt": {
+      "raw_sha256": "cd24157944d319a0c00e0fded6e4fa2b0849993c6f930e3317023c0f9d45cad8",
+      "exported_sha256": "f5177d33ea6d4d1439c056b8e5cf51822e20bf57b6106a10d27ee54af20ddeaf"
+    },
+    "negative/altered.check.json": {
+      "raw_sha256": "9828be32f6295e9a24ea52038aeb659ea6a1b5467b4a64e3e7573c9bcb9e94c0",
+      "exported_sha256": "9828be32f6295e9a24ea52038aeb659ea6a1b5467b4a64e3e7573c9bcb9e94c0"
+    },
+    "negative/malformed.check.json": {
+      "raw_sha256": "48d9e5f419b271e07427676a59625dc8a4c30dfce8228d4a495bbfb36b91dbfc",
+      "exported_sha256": "bbae2129508517669775dfcc99927124d90b9e5c6a1aee1da03aa8ddaadd79f4"
+    },
+    "negative/legacy.check.json": {
+      "raw_sha256": "986dcea34aa034dfc9bc0bf710805567483176aa26fe61e5b934c49daa102f9c",
+      "exported_sha256": "986dcea34aa034dfc9bc0bf710805567483176aa26fe61e5b934c49daa102f9c"
+    }
+  },
+  "figure_repeat": {
+    "status": "pass",
+    "png_sha256": "be4c0addaa9b7c502b1987e87c12c25a88695418312db3f60d6b2b3d62db7a25",
+    "receipt_sha256": "bfe1ca84659b887dd4f95057be24c46143f6badc9492a6623f7019d17f71a386"
+  },
+  "tool_identities": {
+    "biber": {
+      "sha256": "a1a2784931d9156a9d4cc8cb609912d533f04365d2e4aa7b902001a2f1a65066",
+      "version": "2.21"
+    },
+    "latexmk": {
+      "sha256": "c1b26a396bdeb975855afac668b2490652292dcaec958880bc87ce51295be13b",
+      "version": "4.88"
+    },
+    "lualatex": {
+      "sha256": "0abc5faeb56c8439d3d20d732b25681a0574d51280c26488b46e080f8b47508e",
+      "version": "LuaHBTeX 1.24.0"
+    }
+  }
+}

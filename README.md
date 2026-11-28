@@ -27,7 +27,7 @@ python3 scripts/scaffold.py slides research-talk --parent "/absolute/path/to/Pro
 Each new project has its own LaTeX sources, driver, native lock and README.
 Use its README to select the provisioned TeX Live tree and Biber executable
 and to run preflight, build and output checks. Both starters use a synthetic
-worked example. See the [N1.3 verification record](docs/n1-3-scaffold.md).
+worked example. The article README includes an explicit figure-generation step. See the [N1.3 verification record](docs/n1-3-scaffold.md).
 
 | Document | Purpose |
 |---|---|

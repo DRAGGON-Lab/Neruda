@@ -131,3 +131,10 @@ notation, standalone layout and a 16:9 Beamer handout. Neruda authored its
 scaffolder, templates and styles in this repository. The starter uses the lab
 name as text and carries Neruda's existing MIT license for its original assets.
 See the [provenance and verification record](../docs/n1-3-scaffold.md).
+
+## N1.4 disposition
+
+The coordinate-scaling generator and synthetic input values derive from the
+Neruda N1.3 worked example. Both are project-owned and MIT-licensed. The
+scaffolder bundles these inputs and generates the PNG only when the author
+runs the figure command.

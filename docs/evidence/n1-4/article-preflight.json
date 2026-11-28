@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "policy": "texlive-local-v1",
+  "status": "integrity_verified",
+  "exit_code": 0,
+  "driver_sha256": "118632f39a8b58ba66b4c146f2b1ab74553c4db83e52023e9abcaef7db858917",
+  "timestamp_utc": "2026-11-28T10:12:38Z",
+  "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+  "release": "mactex-20260324"
+}

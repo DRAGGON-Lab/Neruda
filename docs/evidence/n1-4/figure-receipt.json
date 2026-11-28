@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "generator": {
+    "path": "figures/source/build.py",
+    "sha256": "aa358a02da3f6e2ae2ff4d47cb8e632cc6736158abf78b47085d124cfc4a9d0c"
+  },
+  "data": {
+    "path": "figures/source/scaling.json",
+    "sha256": "747786b4724aa8d998c00078738136e1e3bbb3a3fec1071051895257112922bf"
+  },
+  "runtime": "CPython 3.9.6",
+  "output": {
+    "path": "src/figures/generated/coordinate-scaling.png",
+    "sha256": "be4c0addaa9b7c502b1987e87c12c25a88695418312db3f60d6b2b3d62db7a25"
+  }
+}

@@ -49,19 +49,65 @@ publisher provenance. The locally derived slice has an invalid code signature
 and is selected by its separately pinned SHA-256. See the provisioning record
 for the source and derived identities.
 
-Every build creates a fresh project-local `build/<unique-id>` and prints the receipt
-path. It retains console/TeX/Biber logs, PDF, source and consumed-resource hashes,
-Git provenance, cache inventory and driver identity. The driver records the
-revision and dirty state of a Git worktree rooted at the document directory.
-Both fields are null for a directory without its own worktree, including
-projects nested in a larger repository. Sanitize operational receipts before
-uploading. `check --output PATH` rechecks a run's logs and expected files.
-Exit codes: 0 compilation checks passed; 1 compilation/output/log failure or timeout;
-2 configuration/dependency/cache refusal. Compatibility receipts remain partial
-until platform, rendered-page and independent acceptance checks are complete.
+## Figures and output checks
 
-The current checks require bibliography artifacts, as all three fixtures use Biber.
-Bibliography-free projects and automatic PDF preview integration are not validated.
+The article starter generates its synthetic coordinate-scaling PNG before
+compilation. From a newly scaffolded article project:
+
+```sh
+python3 figures/source/build.py
+python3 scripts/latex.py build --project . --lock tools/texlive-lock.json \
+  --figure-receipt src/figures/generated/coordinate-scaling.receipt.json
+```
+
+Pass one `--figure-receipt PATH` per generated image the entry uses. The
+receipt's generator, data and output paths are project-relative. The build
+verifies their hashes and checks the TeX recorder for the corresponding
+image. Every consumed input in `src/figures/generated/` requires a receipt.
+Projects without generated figures use the existing build command.
+
+Every build creates a fresh project-local `build/<unique-id>`. Its version 2
+receipt binds the retained artifacts and dependency records from every TeX
+and Biber pass. It includes pinned tool identities, verified figures, PDF
+metadata, and the scaffold origin manifest's hash when present. Each reported
+input is identified as a project file, a pinned distribution resource, a
+run-local intermediate, or a declared external file. The driver compares
+consumed source hashes and file identities with a pre-build snapshot.
+The audit covers compiler records. Custom Lua file I/O and executable runtime
+reads require separate OS-level controls. Font discovery uses the pinned
+TeX Live tree.
+
+For local inputs outside the project or distribution, pass
+`build --external-inputs PATH`. The UTF-8 JSON file contains an array of
+`{"id": "...", "path": "...", "sha256": "..."}` objects. Use a unique ID, an
+absolute local file path, and the expected SHA-256. A consumed external path
+without a matching declaration fails the build. Biber accepts local
+bibliography files. Keep external declarations and raw dependency logs in
+authorized storage and sanitize them before sharing.
+
+For an intentionally bibliography-free entry, remove its bibliography setup
+and citations. Pass `--bibliography none` to `preflight` and `build`.
+The driver disables bibliography execution and Biber-specific dependency
+checks. The default `biber` mode still requires Biber and its artifacts.
+The shipped article and slides use the default.
+
+Run `check --project . --entry src/main.tex --lock tools/texlive-lock.json
+--output PATH` against an original run directory. It verifies the artifact
+hashes, PDF metadata and logs using the receipt's bibliography mode.
+Version 1 and unversioned successful receipts retain their original checks.
+Compare input identities, page counts and rendered pages across repeats.
+Timestamps and paths describe individual runs, and PDF bytes can vary.
+
+A new scaffold includes `scaffold-origin.json` with its profile, template Git
+revision and dirty flag when available, and hashes of the initial bundle
+bytes. The bundle digest identifies source exports without Git. Keep the
+manifest as an origin record after editing the project.
+
+Exit 0 means mechanical checks passed. Exit 1 means compilation, output or
+receipt verification failed. Exit 2 means invalid inputs, unavailable pinned
+dependencies or a refused cache. On a compilation failure the driver retains
+available logs and includes the matching diagnostics in its output and
+receipt. Visual review and independent acceptance follow mechanical checks.
 
 ## Cache and offline experiments
 

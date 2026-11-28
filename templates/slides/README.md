@@ -18,6 +18,12 @@ export NERUDA_BIBER="/absolute/path/to/Neruda_artifacts/texlive-2026-native-2026
 python3 scripts/latex.py preflight --lock tools/texlive-lock.json
 ```
 
+If preflight reports a missing TeX Live tree, set `NERUDA_TEX_ROOT` to the
+provisioned release root. If it reports a missing or mismatched Biber, set
+`NERUDA_BIBER` to the approved executable for this lock and architecture.
+For a hash mismatch, compare the selected paths with your lab's provisioning
+record and ask the maintainer to verify the installation before rebuilding.
+
 Continue after preflight reports `integrity_verified`.
 
 ```sh
@@ -37,3 +43,11 @@ the intended overlay content. The driver uses isolated build caches and
 disables shell escape. A Neruda checkout and AI runtime are optional.
 
 The original starter and styles are distributed under [MIT](LICENSE).
+
+
+`scaffold-origin.json` records the initial template and infrastructure bytes.
+Keep it as a record of the initial scaffold when editing sources.
+
+To build an entry without a bibliography, remove its `biblatex` setup,
+bibliography commands and citations. Pass `--bibliography none` to preflight
+and build. The check command reads the mode from the run receipt.

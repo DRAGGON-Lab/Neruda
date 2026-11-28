@@ -1,0 +1,2 @@
+tex input <INPUT_VALIDATION>/external/coordinate-note.tex: undeclared external dependency; declare it with --external-inputs
+biber input <INPUT_VALIDATION>/external/references.bib: undeclared external dependency; declare it with --external-inputs

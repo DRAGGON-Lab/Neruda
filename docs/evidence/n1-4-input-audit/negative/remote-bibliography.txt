@@ -1,0 +1,13 @@
+latexmk exited 12; see console.log
+missing or invalid output: remote.blg
+missing or invalid output: remote.bbl
+remote.log: luaotfload | db : Font names database not found, generating new one.
+remote.log: Package biblatex Info: ... file 'remote.bbl' not found.
+remote.log: No file remote.bbl.
+remote.log: LaTeX Warning: Citation 'latex-core-documentation' on page 1 undefined on input
+remote.log: LaTeX Warning: There were undefined references.
+remote.log: (rerunfilecheck)                Rerun to get outlines right
+remote.log: Package biblatex Warning: Please (re)run Biber on the file:
+remote.log: (biblatex)                and rerun LaTeX afterwards.
+tex input <INPUT_VALIDATION>/external/coordinate-note.tex: undeclared external dependency; declare it with --external-inputs
+Biber remote bibliography source refused: https://www.latex-project.org/references.bib
