@@ -23,7 +23,7 @@ copy is at `../Neruda_artifacts/texlive-2026-native-20261127/biber-arm64`. Expor
 its absolute path as follows, then run the same preflight:
 
 ```sh
-export NERUDA_BIBER="$(cd ../Neruda_artifacts/texlive-2026-native-20261127 && pwd)/biber-arm64"
+export NERUDA_BIBER="$PWD/../Neruda_artifacts/texlive-2026-native-20261127/biber-arm64"
 ```
 
 The preflight exits 0 with `integrity_verified` after checking architecture,

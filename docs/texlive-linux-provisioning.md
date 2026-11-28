@@ -1,5 +1,10 @@
 # Prepared Ubuntu validation — publication and first execution approved
 
+The native-first roadmap tracks this procedure under deferred
+[N1.2b](https://github.com/DRAGGON-Lab/Neruda/issues/12). The follow-up CI policy
+moves the workflow to explicit dispatch. The recorded approval and execution
+results below preserve the history of the original investigation.
+
 On 2026-11-28 the maintainer explicitly approved publishing the prepared changes to
 PR #11 and running this Ubuntu validation procedure. Preserve that approval; do
 not request it again for these exact steps. Execution results are recorded

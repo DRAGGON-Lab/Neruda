@@ -1,0 +1,28 @@
+{
+  "source_revision": "ea5932453740e91e3327953672dce229edb306d0",
+  "source_dirty": false,
+  "timestamp_utc": "2026-11-28T01:02:47Z",
+  "macos": "27.2.1 (26B131) arm64",
+  "python": "3.9.6",
+  "driver_tests": 19,
+  "experiment_tests": 45,
+  "preflight_exit_code": 0,
+  "durable_copy_preflight_exit_code": 0,
+  "missing_override_exit_code": 2,
+  "build_exit_code": 0,
+  "pdf_sha256": "2eb4ec82700f8b9546884cca4bdb593d721ebee5b6836051a85fa155e83a8672",
+  "pages": [
+    {
+      "page": "page-1.png",
+      "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+      "matches_inspected_reference": true
+    },
+    {
+      "page": "page-2.png",
+      "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+      "matches_inspected_reference": true
+    }
+  ],
+  "renderer": "Swift PDFKit, 1500-pixel width",
+  "renderer_sha256": "10760a52391c2dbd789e499eee6479e5eaa057b9503c64a4ba48042a910041ac"
+}
