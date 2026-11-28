@@ -21,7 +21,7 @@ SHARED = {
     "LICENSE": "LICENSE",
     "scripts/latex.py": "scripts/latex.py",
     "tools/texlive-lock.json": "tools/texlive-lock.json",
-    "src/styles/neruda.sty": "tex/neruda.sty",
+    "src/neruda.sty": "tex/neruda.sty",
     "src/bib/references.bib": "templates/common/src/bib/references.bib",
 }
 ARTICLE = (
@@ -34,9 +34,9 @@ SLIDES = (
 )
 EXPECTED = {
     "article": SHARED | {name: f"templates/article/{name}" for name in ARTICLE}
-    | {"src/styles/neruda-article.sty": "tex/neruda-article.sty"},
+    | {"src/neruda-article.sty": "tex/neruda-article.sty"},
     "slides": SHARED | {name: f"templates/slides/{name}" for name in SLIDES}
-    | {"src/styles/beamerthemeNeruda.sty": "tex/beamerthemeNeruda.sty"},
+    | {"src/beamerthemeNeruda.sty": "tex/beamerthemeNeruda.sty"},
 }
 
 
@@ -85,6 +85,18 @@ class ScaffoldTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual(result.stdout, f"{destination}\n")
                 self.assert_inventory(destination, profile, self.root)
+
+    def test_repository_bundles_are_complete_and_standalone(self):
+        root = Path(scaffold.__file__).resolve().parents[1]
+        for profile in EXPECTED:
+            with self.subTest(profile=profile):
+                result = subprocess.run(
+                    [sys.executable, str(root / "scripts/scaffold.py"),
+                     *self.args(profile, profile)],
+                    capture_output=True, text=True, cwd=self.base,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assert_inventory(self.parent / profile, profile, root)
 
     def test_invalid_names_and_traversal(self):
         for name in ("", "Upper", "under_score", "naïve", "a--b", "-foo", "foo-", "a/b",
@@ -184,4 +196,24 @@ class ScaffoldTests(unittest.TestCase):
         self.assertIn(f"partial output may remain at {destination}", message)
         self.assertEqual(list(destination.iterdir()), [destination / "foreign.txt"])
         self.assertEqual((destination / "foreign.txt").read_bytes(), b"keep foreign")
+        self.assert_parent_intact(destination)
+
+    def test_symlink_swapped_in_after_reservation_is_preserved(self):
+        destination = self.parent / "example"
+        foreign = self.base / "foreign"
+        foreign.mkdir()
+        real_mkdir = os.mkdir
+
+        def swap(name, mode=0o777, *, dir_fd=None):
+            real_mkdir(name, mode=mode, dir_fd=dir_fd)
+            if name == destination.name:
+                destination.rmdir()
+                destination.symlink_to(foreign, target_is_directory=True)
+
+        stderr = io.StringIO()
+        with patch.object(scaffold.os, "mkdir", swap), redirect_stderr(stderr):
+            self.assertEqual(scaffold.main(self.args(), root=self.root), 1)
+        self.assertIn(f"partial output may remain at {destination}", stderr.getvalue())
+        self.assertEqual(destination.readlink(), foreign)
+        self.assertEqual(list(foreign.iterdir()), [])
         self.assert_parent_intact(destination)

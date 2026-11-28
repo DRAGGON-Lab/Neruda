@@ -18,7 +18,7 @@ COMMON = {
     "LICENSE": "LICENSE",
     "scripts/latex.py": "scripts/latex.py",
     "tools/texlive-lock.json": "tools/texlive-lock.json",
-    "src/styles/neruda.sty": "tex/neruda.sty",
+    "src/neruda.sty": "tex/neruda.sty",
     "src/bib/references.bib": "templates/common/src/bib/references.bib",
 }
 PROFILES = {
@@ -81,7 +81,7 @@ def bundled_files(profile, root):
     """Read and validate the entire allowlist before making any output."""
     sources = COMMON | {path: f"templates/{profile}/{path}" for path in PROFILES[profile]}
     style = PROFILE_STYLES[profile]
-    sources[f"src/styles/{style}"] = f"tex/{style}"
+    sources[f"src/{style}"] = f"tex/{style}"
     files = {}
     for target, source in sources.items():
         try:
@@ -125,6 +125,17 @@ def write_file(descriptor, contents):
         stream.write(contents)
 
 
+def open_created_directory(stack, parent, name, created):
+    identity = os.stat(name, dir_fd=parent, follow_symlinks=False)
+    if not stat.S_ISDIR(identity.st_mode):
+        raise OSError(f"new directory was replaced: {name}")
+    created.append((parent, name, identity))
+    descriptor = open_directory(stack, name, parent)
+    if not os.path.samestat(identity, os.fstat(descriptor)):
+        raise OSError(f"new directory was replaced: {name}")
+    return descriptor
+
+
 def populate(stack, directory, files, created, checkpoint):
     directories = {Path("."): directory}
     for path, contents in files.items():
@@ -133,9 +144,7 @@ def populate(stack, directory, files, created, checkpoint):
             if folder not in directories:
                 parent = directories[folder.parent]
                 os.mkdir(folder.name, dir_fd=parent)
-                identity = os.stat(folder.name, dir_fd=parent, follow_symlinks=False)
-                created.append((parent, folder.name, identity))
-                directories[folder] = open_directory(stack, folder.name, parent)
+                directories[folder] = open_created_directory(stack, parent, folder.name, created)
         parent = directories[path.parent]
         descriptor = os.open(path.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
                              0o666, dir_fd=parent)
@@ -158,9 +167,7 @@ def create_project(parent, destination, files, checkpoint):
     with ExitStack() as stack:
         created = []
         try:
-            identity = os.stat(name, dir_fd=parent, follow_symlinks=False)
-            created.append((parent, name, identity))
-            directory = open_directory(stack, name, parent)
+            directory = open_created_directory(stack, parent, name, created)
             populate(stack, directory, files, created, checkpoint)
         except (OSError, KeyboardInterrupt) as error:
             failures = remove_created(created)

@@ -3,7 +3,8 @@
 MacTeX / TeX Live → LuaLaTeX + latexmk → matched Biber/biblatex → PDF and logs.
 Native candidate: LuaHBTeX 1.24.0, latexmk 4.88, Biber 2.21, biblatex 3.21.
 See [ADR-003](decisions/ADR-003.md) and [provisioning](mactex-provisioning.md).
-This is the N1.2a candidate for Apple Silicon. Maintainer acceptance is pending.
+The [N1.2a acceptance](https://github.com/DRAGGON-Lab/Neruda/issues/2) covers
+this provisioned Apple Silicon configuration.
 
 ## Daily command
 
@@ -107,7 +108,8 @@ under `tools/`, selecting its installed distribution explicitly. On this Mac the
 native Biber slice can be kept locally with its recorded hash. An article snapshot
 outside the checkout compiled under OS network denial using that layout. No separate
 Neruda checkout, editor or AI runtime was needed. Do not commit dependency binaries.
-Automatic template scaffolding and general snapshot packaging are separate work.
+The [standalone starters](../README.md#start-here) copy this driver and lock
+into each new project and document the explicit dependency paths.
 
 ## Editors and remaining gates
 
@@ -122,8 +124,7 @@ same Python command, using quoted explicit project/entry/root/lock/Biber paths.
 Its default pdfLaTeX recipe is inappropriate for these Unicode fixtures. Neither
 editor integration has been manually exercised in its GUI yet.
 
-Independent review and maintainer acceptance remain for N1.2a. Native build
-verification runs on a Mac with the pinned installation. CI runs both behavioral
+Native build verification runs on a Mac with the pinned installation. CI runs both behavioral
 suites on each PR without a provisioned TeX installation. Linux and historical
 Tectonic compatibility workflows run on explicit dispatch for deferred N1.2b.
 See the [Ubuntu evidence and blockers](texlive-linux-provisioning.md).

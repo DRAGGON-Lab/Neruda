@@ -4,7 +4,7 @@
 
 Neruda is DRAGGON Lab's LaTeX-first infrastructure for building traceable scientific manuscripts, presentations and figures. It treats scientific documents as versioned, reviewable build products: content, bibliography, mathematical notation, figure source, data references, compiler and generated artifacts have explicit identities.
 
-**Status:** Apple Silicon first, portability by design. The native MacTeX/LuaLaTeX candidate has local article, slide, handout and offline-build evidence. Native compatibility awaits independent review and maintainer acceptance. Cross-platform validation is deferred to [N1.2b](https://github.com/DRAGGON-Lab/Neruda/issues/12). [LaTexProjects](https://github.com/Gonza10V/LaTexProjects) remains the migration reference.
+**Status:** Apple Silicon first. The [N1.2a review](https://github.com/DRAGGON-Lab/Neruda/issues/2) records acceptance of the provisioned MacTeX/LuaLaTeX toolchain. Cross-platform validation is deferred to [N1.2b](https://github.com/DRAGGON-Lab/Neruda/issues/12). [LaTexProjects](https://github.com/Gonza10V/LaTexProjects) remains the migration reference.
 
 ## Planned capabilities
 
@@ -15,6 +15,19 @@ Neruda is DRAGGON Lab's LaTeX-first infrastructure for building traceable scient
 - Standalone use without AI or ANDES installed. No mandatory network service, personal account or hidden host cache.
 
 ## Start here
+
+Pass an existing directory and an unused lowercase ASCII kebab-case project
+name to the scaffolder. Quote parent paths that contain spaces.
+
+```sh
+python3 scripts/scaffold.py article research-note --parent "/absolute/path/to/Projects"
+python3 scripts/scaffold.py slides research-talk --parent "/absolute/path/to/Projects"
+```
+
+Each new project has its own LaTeX sources, driver, native lock and README.
+Use its README to select the provisioned TeX Live tree and Biber executable
+and to run preflight, build and output checks. Both starters use a synthetic
+worked example. See the [N1.3 verification record](docs/n1-3-scaffold.md).
 
 | Document | Purpose |
 |---|---|
@@ -51,7 +64,7 @@ approval. [N1.2a](https://github.com/DRAGGON-Lab/Neruda/issues/2) reviews the
 native stack. The compatibility report preserves the historical Tectonic
 investigation alongside the native results.
 
-### Planned layout
+### Repository layout
 
 ```text
 Neruda/
@@ -59,13 +72,14 @@ Neruda/
   AGENTS.md  AGENT.md  CONTRIBUTING.md
   docs/ upstream/           design, ADRs, reviewed extraction provenance
   tex/                      versioned semantic styles and Beamer theme
-  templates/papers/         base and justified document-type variants
-  templates/slides/         16:9 Beamer and handout variants
+  templates/article/        modular article starter
+  templates/slides/         16:9 Beamer and handout starter
   tools/ scripts/           reviewed pins, scaffold/build/check entry points
-  examples/ tests/          synthetic examples and negative fixtures
+  experiments/ tests/       compatibility fixtures and behavioral tests
 ```
 
-Style/template/scaffold modules remain planned; candidate tools, scripts and tests are implemented for the compatibility investigation. Individual research documents belong in their own project repositories or restricted collections. Keep the upstream LaTexProjects working projects intact. Production packaging and release remain gated on compatibility acceptance.
+Individual research documents belong in their own project repositories or
+restricted collections. Keep the upstream LaTexProjects working projects intact.
 
 ### Toolchain and testing
 

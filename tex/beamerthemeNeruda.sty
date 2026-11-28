@@ -1,0 +1,52 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeNeruda}[2026/11/28 Neruda presentation and handout layout]
+
+\setbeamersize{text margin left=10mm,text margin right=10mm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{bibliography item}[text]
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{normal text}{fg=NerudaNavy,bg=white}
+\setbeamercolor{structure}{fg=NerudaTeal}
+\setbeamercolor{frametitle}{fg=NerudaNavy}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{title}{size=\huge,series=\bfseries}
+\setbeamercolor{title}{fg=NerudaNavy}
+\setbeamercolor{subtitle}{fg=NerudaTeal}
+\setbeamercolor{neruda title identity}{fg=NerudaTeal}
+\setbeamercolor{neruda footer}{fg=NerudaTeal,bg=white}
+\setbeamercolor{bibliography entry note}{fg=NerudaTeal}
+
+\setbeamertemplate{frametitle}{%
+  \vskip1ex%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \ifx\insertframesubtitle\@empty\else
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+  \fi
+}
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.5ex,leftskip=10mm,rightskip=10mm]{neruda footer}%
+    \nerudalab\hfill\insertframenumber
+  \end{beamercolorbox}%
+}
+\setbeamertemplate{title page}{%
+  {\usebeamercolor[fg]{neruda title identity}\bfseries\nerudalab\par}%
+  \vskip1.2em%
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip.65em%
+  {\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \vskip1.5em%
+  {\usebeamercolor[fg]{title}\insertauthor\par}%
+}
+\newcommand{\nerudatitleframe}{%
+  \begingroup
+  \mode<beamer>{%
+    \setbeamercolor{background canvas}{bg=NerudaNavy}%
+    \setbeamercolor{title}{fg=white}%
+    \setbeamercolor{subtitle}{fg=NerudaLightTeal}%
+    \setbeamercolor{neruda title identity}{fg=NerudaLightTeal}%
+  }%
+  \begin{frame}[plain]
+    \titlepage
+  \end{frame}
+  \endgroup
+}
