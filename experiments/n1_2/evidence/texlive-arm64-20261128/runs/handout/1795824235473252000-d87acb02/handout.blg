@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is '<CI_WORK>/handout/build/1795824235473252000-d87acb02/handout.blg'
+[22] biber-darwin:342> INFO - === Sat Nov 28, 2026, 00:04:13
+[39] Biber.pm:421> INFO - Reading '<CI_WORK>/handout/build/1795824235473252000-d87acb02/handout.bcf'
+[59] Biber.pm:1002> INFO - Found 1 citekeys in bib section 0
+[63] Biber.pm:4487> INFO - Processing section 0
+[68] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[71] bibtex.pm:1713> INFO - LaTeX decoding ...
+[73] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[92] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[92] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[92] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[92] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[98] bbl.pm:676> INFO - Writing '<CI_WORK>/handout/build/1795824235473252000-d87acb02/handout.bbl' with encoding 'UTF-8'
+[99] bbl.pm:779> INFO - Output to <CI_WORK>/handout/build/1795824235473252000-d87acb02/handout.bbl

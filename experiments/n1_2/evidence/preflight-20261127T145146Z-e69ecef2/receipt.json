@@ -1,0 +1,35 @@
+{
+  "status": "not_run",
+  "compilation": "not_run",
+  "case": "cold",
+  "timestamp": "2026-11-27T14:51:46.424757+00:00",
+  "architecture": "arm64",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "environment_policy": "isolated-v1",
+  "inputs": {
+    "article/Tectonic.toml": "8f5fc4094afc5e613b259677461c4fc3921a39e4313dc12e1dfbbae1c5238ecb",
+    "article/src/main.tex": "82aa4d7be5120980658b2af27f3adef43c126f332126170e7f927a5d4c12e8e6",
+    "article/src/references.bib": "832c4cd0c1fe24f53461f1affbf60bbff82f9776e61061ba55273bc21dc7270b",
+    "slides/Tectonic.toml": "173f4f29f48a99b53b24535286552103f7bdac3645b81985415345793521fa05",
+    "slides/src/content.tex": "9bde1becc555b8df8b9ee8a363cc24665fd035436fa69294d49d6792fa4ff87a",
+    "slides/src/handout.tex": "6987c5af18b74b3126eeb75f9303931e5efe61d6e10f1d9a2f60f9d06b7bc339",
+    "slides/src/main.tex": "8a09abe2b6fbc81ca3570053fec728216274281c03d163cc5aee74021949c15e",
+    "slides/src/references.bib": "832c4cd0c1fe24f53461f1affbf60bbff82f9776e61061ba55273bc21dc7270b"
+  },
+  "tools": {
+    "tectonic": {
+      "sha256": "b52b5a730e2b0b33087304f7720f649603953f270a6b1c88bb031e1ae01f7f9c"
+    },
+    "biber": {
+      "sha256": "d894bfb75f2df1935fbcf452e8a79fd80de5c859ade4842d8e0681306b509681"
+    }
+  },
+  "dirty_state": "git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\n M docs/decisions/ADR-002.md\n M docs/n1-2-compatibility.md\n M experiments/n1_2/README.md\n M experiments/n1_2/article/src/main.tex\n M experiments/n1_2/run.py\n M experiments/n1_2/slides/src/content.tex\n M experiments/n1_2/test_runner.py\n?? experiments/n1_2/evidence/\n",
+  "diagnostic": "biber version mismatch: expected 'biber version: 2.17', got 'usage: lipo <input_file> <command> [<options> ...]\\n  command is one of:\\n    -create[_album]\\n    -info\\n    -detailed_info\\n    -thin <arch>\\n    -extract <arch> [-extract <arch> ...]\\n    -remove <arch> [-remove <arch> ...]\\n    -replace <arch> <file_name> [-replace <arch> <file_name> ...]\\n    -verify_arch <arch> ...\\n    -archs\\n  options are one or more of:\\n    -arch <arch> <input_file>\\n    -o <output_file>\\n    -segalign <arch> <alignment>\\n<TOOLS>/biber: Cannot find thin binary <TMP>/neruda-probe-<ID>/par/par-<USER>/cache-3a9aa73f15499a989f86825562d0ce5ba5c5ba47/thin/biber to run (errno=2)'",
+  "bundle_url": "https://data1.fullyjustified.net/tlextras-2022.0r0.tar",
+  "source_revision": "git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead\n025ce44c61555c2186525e428820cd83d8934718",
+  "harness": {
+    "run.py": "93c8699d172917f5418ea78267e57722b62085831bb8d8fd346fb0a459430448",
+    "test_runner.py": "24bb794745fab23c1e8de568ef577796545e86631978c5bd5cde82e5489a23a7"
+  }
+}

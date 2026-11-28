@@ -1,0 +1,368 @@
+{
+  "renderer": "macOS PDFKit via Swift 6.4.2; 1500 pixel width",
+  "renderer_sha256": "10760a52391c2dbd789e499eee6479e5eaa057b9503c64a4ba48042a910041ac",
+  "results": [
+    {
+      "pdf": "article/build/1795812933668332000-338ad01e/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=2\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "article/build/1795812967483462000-41cd6ab3/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=2\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "article/build/1795812982737145000-d5b40b2b/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=2\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "article/build/1795812997825045000-90e7bef7/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=2\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "handout/build/1795812933668347000-6e923c7f/handout.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=5\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "c012c4dd633a68acbec99356ef6a87fb3dd863006f42d0aa4b6337e0b328ccb7",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "cc20bb9f63f63b6108291dbcc6e01bb5aa9009d7955795afea329b11de2afded",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "1bc160b222bb2a71835338cdb18238337dd5bfb4eb3f8c2bdf4257c6e5ce1ed2",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "8129bfaee55254a3e6e86eee28521cb9a02d37361b002423c396d5339c27bc3e",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "29082368ca28f51666e91c20662edc3760bd633be57e87a0c7e9fbd599ff2d10",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "handout/build/1795812967483478000-a2c013a4/handout.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=5\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "c012c4dd633a68acbec99356ef6a87fb3dd863006f42d0aa4b6337e0b328ccb7",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "cc20bb9f63f63b6108291dbcc6e01bb5aa9009d7955795afea329b11de2afded",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "1bc160b222bb2a71835338cdb18238337dd5bfb4eb3f8c2bdf4257c6e5ce1ed2",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "8129bfaee55254a3e6e86eee28521cb9a02d37361b002423c396d5339c27bc3e",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "29082368ca28f51666e91c20662edc3760bd633be57e87a0c7e9fbd599ff2d10",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "handout/build/1795812982737138000-26ebc0bd/handout.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=5\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "c012c4dd633a68acbec99356ef6a87fb3dd863006f42d0aa4b6337e0b328ccb7",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "cc20bb9f63f63b6108291dbcc6e01bb5aa9009d7955795afea329b11de2afded",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "1bc160b222bb2a71835338cdb18238337dd5bfb4eb3f8c2bdf4257c6e5ce1ed2",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "8129bfaee55254a3e6e86eee28521cb9a02d37361b002423c396d5339c27bc3e",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "29082368ca28f51666e91c20662edc3760bd633be57e87a0c7e9fbd599ff2d10",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "handout/build/1795812997825029000-635e1a60/handout.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=5\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "c012c4dd633a68acbec99356ef6a87fb3dd863006f42d0aa4b6337e0b328ccb7",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "cc20bb9f63f63b6108291dbcc6e01bb5aa9009d7955795afea329b11de2afded",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "1bc160b222bb2a71835338cdb18238337dd5bfb4eb3f8c2bdf4257c6e5ce1ed2",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "8129bfaee55254a3e6e86eee28521cb9a02d37361b002423c396d5339c27bc3e",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "29082368ca28f51666e91c20662edc3760bd633be57e87a0c7e9fbd599ff2d10",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "slides/build/1795812933668341000-c4e80d79/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=6\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "097c14dd0cf0536985c698225557667c9b640ace60a7fe06aee8dfabe09af0f9",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "a10d22f7715d78cef25221010ac287495f61c525cfcfa220204b0ec12ae81c8c",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "36afbf1e60dadd09ba1a1f83ef022d2ee8c1e59d194ff81a699dfe8750dbbe18",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "39a455a2deb3cc9e6622ecfd6fd9931902695a395efa176f97ee5af78e997650",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "e2da534eae8572fa0b0deb6b480e7d3b14753bd983118549f2c567630741b57b",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-6.png",
+          "sha256": "a02cd0efe03024bf6755b64b37e16905d9f5dcb3104e43797f1bad754a212e28",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "slides/build/1795812967483469000-47a292ee/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=6\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "097c14dd0cf0536985c698225557667c9b640ace60a7fe06aee8dfabe09af0f9",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "a10d22f7715d78cef25221010ac287495f61c525cfcfa220204b0ec12ae81c8c",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "36afbf1e60dadd09ba1a1f83ef022d2ee8c1e59d194ff81a699dfe8750dbbe18",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "39a455a2deb3cc9e6622ecfd6fd9931902695a395efa176f97ee5af78e997650",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "e2da534eae8572fa0b0deb6b480e7d3b14753bd983118549f2c567630741b57b",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-6.png",
+          "sha256": "a02cd0efe03024bf6755b64b37e16905d9f5dcb3104e43797f1bad754a212e28",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "slides/build/1795812982737169000-7aacac2a/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=6\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "097c14dd0cf0536985c698225557667c9b640ace60a7fe06aee8dfabe09af0f9",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "a10d22f7715d78cef25221010ac287495f61c525cfcfa220204b0ec12ae81c8c",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "36afbf1e60dadd09ba1a1f83ef022d2ee8c1e59d194ff81a699dfe8750dbbe18",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "39a455a2deb3cc9e6622ecfd6fd9931902695a395efa176f97ee5af78e997650",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "e2da534eae8572fa0b0deb6b480e7d3b14753bd983118549f2c567630741b57b",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-6.png",
+          "sha256": "a02cd0efe03024bf6755b64b37e16905d9f5dcb3104e43797f1bad754a212e28",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "slides/build/1795812997825032000-c9f7d83c/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=6\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "097c14dd0cf0536985c698225557667c9b640ace60a7fe06aee8dfabe09af0f9",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "a10d22f7715d78cef25221010ac287495f61c525cfcfa220204b0ec12ae81c8c",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-3.png",
+          "sha256": "36afbf1e60dadd09ba1a1f83ef022d2ee8c1e59d194ff81a699dfe8750dbbe18",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-4.png",
+          "sha256": "39a455a2deb3cc9e6622ecfd6fd9931902695a395efa176f97ee5af78e997650",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-5.png",
+          "sha256": "e2da534eae8572fa0b0deb6b480e7d3b14753bd983118549f2c567630741b57b",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-6.png",
+          "sha256": "a02cd0efe03024bf6755b64b37e16905d9f5dcb3104e43797f1bad754a212e28",
+          "matches_inspected_reference": true
+        }
+      ]
+    },
+    {
+      "pdf": "standalone/main.pdf",
+      "exit_code": 0,
+      "diagnostics": "pages=2\n",
+      "pages": [
+        {
+          "page": "page-1.png",
+          "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+          "matches_inspected_reference": true
+        },
+        {
+          "page": "page-2.png",
+          "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+          "matches_inspected_reference": true
+        }
+      ]
+    }
+  ],
+  "all_match": true
+}

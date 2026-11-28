@@ -1,0 +1,13 @@
+{
+  "cases": {
+    "cold": 2,
+    "warm": "not_run: cold did not compile",
+    "offline": "not_run: cold did not compile",
+    "offline-empty": 2
+  },
+  "visual_review": "not_run",
+  "limitations": [
+    "Biber publisher checksum corroboration pending",
+    "Successful compilation requires separate log and all-page review"
+  ]
+}

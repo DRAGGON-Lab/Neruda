@@ -1,0 +1,9 @@
+{
+  "url": "https://texlive.info/tlnet-archive/2026/03/22/tlnet/install-tl-unx.tar.gz.sha512.asc",
+  "status": 200,
+  "content_type": "text/html; charset=utf-8",
+  "bytes": 2402,
+  "sha256": "e0eb3bd90a82731febad487d22db27753346b8e4bba45b7a4f334a7a1a0a4915",
+  "timestamp": "2026-11-28T00:31:48.785556+00:00",
+  "classification": "HTML access challenge, not a signature; not executed"
+}

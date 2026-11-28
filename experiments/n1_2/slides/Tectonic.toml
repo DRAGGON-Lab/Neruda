@@ -1,0 +1,15 @@
+[doc]
+name = "neruda-compatibility-slides"
+bundle = "https://data1.fullyjustified.net/tlextras-2022.0r0.tar"
+
+[[output]]
+name = "slides"
+type = "pdf"
+inputs = "main.tex"
+shell_escape = false
+
+[[output]]
+name = "handout"
+type = "pdf"
+inputs = "handout.tex"
+shell_escape = false

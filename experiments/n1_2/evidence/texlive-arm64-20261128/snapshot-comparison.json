@@ -1,0 +1,2824 @@
+{
+  "packages_compared": 298,
+  "mismatches": [
+    {
+      "package": "ebgaramond",
+      "mac_revision": "78251",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "fontawesome",
+      "mac_revision": "78348",
+      "iso_revision": "48145",
+      "mac_version": "4.6.3.2",
+      "iso_version": "4.6.3.2",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "fonts-tlwg",
+      "mac_revision": "78431",
+      "iso_revision": "60817",
+      "mac_version": "0.7.3",
+      "iso_version": "0.7.3",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "geometry",
+      "mac_revision": "78315",
+      "iso_revision": "77682",
+      "mac_version": "6.0",
+      "iso_version": "5.9",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "graphics",
+      "mac_revision": "78282",
+      "iso_revision": "75374",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "kpfonts-otf",
+      "mac_revision": "78294",
+      "iso_revision": "77917",
+      "mac_version": "0.73",
+      "iso_version": "0.72",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "latexmk",
+      "mac_revision": "78335",
+      "iso_revision": "75540",
+      "mac_version": "4.88",
+      "iso_version": "4.87",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "lete-sans-math",
+      "mac_revision": "78438",
+      "iso_revision": "77682",
+      "mac_version": "0.60",
+      "iso_version": "0.50",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "lualibs",
+      "mac_revision": "78415",
+      "iso_revision": "67994",
+      "mac_version": "2.76",
+      "iso_version": "2.76",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "mathtools",
+      "mac_revision": "78251",
+      "iso_revision": "77682",
+      "mac_version": "1.31",
+      "iso_version": "1.31",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "nxtlatex",
+      "mac_revision": "78371",
+      "iso_revision": null,
+      "mac_version": "1.0",
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "simpleicons",
+      "mac_revision": "78447",
+      "iso_revision": "78009",
+      "mac_version": "16.12.0",
+      "iso_version": "16.9.0",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "sourcesans",
+      "mac_revision": "78246",
+      "iso_revision": null,
+      "mac_version": "3.0",
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "sourceserif",
+      "mac_revision": "78252",
+      "iso_revision": null,
+      "mac_version": "2.0",
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "unicode-math",
+      "mac_revision": "78251",
+      "iso_revision": "77682",
+      "mac_version": "0.8r",
+      "iso_version": "0.8r",
+      "same_container": false,
+      "same_revision": false
+    }
+  ],
+  "packages": [
+    {
+      "package": "aboensis",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "academicons",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.9.6-2",
+      "iso_version": "1.9.6-2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "accanthis",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "aesupp",
+      "mac_revision": "58253",
+      "iso_revision": "58253",
+      "mac_version": "1",
+      "iso_version": "1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "alegreya",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "alfaslabone",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.0.1",
+      "iso_version": "0.0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "algolrevived",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.054",
+      "iso_version": "1.054",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "alkalami",
+      "mac_revision": "44497",
+      "iso_revision": "44497",
+      "mac_version": "1.000",
+      "iso_version": "1.000",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "almendra",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "almfixed",
+      "mac_revision": "35065",
+      "iso_revision": "35065",
+      "mac_version": "0.92",
+      "iso_version": "0.92",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "amiri",
+      "mac_revision": "65191",
+      "iso_revision": "65191",
+      "mac_version": "1.000",
+      "iso_version": "1.000",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "amscls",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.20.6",
+      "iso_version": "2.20.6",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "amsfonts",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.04",
+      "iso_version": "3.04",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "amsmath",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "andika",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "6.101",
+      "iso_version": "6.101",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "anonymouspro",
+      "mac_revision": "51631",
+      "iso_revision": "51631",
+      "mac_version": "2.2",
+      "iso_version": "2.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "antt",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.08",
+      "iso_version": "2.08",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "archivo",
+      "mac_revision": "57283",
+      "iso_revision": "57283",
+      "mac_version": "0.0.2",
+      "iso_version": "0.0.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "arimo",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "arphic-ttf",
+      "mac_revision": "42675",
+      "iso_revision": "42675",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "arsenal",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.1",
+      "iso_version": "1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "arsenal-math",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.9.3",
+      "iso_version": "0.9.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "arvo",
+      "mac_revision": "57213",
+      "iso_revision": "57213",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "asana-math",
+      "mac_revision": "76895",
+      "iso_revision": "76895",
+      "mac_version": "000.962",
+      "iso_version": "000.962",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "asapsym",
+      "mac_revision": "40201",
+      "iso_revision": "40201",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "atkinson",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "awami",
+      "mac_revision": "76980",
+      "iso_revision": "76980",
+      "mac_version": "3.400",
+      "iso_version": "3.400",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "baekmuk",
+      "mac_revision": "56915",
+      "iso_revision": "56915",
+      "mac_version": "2.2.1",
+      "iso_version": "2.2.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "bangla",
+      "mac_revision": "76924",
+      "iso_revision": "76924",
+      "mac_version": "2.1",
+      "iso_version": "2.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "baskervaldx",
+      "mac_revision": "73362",
+      "iso_revision": "73362",
+      "mac_version": "1.08",
+      "iso_version": "1.08",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "baskervillef",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.052",
+      "iso_version": "1.052",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "beamer",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": "3.77",
+      "iso_version": "3.77",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "belleek",
+      "mac_revision": "66115",
+      "iso_revision": "66115",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "berenisadf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.1",
+      "iso_version": "2.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "beuron",
+      "mac_revision": "46374",
+      "iso_revision": "46374",
+      "mac_version": "1.3",
+      "iso_version": "1.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "biber",
+      "mac_revision": "75738",
+      "iso_revision": "75738",
+      "mac_version": "2.21",
+      "iso_version": "2.21",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "biblatex",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.21",
+      "iso_version": "3.21",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "bigintcalc",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.5",
+      "iso_version": "1.5",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "bitset",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.3",
+      "iso_version": "1.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "bitter",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "booktabs",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.61803398",
+      "iso_version": "1.61803398",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cabin",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "caladea",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cantarell",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.2",
+      "iso_version": "3.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "carlito",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cascadia-code",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.0.2",
+      "iso_version": "0.0.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ccicons",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.6",
+      "iso_version": "1.6",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "charissil",
+      "mac_revision": "64998",
+      "iso_revision": "64998",
+      "mac_version": "6.101",
+      "iso_version": "6.101",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "chivo",
+      "mac_revision": "65029",
+      "iso_revision": "65029",
+      "mac_version": "2.2",
+      "iso_version": "2.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cinzel",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "clara",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "clearsans",
+      "mac_revision": "74767",
+      "iso_revision": "74767",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cleveref",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.21.4",
+      "iso_version": "0.21.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cm",
+      "mac_revision": "57963",
+      "iso_revision": "57963",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cm-unicode",
+      "mac_revision": "58661",
+      "iso_revision": "58661",
+      "mac_version": "0.7.0",
+      "iso_version": "0.7.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cochineal",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.085",
+      "iso_version": "1.085",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "coelacanth",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.005",
+      "iso_version": "0.005",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "comfortaa",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.2",
+      "iso_version": "3.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "comicneue",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.2",
+      "iso_version": "1.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "concmath-otf",
+      "mac_revision": "78172",
+      "iso_revision": "78172",
+      "mac_version": "0.73",
+      "iso_version": "0.73",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cooperhewitt",
+      "mac_revision": "64967",
+      "iso_revision": "64967",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cormorantgaramond",
+      "mac_revision": "71057",
+      "iso_revision": "71057",
+      "mac_version": "3.601",
+      "iso_version": "3.601",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "countriesofeurope",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.23",
+      "iso_version": "0.23",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "courierten",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "crimson",
+      "mac_revision": "75712",
+      "iso_revision": "75712",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "crimsonpro",
+      "mac_revision": "64565",
+      "iso_revision": "64565",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "csquotes",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "5.2o",
+      "iso_version": "5.2o",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "culmus",
+      "mac_revision": "76924",
+      "iso_revision": "76924",
+      "mac_version": "1.1",
+      "iso_version": "1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cuprum",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cyklop",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.915",
+      "iso_version": "0.915",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "cyrillic-modern",
+      "mac_revision": "71183",
+      "iso_revision": "71183",
+      "mac_version": "0.4",
+      "iso_version": "0.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "dantelogo",
+      "mac_revision": "38599",
+      "iso_revision": "38599",
+      "mac_version": "0.03",
+      "iso_version": "0.03",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "dejavu",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.34",
+      "iso_version": "2.34",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "domitian",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0.1",
+      "iso_version": "1.0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "doulossil",
+      "mac_revision": "63255",
+      "iso_revision": "63255",
+      "mac_version": "0.1",
+      "iso_version": "0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "drm",
+      "mac_revision": "38157",
+      "iso_revision": "38157",
+      "mac_version": "4.4",
+      "iso_version": "4.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "droid",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.2",
+      "iso_version": "3.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ebgaramond",
+      "mac_revision": "78251",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "eczar",
+      "mac_revision": "57716",
+      "iso_revision": "57716",
+      "mac_version": "0.1",
+      "iso_version": "0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ektype-tanka",
+      "mac_revision": "63255",
+      "iso_revision": "63255",
+      "mac_version": "0.2",
+      "iso_version": "0.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "emo",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.4",
+      "iso_version": "0.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "epstopdf-pkg",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.11",
+      "iso_version": "2.11",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "erewhon",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.123",
+      "iso_version": "1.123",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "erewhon-math",
+      "mac_revision": "78171",
+      "iso_revision": "78171",
+      "mac_version": "0.73",
+      "iso_version": "0.73",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "etbb",
+      "mac_revision": "69098",
+      "iso_revision": "69098",
+      "mac_version": "1.057",
+      "iso_version": "1.057",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "etoolbox",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.5m",
+      "iso_version": "2.5m",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "euler-math",
+      "mac_revision": "77952",
+      "iso_revision": "77952",
+      "mac_version": "0.75",
+      "iso_version": "0.75",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fandol",
+      "mac_revision": "37889",
+      "iso_revision": "37889",
+      "mac_version": "0.3",
+      "iso_version": "0.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fbb",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.16",
+      "iso_version": "1.16",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fdsymbol",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fetamont",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fira",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "4.3",
+      "iso_version": "4.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "firamath",
+      "mac_revision": "56672",
+      "iso_revision": "56672",
+      "mac_version": "0.3.4",
+      "iso_version": "0.3.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fonetika",
+      "mac_revision": "21326",
+      "iso_revision": "21326",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fontawesome",
+      "mac_revision": "78348",
+      "iso_revision": "48145",
+      "mac_version": "4.6.3.2",
+      "iso_version": "4.6.3.2",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "fontawesome5",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "5.15.4",
+      "iso_version": "5.15.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fontawesome6",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "6.7.2-3",
+      "iso_version": "6.7.2-3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fontawesome7",
+      "mac_revision": "76735",
+      "iso_revision": "76735",
+      "mac_version": "7.1.0-1",
+      "iso_version": "7.1.0-1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fontmfizz",
+      "mac_revision": "43546",
+      "iso_revision": "43546",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fonts-churchslavonic",
+      "mac_revision": "67473",
+      "iso_revision": "67473",
+      "mac_version": "2.3",
+      "iso_version": "2.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fonts-tlwg",
+      "mac_revision": "78431",
+      "iso_revision": "60817",
+      "mac_version": "0.7.3",
+      "iso_version": "0.7.3",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "fontspec",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.9g",
+      "iso_version": "2.9g",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "forum",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "fourier",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.4",
+      "iso_version": "2.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "frederika2016",
+      "mac_revision": "42157",
+      "iso_revision": "42157",
+      "mac_version": "1.000 2016 initial release",
+      "iso_version": "1.000 2016 initial release",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "garamond-libre",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.4",
+      "iso_version": "1.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "garamond-math",
+      "mac_revision": "61481",
+      "iso_revision": "61481",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gelasio",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gentium-sil",
+      "mac_revision": "75783",
+      "iso_revision": "75783",
+      "mac_version": "7.000",
+      "iso_version": "7.000",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "geometry",
+      "mac_revision": "78315",
+      "iso_revision": "77682",
+      "mac_version": "6.0",
+      "iso_version": "5.9",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "gettitlestring",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.6",
+      "iso_version": "1.6",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsartemisia",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsbaskerville",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsbodoni",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.01",
+      "iso_version": "1.01",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfscomplutum",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsdidot",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsdidotclassic",
+      "mac_revision": "52778",
+      "iso_revision": "52778",
+      "mac_version": "001.001",
+      "iso_version": "001.001",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsneohellenic",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.02",
+      "iso_version": "1.02",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsneohellenicmath",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.02",
+      "iso_version": "1.02",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfsporson",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.01",
+      "iso_version": "1.01",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gfssolomos",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gillius",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gnu-freefont",
+      "mac_revision": "68624",
+      "iso_revision": "68624",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gofonts",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "graphics",
+      "mac_revision": "78282",
+      "iso_revision": "75374",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "graphics-cfg",
+      "mac_revision": "41448",
+      "iso_revision": "41448",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "graphics-def",
+      "mac_revision": "76719",
+      "iso_revision": "76719",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "gregoriotex",
+      "mac_revision": "74348",
+      "iso_revision": "74348",
+      "mac_version": "6.1.0",
+      "iso_version": "6.1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "hamnosys",
+      "mac_revision": "61941",
+      "iso_revision": "61941",
+      "mac_version": "1.0.3",
+      "iso_version": "1.0.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "haranoaji",
+      "mac_revision": "76078",
+      "iso_revision": "76078",
+      "mac_version": "20250811",
+      "iso_version": "20250811",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "haranoaji-extra",
+      "mac_revision": "76079",
+      "iso_revision": "76079",
+      "mac_version": "20250811",
+      "iso_version": "20250811",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "helmholtz-ellis-ji-notation",
+      "mac_revision": "55213",
+      "iso_revision": "55213",
+      "mac_version": "1.1",
+      "iso_version": "1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "heuristica",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.093",
+      "iso_version": "1.093",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "hindmadurai",
+      "mac_revision": "57360",
+      "iso_revision": "57360",
+      "mac_version": "0.0.1",
+      "iso_version": "0.0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "hmtrump",
+      "mac_revision": "54512",
+      "iso_revision": "54512",
+      "mac_version": "1.2a",
+      "iso_version": "1.2a",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "hycolor",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.10",
+      "iso_version": "1.10",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "hyperref",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "7.01p",
+      "iso_version": "7.01p",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ibarra",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "iftex",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0g",
+      "iso_version": "1.0g",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "imfellenglish",
+      "mac_revision": "64568",
+      "iso_revision": "64568",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "inconsolata",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.121",
+      "iso_version": "1.121",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "inconsolata-nerd-font",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.5",
+      "iso_version": "0.5",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "infwarerr",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.5",
+      "iso_version": "1.5",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "inriafonts",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "intcalc",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.3",
+      "iso_version": "1.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "inter",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ipaex",
+      "mac_revision": "61719",
+      "iso_revision": "61719",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "iwona",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.995b",
+      "iso_version": "0.995b",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "jetbrainsmono-otf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.1",
+      "iso_version": "0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "josefin",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "juliamono",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.06",
+      "iso_version": "0.06",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "junicode",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.218",
+      "iso_version": "2.218",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "junicodevf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.218",
+      "iso_version": "2.218",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "kerkis",
+      "mac_revision": "56271",
+      "iso_revision": "56271",
+      "mac_version": "1.11",
+      "iso_version": "1.11",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "khatalmaqala",
+      "mac_revision": "68280",
+      "iso_revision": "68280",
+      "mac_version": "1.0.2",
+      "iso_version": "1.0.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "koma-script",
+      "mac_revision": "77575",
+      "iso_revision": "77575",
+      "mac_version": "3.49.2",
+      "iso_version": "3.49.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "kpathsea",
+      "mac_revision": "77861",
+      "iso_revision": "77861",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "kpfonts-otf",
+      "mac_revision": "78294",
+      "iso_revision": "77917",
+      "mac_version": "0.73",
+      "iso_version": "0.72",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "kurier",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.995b",
+      "iso_version": "0.995b",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "kvdefinekeys",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.6",
+      "iso_version": "1.6",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "kvoptions",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.15",
+      "iso_version": "3.15",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "kvsetkeys",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.19",
+      "iso_version": "1.19",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "l3backend",
+      "mac_revision": "76924",
+      "iso_revision": "76924",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "l3kernel",
+      "mac_revision": "77438",
+      "iso_revision": "77438",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "l3packages",
+      "mac_revision": "76637",
+      "iso_revision": "76637",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "latex",
+      "mac_revision": "76924",
+      "iso_revision": "76924",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "latexconfig",
+      "mac_revision": "68923",
+      "iso_revision": "68923",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "latexmk",
+      "mac_revision": "78335",
+      "iso_revision": "75540",
+      "mac_version": "4.88",
+      "iso_version": "4.87",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "lato",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.3",
+      "iso_version": "3.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lete-sans-math",
+      "mac_revision": "78438",
+      "iso_revision": "77682",
+      "mac_version": "0.60",
+      "iso_version": "0.50",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "lexend",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.1.0.70",
+      "iso_version": "1.1.0.70",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "libertine",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "5.3.0",
+      "iso_version": "5.3.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "libertinus-fonts",
+      "mac_revision": "72484",
+      "iso_revision": "72484",
+      "mac_version": "7.051",
+      "iso_version": "7.051",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "librebaskerville",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "librebodoni",
+      "mac_revision": "64431",
+      "iso_revision": "64431",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "librecaslon",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "librefranklin",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lilyglyphs",
+      "mac_revision": "56473",
+      "iso_revision": "56473",
+      "mac_version": "0.2.4",
+      "iso_version": "0.2.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "linguisticspro",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "listings",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.11b",
+      "iso_version": "1.11b",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lm",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.005",
+      "iso_version": "2.005",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lm-math",
+      "mac_revision": "67718",
+      "iso_revision": "67718",
+      "mac_version": "1.959",
+      "iso_version": "1.959",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lobster2",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "logix",
+      "mac_revision": "63688",
+      "iso_revision": "63688",
+      "mac_version": "1.13",
+      "iso_version": "1.13",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "logreq",
+      "mac_revision": "53003",
+      "iso_revision": "53003",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ltxcmds",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.26",
+      "iso_version": "1.26",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lua-uni-algos",
+      "mac_revision": "76195",
+      "iso_revision": "76195",
+      "mac_version": "0.5",
+      "iso_version": "0.5",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "luacensor",
+      "mac_revision": "71922",
+      "iso_revision": "71922",
+      "mac_version": "1.1.1",
+      "iso_version": "1.1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "luahbtex",
+      "mac_revision": "77830",
+      "iso_revision": "77830",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lualatex-math",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.12",
+      "iso_version": "1.12",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lualibs",
+      "mac_revision": "78415",
+      "iso_revision": "67994",
+      "mac_version": "2.76",
+      "iso_version": "2.76",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "luaotfload",
+      "mac_revision": "74324",
+      "iso_revision": "74324",
+      "mac_version": "3.29",
+      "iso_version": "3.29",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "luapstricks",
+      "mac_revision": "77336",
+      "iso_revision": "77336",
+      "mac_version": "0.11",
+      "iso_version": "0.11",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "luciole",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.60",
+      "iso_version": "0.60",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "luwiantype",
+      "mac_revision": "73719",
+      "iso_revision": "73719",
+      "mac_version": "1.3",
+      "iso_version": "1.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lxgw-fonts",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.521N",
+      "iso_version": "1.521N",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "lydtype",
+      "mac_revision": "76924",
+      "iso_revision": "76924",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "marcellus",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "marvosym",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.2a",
+      "iso_version": "2.2a",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "mathtools",
+      "mac_revision": "78251",
+      "iso_revision": "77682",
+      "mac_version": "1.31",
+      "iso_version": "1.31",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "mdsymbol",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.5",
+      "iso_version": "0.5",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "merriweather",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "metsymb",
+      "mac_revision": "68175",
+      "iso_revision": "68175",
+      "mac_version": "1.2.0",
+      "iso_version": "1.2.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "mfb-oldstyle",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "miama",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.2",
+      "iso_version": "1.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "microtype",
+      "mac_revision": "78228",
+      "iso_revision": "78228",
+      "mac_version": "3.2d",
+      "iso_version": "3.2d",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "mintspirit",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "missaali",
+      "mac_revision": "61719",
+      "iso_revision": "61719",
+      "mac_version": "2.0",
+      "iso_version": "2.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "mnsymbol",
+      "mac_revision": "18651",
+      "iso_revision": "18651",
+      "mac_version": "1.4",
+      "iso_version": "1.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "monaspace-otf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.1",
+      "iso_version": "0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "montserrat",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.03",
+      "iso_version": "1.03",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "mpchess",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": "0.9",
+      "iso_version": "0.9",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "mptopdf",
+      "mac_revision": "78010",
+      "iso_revision": "78010",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "musixtex-fonts",
+      "mac_revision": "65517",
+      "iso_revision": "65517",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "newcomputermodern",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "7.1.1",
+      "iso_version": "7.1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "newpx",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.551",
+      "iso_version": "1.551",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "newtx",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": "1.756",
+      "iso_version": "1.756",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "nimbus15",
+      "mac_revision": "72894",
+      "iso_revision": "72894",
+      "mac_version": "1.015",
+      "iso_version": "1.015",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "noto",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "noto-emoji",
+      "mac_revision": "62950",
+      "iso_revision": "62950",
+      "mac_version": "2.034",
+      "iso_version": "2.034",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "novel",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.2",
+      "iso_version": "2.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "nunito",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.0.1",
+      "iso_version": "0.0.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "nxtlatex",
+      "mac_revision": "78371",
+      "iso_revision": null,
+      "mac_version": "1.0",
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "ocr-b-outline",
+      "mac_revision": "20969",
+      "iso_revision": "20969",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "oldstandard",
+      "mac_revision": "70421",
+      "iso_revision": "70421",
+      "mac_version": "2.7a",
+      "iso_version": "2.7a",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "opensans",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.2",
+      "iso_version": "2.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "overlock",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "paratype",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "parsimatn",
+      "mac_revision": "70775",
+      "iso_revision": "70775",
+      "mac_version": "2.2",
+      "iso_version": "2.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "parsinevis",
+      "mac_revision": "70776",
+      "iso_revision": "70776",
+      "mac_version": "2.2",
+      "iso_version": "2.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "pdfescape",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.15",
+      "iso_version": "1.15",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "pdftexcmds",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.33",
+      "iso_version": "0.33",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "pennstander-otf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.3a",
+      "iso_version": "0.3a",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "pgf",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": "3.1.11a",
+      "iso_version": "3.1.11a",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "phaistos",
+      "mac_revision": "18651",
+      "iso_revision": "18651",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "philokalia",
+      "mac_revision": "45356",
+      "iso_revision": "45356",
+      "mac_version": "1.2",
+      "iso_version": "1.2",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "playfair",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "plex",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "poiretone",
+      "mac_revision": "64856",
+      "iso_revision": "64856",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "poltawski",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.101",
+      "iso_version": "1.101",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "punknova",
+      "mac_revision": "24649",
+      "iso_revision": "24649",
+      "mac_version": "1.003",
+      "iso_version": "1.003",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "qualitype",
+      "mac_revision": "54512",
+      "iso_revision": "54512",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "quattrocento",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "raleway",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.6",
+      "iso_version": "1.6",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "refcount",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.6",
+      "iso_version": "3.6",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "rerunfilecheck",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.11",
+      "iso_version": "1.11",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "rit-fonts",
+      "mac_revision": "74984",
+      "iso_revision": "74984",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "roboto",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "rosario",
+      "mac_revision": "51688",
+      "iso_revision": "51688",
+      "mac_version": "2.1",
+      "iso_version": "2.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "sansmathaccent",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "scholax",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.033",
+      "iso_version": "1.033",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "semaphor",
+      "mac_revision": "18651",
+      "iso_revision": "18651",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "shobhika",
+      "mac_revision": "50555",
+      "iso_revision": "50555",
+      "mac_version": "1.05",
+      "iso_version": "1.05",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "simpleicons",
+      "mac_revision": "78447",
+      "iso_revision": "78009",
+      "mac_version": "16.12.0",
+      "iso_version": "16.9.0",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "siunitx",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.4.14",
+      "iso_version": "3.4.14",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "skaknew",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "sourcecodepro",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.8",
+      "iso_version": "2.8",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "sourcesans",
+      "mac_revision": "78246",
+      "iso_revision": null,
+      "mac_version": "3.0",
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "sourceserif",
+      "mac_revision": "78252",
+      "iso_revision": null,
+      "mac_version": "2.0",
+      "iso_version": null,
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "spark-otf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.05a",
+      "iso_version": "0.05a",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "spectral",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "splentinex",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "step",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.0.5",
+      "iso_version": "2.0.5",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "stix",
+      "mac_revision": "78101",
+      "iso_revision": "78101",
+      "mac_version": "1.1.3",
+      "iso_version": "1.1.3",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "stix2-otf",
+      "mac_revision": "58735",
+      "iso_revision": "58735",
+      "mac_version": "2.12",
+      "iso_version": "2.12",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "stringenc",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.12",
+      "iso_version": "1.12",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "svrsymbols",
+      "mac_revision": "50019",
+      "iso_revision": "50019",
+      "mac_version": "2.0b",
+      "iso_version": "2.0b",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "talos",
+      "mac_revision": "61820",
+      "iso_revision": "61820",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "tempora",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.05",
+      "iso_version": "1.05",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "tex-gyre",
+      "mac_revision": "68624",
+      "iso_revision": "68624",
+      "mac_version": "2.501",
+      "iso_version": "2.501",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "tex-gyre-math",
+      "mac_revision": "41264",
+      "iso_revision": "41264",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "tex-ini-files",
+      "mac_revision": "73863",
+      "iso_revision": "73863",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "theanodidot",
+      "mac_revision": "64518",
+      "iso_revision": "64518",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "theanomodern",
+      "mac_revision": "64520",
+      "iso_revision": "64520",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "theanooldstyle",
+      "mac_revision": "64519",
+      "iso_revision": "64519",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "tinos",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "tools",
+      "mac_revision": "76708",
+      "iso_revision": "76708",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "translations",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.12",
+      "iso_version": "1.12",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "translator",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.12d",
+      "iso_version": "1.12d",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "twemoji-colr",
+      "mac_revision": "75301",
+      "iso_revision": "75301",
+      "mac_version": "0.7.0",
+      "iso_version": "0.7.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "txfontsb",
+      "mac_revision": "54512",
+      "iso_revision": "54512",
+      "mac_version": "1.1.1",
+      "iso_version": "1.1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "typicons",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.0.7",
+      "iso_version": "2.0.7",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "umtypewriter",
+      "mac_revision": "64443",
+      "iso_revision": "64443",
+      "mac_version": "1.1",
+      "iso_version": "1.1",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "unfonts-core",
+      "mac_revision": "56291",
+      "iso_revision": "56291",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "unfonts-extra",
+      "mac_revision": "56291",
+      "iso_revision": "56291",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "unicode-data",
+      "mac_revision": "76413",
+      "iso_revision": "76413",
+      "mac_version": "1.19",
+      "iso_version": "1.19",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "unicode-math",
+      "mac_revision": "78251",
+      "iso_revision": "77682",
+      "mac_version": "0.8r",
+      "iso_version": "0.8r",
+      "same_container": false,
+      "same_revision": false
+    },
+    {
+      "package": "uniquecounter",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.4",
+      "iso_version": "1.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "universalis",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": null,
+      "iso_version": null,
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "url",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.4",
+      "iso_version": "3.4",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "venturisadf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "2.0",
+      "iso_version": "2.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "xcharter",
+      "mac_revision": "71564",
+      "iso_revision": "71564",
+      "mac_version": "1.26",
+      "iso_version": "1.26",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "xcharter-math",
+      "mac_revision": "78170",
+      "iso_revision": "78170",
+      "mac_version": "0.73",
+      "iso_version": "0.73",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "xcolor",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "3.02",
+      "iso_version": "3.02",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "xits",
+      "mac_revision": "55730",
+      "iso_revision": "55730",
+      "mac_version": "1.302",
+      "iso_version": "1.302",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "yfonts-otf",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "0.61",
+      "iso_version": "0.61",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "yinit-otf",
+      "mac_revision": "40207",
+      "iso_revision": "40207",
+      "mac_version": "1.0",
+      "iso_version": "1.0",
+      "same_container": true,
+      "same_revision": true
+    },
+    {
+      "package": "ysabeau",
+      "mac_revision": "77682",
+      "iso_revision": "77682",
+      "mac_version": "1.6",
+      "iso_version": "1.6",
+      "same_container": true,
+      "same_revision": true
+    }
+  ]
+}

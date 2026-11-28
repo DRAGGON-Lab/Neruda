@@ -1,0 +1,12 @@
+{
+  "latex-workshop.latex.autoBuild.run": "never",
+  "latex-workshop.latex.build.forceRecipeUsage": true,
+  "latex-workshop.latex.tools": [
+    {
+      "name": "neruda-lualatex",
+      "command": "python3",
+      "args": ["%WORKSPACE_FOLDER%/scripts/latex.py", "build", "--project", "%WORKSPACE_FOLDER%", "--entry", "%DOC%.tex", "--lock", "%WORKSPACE_FOLDER%/tools/texlive-lock.json"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [{"name": "Neruda LuaLaTeX candidate", "tools": ["neruda-lualatex"]}]
+}

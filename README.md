@@ -4,7 +4,7 @@
 
 Neruda is DRAGGON Lab's LaTeX-first infrastructure for building traceable scientific manuscripts, presentations and figures. It treats scientific documents as versioned, reviewable build products: content, bibliography, mathematical notation, figure source, data references, compiler and generated artifacts have explicit identities.
 
-**Status:** approved conceptual design; documentation and extraction inventory under review. No standalone Neruda package, verified compiler workflow or release exists at the inspected bootstrap baseline. The source infrastructure in [LaTexProjects](https://github.com/Gonza10V/LaTexProjects) is the migration reference, not an installed Neruda distribution.
+**Status:** compatibility investigation in progress. The native MacTeX/LuaLaTeX candidate has local article, slide, handout and offline-build evidence; cross-platform validation and maintainer acceptance remain pending. There is no supported standalone package or release. [LaTexProjects](https://github.com/Gonza10V/LaTexProjects) remains the migration reference.
 
 ## Planned capabilities
 
@@ -27,6 +27,13 @@ Neruda is DRAGGON Lab's LaTeX-first infrastructure for building traceable scient
 | [ADR-001](docs/decisions/ADR-001.md) | Selective extraction and standalone package boundary |
 | [Extraction inventory](upstream/LaTexProjects.md) | Pinned upstream source, digests, compatibility findings, exclusions and migration disposition |
 
+## Candidate build stack
+
+Use [the stack guide](docs/latex-stack.md) for the implemented command-line driver,
+verified native setup, optional editor configuration and remaining gates. See
+[compatibility evidence](docs/n1-2-compatibility.md) and [ADR-003](docs/decisions/ADR-003.md).
+The driver never installs dependencies or silently selects another compiler.
+
 ## Local development
 
 After bootstrap approval and merge, clone using authorized Git access and inspect the actual checkout:
@@ -38,7 +45,11 @@ git rev-parse HEAD
 git status --short
 ```
 
-At the pre-bootstrap revision only README and LICENSE exist. Do not invoke upstream script names as if they were available here, install packages, copy private projects or run arbitrary TeX commands. The next discovery task, N1.2, evaluates Tectonic/Biber compatibility in clean supported environments. Historical upstream pins are Tectonic 0.17.0, bundle `tlextras-2022.0r0`, and Biber 2.17 with biblatex 3.17; see the inventory for observed constraints. These are reference candidates, not a finalized Neruda compatibility guarantee.
+Use only the implemented candidate commands and explicitly verified dependencies.
+Do not invoke upstream script names as native commands or install tools without
+approval. N1.2 retains the historical Tectonic 0.17.0/Biber 2.17/biblatex 3.17
+investigation and evaluates the approved MacTeX/LuaLaTeX alternative. Current
+results and remaining acceptance checks are in the compatibility report.
 
 ### Planned layout
 
@@ -54,7 +65,7 @@ Neruda/
   examples/ tests/          synthetic examples and negative fixtures
 ```
 
-These are planned modules, not existing directories or API names. Individual research documents belong in their own project repositories or restricted collections. Keep the upstream LaTexProjects working projects intact. Only the documentation and audit are proposed now.
+Style/template/scaffold modules remain planned; candidate tools, scripts and tests are implemented for the compatibility investigation. Individual research documents belong in their own project repositories or restricted collections. Keep the upstream LaTexProjects working projects intact. Production packaging and release remain gated on compatibility acceptance.
 
 ### Toolchain and testing
 

@@ -69,6 +69,11 @@ Adapt the physical layout as needed but maintain stable semantic references and 
 
 ## Environment and deployment
 
+The maintainer has selected a dated MacTeX/TeX Live + LuaLaTeX + latexmk
+candidate for validation and daily build tooling; see
+[ADR-003](docs/decisions/ADR-003.md) and the [candidate interface](docs/latex-stack.md).
+It is not yet a supported toolchain. ADR-002 and its Tectonic evidence are retained.
+
 Reference upstream: LaTexProjects Tectonic 0.17.0, `tlextras-2022.0r0`, Biber 2.17 (matched biblatex 3.17), no shell escape. Current checked source declares Tectonic manifest v2 and uses Unicode/fontspec/unicode-math. Shared style rejects pdfTeX. Historical wrapper paths and pinned archive coverage are not portable guarantees; see [inventory](upstream/LaTexProjects.md). In N1.2 choose a minimal compatibility unit and document exact supported OS/architecture, binaries/archives, hashes, cache/network policy, font and bibliography dependencies. CI and local commands must agree. Validate against clean workspaces and supported configurations, including paths containing spaces if supported; no host-local fallback or project-specific workshop environment. Preserve upstream projects untouched.
 
 No mandatory Docker Compose or container deployment. A reviewed reproducible build container may be introduced if clean native environments cannot meet requirements or CI needs it; record image pin and evidence. Do not assume a global TeX or Python environment. Each figure-generation project owns its dependencies and locks. Avoid installing unreviewed binaries, disabling security controls or changing the toolchain without permission. Treat third-party TeX, fonts, images, bibliography and publisher files as untrusted inputs with applicable terms.

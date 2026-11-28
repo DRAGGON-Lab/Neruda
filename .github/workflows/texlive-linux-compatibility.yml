@@ -1,0 +1,51 @@
+name: TeX Live dated Linux compatibility
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/latex.py'
+      - 'experiments/n1_2/texlive*.py'
+      - 'experiments/n1_2/test_texlive*.py'
+      - 'tools/texlive*'
+      - '.github/workflows/texlive-linux-compatibility.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - run: python3 -m unittest discover -s experiments/n1_2 -p 'test_*.py' -v
+  compatibility:
+    needs: regression
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Record clean runner
+        run: |
+          uname -a
+          getconf GNU_LIBC_VERSION
+          df -h .
+          python3 --version
+          /usr/bin/gpg --version
+      - name: Verify dated dependencies and run compatibility matrix
+        run: python3 experiments/n1_2/texlive_linux_ci.py --root .tools/texlive-linux-ci
+      - name: Retain sanitized diagnostics and PDFs on every outcome
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: texlive-linux-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .tools/texlive-linux-ci/public/
+          if-no-files-found: warn
+          retention-days: 30

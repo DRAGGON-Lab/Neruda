@@ -1,0 +1,16 @@
+{
+  "case": "TeX-only diagnostic pass; bibliography intentionally not processed",
+  "command": [
+    "/usr/local/texlive/2026/bin/universal-darwin/lualatex",
+    "-no-shell-escape",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-file-line-error",
+    "-recorder",
+    "main.tex"
+  ],
+  "compiler_sha256": "0abc5faeb56c8439d3d20d732b25681a0574d51280c26488b46e080f8b47508e",
+  "exit_code": 1,
+  "compatibility_status": "partial",
+  "biber_startup": "failed before this probe; no substitution"
+}

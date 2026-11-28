@@ -1,0 +1,81 @@
+[
+  {
+    "date": "2026-03-20",
+    "packages_compared": 4478,
+    "mismatches": [
+      "beamerthemecelestia",
+      "l3kernel-dev",
+      "luamplib",
+      "magicthegathering",
+      "neoschool",
+      "onlinebrief24",
+      "phimisci",
+      "simpleicons",
+      "tagpdf",
+      "texlive-scripts",
+      "tkz-grapheur",
+      "zebra-goodies"
+    ],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-21",
+    "packages_compared": 4478,
+    "mismatches": [
+      "beamerthemecelestia",
+      "magicthegathering",
+      "neoschool",
+      "onlinebrief24",
+      "phimisci",
+      "texlive-scripts",
+      "tkz-grapheur",
+      "zebra-goodies"
+    ],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-22",
+    "packages_compared": 4478,
+    "mismatches": [],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-23",
+    "packages_compared": 4478,
+    "mismatches": [
+      "bxdvidriver",
+      "chronos",
+      "fox-listings",
+      "pygmentex",
+      "texlive-scripts",
+      "yb-book",
+      "zebra-goodies"
+    ],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-24",
+    "packages_compared": 4478,
+    "mismatches": [
+      "bxdvidriver",
+      "chronos",
+      "delimset",
+      "eqnlines",
+      "exframe",
+      "fox-listings",
+      "lxgw-fonts",
+      "mathfixs",
+      "nihbiosketch",
+      "onlinebrief24",
+      "pygmentex",
+      "sesstime",
+      "svg-animate",
+      "tex-ini-files",
+      "texlive-scripts",
+      "thermodynamics",
+      "yb-book",
+      "zebra-goodies"
+    ],
+    "signature_status": "not_verified"
+  }
+]

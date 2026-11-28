@@ -1,0 +1,54 @@
+[
+  {
+    "date": "2026-03-20",
+    "sha256_compressed": "0c14d2a2ad65b5796dc78c6f036f4dffd294a79349231c9ad24609c2dc304829",
+    "sha256_database": "4d603ce98dba1612af34b0d0a5e26bc710a9d474a39aaae7cd9cb1bc95e345e2",
+    "mismatches": [
+      {
+        "package": "simpleicons",
+        "mac_revision": "78447",
+        "archive_revision": "78366"
+      }
+    ],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-21",
+    "sha256_compressed": "d1dc57012a97eb406a19cc4623015e4c8b131df27ec34db4515c64279f7a1b6d",
+    "sha256_database": "f8dd7d3cb76993b3635394725885b420101886b5a86b8a0599ecf909e2cd468a",
+    "mismatches": [],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-22",
+    "sha256_compressed": "f6dab808e04d7dc6bc8861b6801af4f8d2b62e7a171ffcd6fa05d8cfb1642a12",
+    "sha256_database": "f0fbeec50424222ff26d58093407080de887c0461a9e034d4df30e06711ba6ce",
+    "mismatches": [],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-23",
+    "sha256_compressed": "9943c9ebf166c1829325018d1bf9e19f9bb40866295019632a92b4b7b2e3860d",
+    "sha256_database": "4da6063b1d8a02781f50de608a38479d34bd66b0a4e50ab61d7b3ebbef47f4e9",
+    "mismatches": [],
+    "signature_status": "not_verified"
+  },
+  {
+    "date": "2026-03-24",
+    "sha256_compressed": "e3e4334c9de6608ba8a4afde790cbaf9f10cace395dcc953ff9ede1e2caf74a3",
+    "sha256_database": "aa6895892d9532993269e22cd5f21d43d1a343bf9baa47f83f4f5758f377352e",
+    "mismatches": [
+      {
+        "package": "lxgw-fonts",
+        "mac_revision": "77682",
+        "archive_revision": "78482"
+      },
+      {
+        "package": "tex-ini-files",
+        "mac_revision": "73863",
+        "archive_revision": "78479"
+      }
+    ],
+    "signature_status": "not_verified"
+  }
+]

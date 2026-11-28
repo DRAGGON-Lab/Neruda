@@ -1,0 +1,45 @@
+{
+  "source_revision": "8e9e09aa0d89ab2231def87a998ad6688efb4462",
+  "dirty_state": "",
+  "git_diagnostics": {
+    "source_revision": {
+      "exit_code": 0,
+      "stderr": ""
+    },
+    "dirty_state": {
+      "exit_code": 0,
+      "stderr": ""
+    }
+  },
+  "status": "not_run",
+  "compilation": "not_run",
+  "case": "offline-empty",
+  "timestamp": "2026-11-27T16:06:33.470464+00:00",
+  "architecture": "x86_64",
+  "platform": "Linux-6.8.0-1073-azure-x86_64-with-glibc2.35",
+  "environment_policy": "isolated-v1",
+  "inputs": {
+    "article/Tectonic.toml": "8f5fc4094afc5e613b259677461c4fc3921a39e4313dc12e1dfbbae1c5238ecb",
+    "article/src/main.tex": "82aa4d7be5120980658b2af27f3adef43c126f332126170e7f927a5d4c12e8e6",
+    "article/src/references.bib": "832c4cd0c1fe24f53461f1affbf60bbff82f9776e61061ba55273bc21dc7270b",
+    "slides/Tectonic.toml": "173f4f29f48a99b53b24535286552103f7bdac3645b81985415345793521fa05",
+    "slides/src/content.tex": "9bde1becc555b8df8b9ee8a363cc24665fd035436fa69294d49d6792fa4ff87a",
+    "slides/src/handout.tex": "6987c5af18b74b3126eeb75f9303931e5efe61d6e10f1d9a2f60f9d06b7bc339",
+    "slides/src/main.tex": "8a09abe2b6fbc81ca3570053fec728216274281c03d163cc5aee74021949c15e",
+    "slides/src/references.bib": "832c4cd0c1fe24f53461f1affbf60bbff82f9776e61061ba55273bc21dc7270b"
+  },
+  "tools": {
+    "tectonic": {
+      "sha256": "2b3a86250906c92ed0a3ae8aaa454ec55bd6cede8593b3e549640177f6aecaa3"
+    },
+    "biber": {
+      "sha256": "ff87e30fbc1958acf16a1772973d40eeb7635a9d5ea59f5162df549802c611df"
+    }
+  },
+  "diagnostic": "tectonic version mismatch: expected 'Tectonic 0.17.0', got \"<TOOLS>/tectonic: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.36' not found (required by <TOOLS>/tectonic)\\n<TOOLS>/tectonic: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by <TOOLS>/tectonic)\\n<TOOLS>/tectonic: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.39' not found (required by <TOOLS>/tectonic)\"",
+  "bundle_url": "https://data1.fullyjustified.net/tlextras-2022.0r0.tar",
+  "harness": {
+    "run.py": "eee984959e1512ca1f17506671f58760669eec1f15e2e7964eba8a26add80709",
+    "test_runner.py": "618b273dc03f5b272b5da3b19c6f715501930d8f037d6d29d87066617dc2241f"
+  }
+}

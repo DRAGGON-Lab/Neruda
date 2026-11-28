@@ -1,0 +1,9 @@
+{
+  "commit": "3a1ede2df77076108d5e4dcf1dc6aabaa4943ee8",
+  "run": "https://github.com/DRAGGON-Lab/Neruda/actions/runs/46087960068",
+  "artifact": "https://github.com/DRAGGON-Lab/Neruda/actions/runs/46087960068/artifacts/15239224827",
+  "regression": "57 pass",
+  "provisioning": "fail: GPG NODATA; separate same-endpoint response identified HTML access challenge",
+  "compilation": "not_run",
+  "artifact_export_checksums": "all verified against downloaded manifest"
+}

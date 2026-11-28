@@ -1,0 +1,112 @@
+{
+  "timestamp": "2026-11-27T15:26:19.618588+00:00",
+  "architecture": "arm64",
+  "source": {
+    "biber": "d894bfb75f2df1935fbcf452e8a79fd80de5c859ade4842d8e0681306b509681",
+    "tectonic": "b52b5a730e2b0b33087304f7720f649603953f270a6b1c88bb031e1ae01f7f9c"
+  },
+  "lipo_sha256": "ed6f5284033aa2aae6a58427c25ba3ab119947b40365627b24e5d51a4b70a1cd",
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/lipo",
+        "<ORIGINAL_TOOLS>/biber",
+        "-thin",
+        "arm64",
+        "-output",
+        "<THIN_TOOLS>/biber"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/file",
+        "<THIN_TOOLS>/biber"
+      ],
+      "exit_code": 0,
+      "output": "<THIN_TOOLS>/biber: Mach-O 64-bit executable arm64\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/lipo",
+        "-archs",
+        "<THIN_TOOLS>/biber"
+      ],
+      "exit_code": 0,
+      "output": "arm64\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/codesign",
+        "--verify",
+        "--strict",
+        "<THIN_TOOLS>/biber"
+      ],
+      "exit_code": 1,
+      "output": "<THIN_TOOLS>/biber: invalid signature (code or signature have been modified)\nIn architecture: arm64\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/sw_vers"
+      ],
+      "exit_code": 0,
+      "output": "ProductName:\t\tmacOS\nProductVersion:\t\t27.2.1\nBuildVersion:\t\t26B131\n"
+    },
+    {
+      "argv": [
+        "/usr/bin/xcode-select",
+        "-p"
+      ],
+      "exit_code": 0,
+      "output": "/Library/Developer/CommandLineTools\n"
+    },
+    {
+      "argv": [
+        "<THIN_TOOLS>/tectonic",
+        "--version"
+      ],
+      "environment_policy": "isolated-v1",
+      "exit_code": 0,
+      "output": "Tectonic 0.17.0\n"
+    },
+    {
+      "argv": [
+        "<THIN_TOOLS>/biber",
+        "--version"
+      ],
+      "environment_policy": "isolated-v1",
+      "exit_code": 0,
+      "output": "biber version: 2.17\n"
+    }
+  ],
+  "archive_verification": "Biber archive SHA-256 locally measured, not publisher corroborated",
+  "derived": {
+    "biber": "ec2e851a60a36ff9aa756120c728ffec7a8727e4a1a6094e504b0863f2bb7bd4",
+    "tectonic": "b52b5a730e2b0b33087304f7720f649603953f270a6b1c88bb031e1ae01f7f9c"
+  },
+  "source_revision": "767ade93e118cf5a8d8a77767c6ec45027fef7a7",
+  "python_operations": [
+    "destination.mkdir() in a fresh UUID directory",
+    "(destination / 'biber').chmod(0o755)",
+    "shutil.copy2(source / 'tectonic', destination / 'tectonic')"
+  ],
+  "archives": {
+    "biber": "182e1efa074d8a2a23a8893f2a22440d4e463cce55e4ed02076ac4c0ee0614b2",
+    "tectonic": "a3f1cac7c5678f01661a92212f58480ae3b0634115d880dbc59e2953ded45667"
+  },
+  "originals_unchanged": {
+    "biber": true,
+    "tectonic": true
+  },
+  "original_signature_check": {
+    "exit_code": 1,
+    "output": "<ORIGINAL_TOOLS>/biber: invalid signature (code or signature have been modified)\nIn architecture: arm64\n"
+  },
+  "status": "partial",
+  "limitations": [
+    "Version probes passed; bibliography processing not reached",
+    "Derived signature check failed; no re-signing or execution-protection changes",
+    "Cold network build HTTP 429; warm/offline and PDF review not_run"
+  ]
+}

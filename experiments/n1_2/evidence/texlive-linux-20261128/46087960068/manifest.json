@@ -1,0 +1,18 @@
+{
+  "key-import.log": {
+    "raw_sha256": "1d685e4c03a9bde79593e51fe2442c2ee8b172670a91013901300cd09112e005",
+    "export_sha256": "960c8ab241f005b499de891dc7d8558addb95b25f1bab45b223e1e82f56f74ba"
+  },
+  "installer-signature.log": {
+    "raw_sha256": "ba0dc04f491d0ba7cb6c9bc5f289cdb51381505d3d0fe457ae5c6587db022d65",
+    "export_sha256": "ba0dc04f491d0ba7cb6c9bc5f289cdb51381505d3d0fe457ae5c6587db022d65"
+  },
+  "gpg-version.log": {
+    "raw_sha256": "bf75fc5e0ab2a8f9637a44c62114ed3b58e0724459edae42348f9ce734f998ad",
+    "export_sha256": "4d5ecdafac4e0bdcdc06e9c267db721ac67af183eb67364ab769fd6a7a65c58f"
+  },
+  "provisioning.json": {
+    "raw_sha256": "1c423590f7762c112844860e7ec011cac37aac981985fd67faa1e7be77760336",
+    "export_sha256": "1c423590f7762c112844860e7ec011cac37aac981985fd67faa1e7be77760336"
+  }
+}
