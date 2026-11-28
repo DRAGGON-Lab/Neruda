@@ -1,0 +1,1 @@
+control=0 ready=0 denied=6

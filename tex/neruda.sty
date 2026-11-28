@@ -1,0 +1,22 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neruda}[2026/11/28 Neruda shared typography and notation]
+\RequirePackage{xcolor}
+\RequirePackage{fontspec,amsmath,unicode-math,siunitx}
+
+\definecolor{NerudaNavy}{HTML}{142C46}
+\definecolor{NerudaTeal}{HTML}{006D68}
+\definecolor{NerudaLightTeal}{HTML}{9DE0D5}
+\newcommand{\nerudalab}{DRAGGON Lab}
+
+\setmainfont{lmroman10-regular.otf}[
+  BoldFont=lmroman10-bold.otf, ItalicFont=lmroman10-italic.otf,
+  BoldItalicFont=lmroman10-bolditalic.otf]
+\setsansfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf, ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf]
+\setmonofont{lmmono10-regular.otf}[ItalicFont=lmmono10-italic.otf]
+\setmathfont{latinmodern-math.otf}
+
+\newcommand{\nerudavector}[1]{\symbf{#1}}
+\newcommand{\nerudamatrix}[1]{\symbf{#1}}
+\newcommand{\nerudaquantity}[2]{\qty{#1}{#2}}

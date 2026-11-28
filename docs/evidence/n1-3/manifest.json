@@ -1,0 +1,202 @@
+{
+  "source_revision": "732c0a7239be1740d56f2f2b74533cc92022a80d",
+  "source_dirty": false,
+  "environment": {
+    "macos": "27.2.1",
+    "macos_build": "26B131",
+    "arch": "arm64",
+    "python": "3.9.6",
+    "release": "mactex-20260324",
+    "locked_versions": {
+      "biber": "2.21",
+      "biblatex": "3.21",
+      "latexmk": "4.88",
+      "lualatex": "LuaHBTeX 1.24.0"
+    },
+    "biber_override_sha256": "a1a2784931d9156a9d4cc8cb609912d533f04365d2e4aa7b902001a2f1a65066"
+  },
+  "network_policy": "(version 1) (allow default) (deny network*)",
+  "source_sha256": {
+    "LICENSE": "96a189df53be0a2b93cae9aaf9c45ec8175bc8fb5693233dd10bbe0b356243a5",
+    "scripts/latex.py": "d9122adfa857a5ca127df3de10e05e94fb291a08a006dfa18a445065a50b3e44",
+    "scripts/scaffold.py": "16b0476cb6e6363649d4e88a0cd00a69fe36f4853b3b84959957fd03e9d9586a",
+    "templates/article/README.md": "3081dfb969d0e5beab9203b35168ae5baa0d6b0cd1af1a819083c8b4b6e042f0",
+    "templates/article/src/main.tex": "76869dbef62e50a39b57d6ea10bdebca98e2a2f904c8fc335f9b906a2f2cf556",
+    "templates/article/src/metadata.tex": "916e89a7a6f6b2d33b237941459753460afebbfd6f8edeb41532c0d536009105",
+    "templates/article/src/sections/introduction.tex": "fc7bdb95e5bd48ca6f1d71d23c5f73af91deb33348f7a4dc0c74fb1537412d23",
+    "templates/article/src/sections/mathematical-concepts.tex": "fb273f4098a9a9176ca3d8fe709b28ca544cdd7432be8f06066066fa1251b8c3",
+    "templates/article/src/sections/reproducibility.tex": "92f09280d812519044530ba1423d1ad4093b53b5dc9abc981f18138ae3ffdf19",
+    "templates/common/.gitignore": "0cf256cc9234b415f912f5b0e9f8c9364688466041611047cd3f599c35f4efa6",
+    "templates/common/AGENTS.md": "cdf9def18809cda82b90e8462a4feae46213cbc9b794d1d16f69e995257c0086",
+    "templates/common/src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101",
+    "templates/slides/README.md": "5aad30e689176840831ed1d83e14525860419c15cb384d38e815a8e0bbde2e08",
+    "templates/slides/src/frames/check.tex": "808ffda79a8904c295bca3ef1b0808ccb85fb868559c85456adbf1452851de9d",
+    "templates/slides/src/frames/documentation.tex": "8bd535a3951861d99c5e319010f7231668fe521a66cb9a109f750203ca3a420c",
+    "templates/slides/src/frames/mapping.tex": "6f19a68fae8a47243715484a9302e6bf8057a5730e611428ba3bab40893fd6e7",
+    "templates/slides/src/handout.tex": "b03ed5f817696042bbb2a6e16cb7f290d50d5b371fc7c1d16b778bec84fc2bba",
+    "templates/slides/src/main.tex": "28f8284e7e4e23512cb748e5960cd2a8d476b977f8d09731fe23d6181e5dda30",
+    "templates/slides/src/metadata.tex": "f328afa696d4309b7664a5735e18dac9afaefa3e8f0d36f8226012d3b4c60027",
+    "templates/slides/src/presentation.tex": "8a219a4d5047278b42c17c5ea01353345cf8196f54660339885f378f801998b0",
+    "tex/beamerthemeNeruda.sty": "4f18eeb1d6a37bd6b149305de1e39739c38b9be680cfc6e7124d96f3dc3ef120",
+    "tex/neruda-article.sty": "e7814e6518be00c00805ac5b80320ba937f4917581704a5fb5ee6ab35f4e293e",
+    "tex/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+    "tools/texlive-lock.json": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536"
+  },
+  "artifacts": {
+    "article-preflight.json": {
+      "raw_sha256": "6cc4770a387108d1cfabe01b09de74fd4fbb0483b76b8e0e24f174244801bcf9",
+      "sha256": "6cc4770a387108d1cfabe01b09de74fd4fbb0483b76b8e0e24f174244801bcf9"
+    },
+    "slides-preflight.json": {
+      "raw_sha256": "6cc4770a387108d1cfabe01b09de74fd4fbb0483b76b8e0e24f174244801bcf9",
+      "sha256": "6cc4770a387108d1cfabe01b09de74fd4fbb0483b76b8e0e24f174244801bcf9"
+    },
+    "network-status.txt": {
+      "raw_sha256": "be071cb5719efa41dc17358fb390302fb58da42725bd56d940ae1e0d173df336",
+      "sha256": "be071cb5719efa41dc17358fb390302fb58da42725bd56d940ae1e0d173df336"
+    },
+    "network-denied.log": {
+      "raw_sha256": "dd3fb2ae56be00e8805b357dd42849743a00e0293929ee28cf91dcbd67383606",
+      "sha256": "dd3fb2ae56be00e8805b357dd42849743a00e0293929ee28cf91dcbd67383606"
+    },
+    "article/main.pdf": {
+      "raw_sha256": "eb114608e330c1e94d19a2a19efa5d75d7afae0701e441d3fd57498fd7995587",
+      "sha256": "eb114608e330c1e94d19a2a19efa5d75d7afae0701e441d3fd57498fd7995587"
+    },
+    "article/tex.log": {
+      "raw_sha256": "67a38a37e9a2fd80e89a6195bfcddcd60791c61d7d940123e22dfc9b8e3c974d",
+      "sha256": "22653382247f5584781a918ab51aaa3686d0b684b06561fd13898d6819ab4af1"
+    },
+    "article/biber.log": {
+      "raw_sha256": "8bb04b0704b870dfac1dc295571d85bb3a2ba7b1c09ad42ed78ea10ca449aa8c",
+      "sha256": "e073d9660b53d0063cc598e6a90719120fcec1d952a01aaf3a2d428b328a3375"
+    },
+    "article/receipt.json": {
+      "raw_sha256": "2799aeb08157027fc7081aab889c3b5304bc1b3d8e66d6b0f52e957a8f552a21",
+      "sha256": "5dfb00b493240c475d3fbf394b3c0c8ea774e136787920bfcfa1f66bd2aabfa5"
+    },
+    "article/build-check.log": {
+      "raw_sha256": "c153a51a367d519975639646d19e88f48281f04411e5086a92a667fa5cee498d",
+      "sha256": "18150c3093a81c7260805072fcc7167b414657e10762734d073a870d8b20c57e"
+    },
+    "presentation/main.pdf": {
+      "raw_sha256": "1106d7816ee58a541a49e3341a2c71241d746a331863166c80695c7daaa87693",
+      "sha256": "1106d7816ee58a541a49e3341a2c71241d746a331863166c80695c7daaa87693"
+    },
+    "presentation/tex.log": {
+      "raw_sha256": "837c394cbb9ae8d78d4143e950a04badd443620213742990ec5290526862887c",
+      "sha256": "05f730adc02bbe64ee1ea3f3880dec877999dba15cd150544b4e8b4c30104b0e"
+    },
+    "presentation/biber.log": {
+      "raw_sha256": "4bae1ce1fdfe3a6afdfdc86eb24c1ae0d237c640756ed3d5e1e11988c2d747f4",
+      "sha256": "a61c88a6832475433f11ea91490659c0b7f1edf90d82891bb51bc7779c00fed9"
+    },
+    "presentation/receipt.json": {
+      "raw_sha256": "8e4c6cd69e715f4bb74633ddeb2b8522f796dc39a65baebb337f9b47a64aab16",
+      "sha256": "c357309f1cbe2a4689546a7dcc549ed7d1f54725319fa118ae46f06bdc7eb7e5"
+    },
+    "presentation/build-check.log": {
+      "raw_sha256": "6fb61b06358817a931053e10525199b6af24fde518bc769a40ea4d89ce4f75bc",
+      "sha256": "c411b200d8d5399ab26be0077531e1e3da30c1f7805a06f8922857322c55df88"
+    },
+    "handout/handout.pdf": {
+      "raw_sha256": "0e5c3a984400daac777261aea73aa1e2ee4c087f1c07078434b31014c4cef2cf",
+      "sha256": "0e5c3a984400daac777261aea73aa1e2ee4c087f1c07078434b31014c4cef2cf"
+    },
+    "handout/tex.log": {
+      "raw_sha256": "1f36fd58100e34758f754af1e9d1ee2346899900fc469a10a030fe888b300f06",
+      "sha256": "8844936a2ff87a64cfc002d021b04b45575a529f16ebee3ad4d0f95e65a5f1cf"
+    },
+    "handout/biber.log": {
+      "raw_sha256": "cf326e4ee0776de5c8e4d90a15fb207efb42598c4fcab2e22015947951e7e253",
+      "sha256": "11ee892b35ce2d3c716ef4748ceea22a338bb77adf9b5b878d0bf40724e96e05"
+    },
+    "handout/receipt.json": {
+      "raw_sha256": "49be6fdb9753b810598085244a2f15af34960430ee3ea42d19c40b0e4a8151f4",
+      "sha256": "327bc8e4928e7726cb1ab0803f8de8e9a35b7227e8a724239defe04ed9cd40e1"
+    },
+    "handout/build-check.log": {
+      "raw_sha256": "99ae443d7700e806ba26e23f04fcce1d7f1a2fed837864001ecc7bf24281cac4",
+      "sha256": "70cd0bf41299f5eb604161a59e1c0e5c400458762565947d96fd393d764e0fb9"
+    }
+  },
+  "checks": {
+    "driver_tests": {
+      "status": "pass",
+      "count": 29
+    },
+    "experiment_tests": {
+      "status": "pass",
+      "count": 45
+    },
+    "article": {
+      "status": "pass",
+      "pages": 1,
+      "pdf_sha256": "eb114608e330c1e94d19a2a19efa5d75d7afae0701e441d3fd57498fd7995587",
+      "locked_resources": 138,
+      "shell_escape": false,
+      "embedded_font_sha256": {
+        "texmf-dist/fonts/opentype/public/lm-math/latinmodern-math.otf": "6075562b771f8b82f0c179e363389684f2dd09de30038269e2628e504bd7be0f",
+        "texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf": "22deb6d3be3ffcb40b33f0e010afb256c677d97c2a2bdee1f5740cdc97751558",
+        "texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf": "c1fce25075567bb8dbf2151658c3b442690041db17a2d49fc9e55905ea5b7169",
+        "texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf": "1aa18cfefa58132c52ce5de70db1fd1154201c19cd2b2cdaffba4906a33e6852",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf": "a597b710326c1a8a2c7238d808e5d38711638a72a32383478db4829d63afd687",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf": "d431b786b9b603662718e79cfe9b441f47a8b0b3e854dde89d5acb3ed7cfd682"
+      },
+      "final_tex_warnings": [],
+      "timestamp_utc": "2026-11-28T01:22:52Z",
+      "rendered_page_sha256": [
+        "ec90676b763070a818ad16d778163e2a3bda373dcfcc477e696ff11e44dd430b"
+      ]
+    },
+    "presentation": {
+      "status": "pass",
+      "pages": 5,
+      "pdf_sha256": "1106d7816ee58a541a49e3341a2c71241d746a331863166c80695c7daaa87693",
+      "locked_resources": 253,
+      "shell_escape": false,
+      "embedded_font_sha256": {
+        "texmf-dist/fonts/opentype/public/lm-math/latinmodern-math.otf": "6075562b771f8b82f0c179e363389684f2dd09de30038269e2628e504bd7be0f",
+        "texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf": "22deb6d3be3ffcb40b33f0e010afb256c677d97c2a2bdee1f5740cdc97751558",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf": "a597b710326c1a8a2c7238d808e5d38711638a72a32383478db4829d63afd687",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-oblique.otf": "1b38b36efc21f9d3f34edf6a13f9d71f59c41f824e790f5d3ee5ba5b4936f377",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf": "d431b786b9b603662718e79cfe9b441f47a8b0b3e854dde89d5acb3ed7cfd682"
+      },
+      "final_tex_warnings": [
+        "Package epstopdf Warning: Shell escape feature is not enabled."
+      ],
+      "timestamp_utc": "2026-11-28T01:22:52Z",
+      "rendered_page_sha256": [
+        "7565cf67033c73857610c3a0eb4d815f17d8df750673a804835bca5457d0eba5",
+        "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+        "1779f693503ec521f8a49d2d353b3c7234c1c718cad71081126d707a68721cd1",
+        "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+        "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+      ]
+    },
+    "handout": {
+      "status": "pass",
+      "pages": 4,
+      "pdf_sha256": "0e5c3a984400daac777261aea73aa1e2ee4c087f1c07078434b31014c4cef2cf",
+      "locked_resources": 253,
+      "shell_escape": false,
+      "embedded_font_sha256": {
+        "texmf-dist/fonts/opentype/public/lm-math/latinmodern-math.otf": "6075562b771f8b82f0c179e363389684f2dd09de30038269e2628e504bd7be0f",
+        "texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf": "22deb6d3be3ffcb40b33f0e010afb256c677d97c2a2bdee1f5740cdc97751558",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf": "a597b710326c1a8a2c7238d808e5d38711638a72a32383478db4829d63afd687",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-oblique.otf": "1b38b36efc21f9d3f34edf6a13f9d71f59c41f824e790f5d3ee5ba5b4936f377",
+        "texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf": "d431b786b9b603662718e79cfe9b441f47a8b0b3e854dde89d5acb3ed7cfd682"
+      },
+      "final_tex_warnings": [
+        "Package epstopdf Warning: Shell escape feature is not enabled."
+      ],
+      "timestamp_utc": "2026-11-28T01:22:52Z",
+      "rendered_page_sha256": [
+        "18e8981242b0c83d1f64c2af6bcdc0c5e4c5d0bd9e8fe23d694bd2e15a4a0633",
+        "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+        "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+        "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+      ]
+    }
+  }
+}

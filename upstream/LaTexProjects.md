@@ -123,3 +123,11 @@ Historical upstream commands, inspected as source (not available or tested in Ne
 ## 5. Migration acceptance and next steps
 
 N1.1 can be reviewed now for correct scope, documented source identity, standalone architecture and exclusions. The IP/release reviewer must accept the extraction candidates and dispositions; unresolved component rights block actual copying. N1.2 tests the minimal independently usable toolchain, captures versions/checksums/logs and supported platform matrix (or explicit blockers), and records a follow-on ADR. N1.3 extracts only cleared assets, removes upstream-specific dependencies and tests safe scaffold/semantic templates; N1.4 builds/checks and provenance; N1.5 validates clean standalone article, slides and handout, page review and upgrade/rollback. A3.1/N2.1 specify shared evidence references separately. Preserve source revision, path, original notice, adaptation rationale, changed paths, validation status and reviewer in each import PR. Actual extraction, commits, installs and publication are outside this review-only task.
+
+## N1.3 disposition
+
+The approved N1.3 scope used this inventory as a design reference for semantic
+notation, standalone layout and a 16:9 Beamer handout. Neruda authored its
+scaffolder, templates and styles in this repository. The starter uses the lab
+name as text and carries Neruda's existing MIT license for its original assets.
+See the [provenance and verification record](../docs/n1-3-scaffold.md).

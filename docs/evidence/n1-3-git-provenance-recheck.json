@@ -1,0 +1,93 @@
+{
+  "implementation_revision": "437caddfac9ea647cb74a1e6ff141815de965bc3",
+  "driver_sha256": "8dcd919bcfd96ab6568339b7cc344020955cc8eb0a44f43030a4c7b48bae4783",
+  "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+  "environment": {
+    "macos": "27.2.1",
+    "arch": "arm64",
+    "python": "3.9.6"
+  },
+  "network_policy": "(version 1) (allow default) (deny network*)",
+  "network_exit_codes": {
+    "control": 0,
+    "ready": 0,
+    "denied": 6
+  },
+  "profiles": {
+    "article": {
+      "status": "pass",
+      "timestamp_utc": "2026-11-28T01:34:35Z",
+      "build_exit_code": 0,
+      "output_check_errors": [],
+      "source_revision": null,
+      "dirty_state": null,
+      "git_diagnostics": "Git worktree root differs from the document project",
+      "shell_escape": false,
+      "pdf_sha256": "e5bfd8a0237f5c573f9e75c1496f94f37065f74499ab4e828751a16be3c4a32b",
+      "previous_pdf_bytes_match": false,
+      "rendered_page_sha256": [
+        "ec90676b763070a818ad16d778163e2a3bda373dcfcc477e696ff11e44dd430b"
+      ],
+      "rendered_pages_match_previous": true
+    },
+    "presentation": {
+      "status": "pass",
+      "timestamp_utc": "2026-11-28T01:34:35Z",
+      "build_exit_code": 0,
+      "output_check_errors": [],
+      "source_revision": null,
+      "dirty_state": null,
+      "git_diagnostics": "Git worktree root differs from the document project",
+      "shell_escape": false,
+      "pdf_sha256": "6b235a39468942b87781f0670cd34645d48bd5d15e270ce610625f612c123317",
+      "previous_pdf_bytes_match": false,
+      "rendered_page_sha256": [
+        "7565cf67033c73857610c3a0eb4d815f17d8df750673a804835bca5457d0eba5",
+        "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+        "1779f693503ec521f8a49d2d353b3c7234c1c718cad71081126d707a68721cd1",
+        "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+        "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+      ],
+      "rendered_pages_match_previous": true
+    },
+    "handout": {
+      "status": "pass",
+      "timestamp_utc": "2026-11-28T01:34:35Z",
+      "build_exit_code": 0,
+      "output_check_errors": [],
+      "source_revision": null,
+      "dirty_state": null,
+      "git_diagnostics": "Git worktree root differs from the document project",
+      "shell_escape": false,
+      "pdf_sha256": "b787a5d46459b3d7889257d2fffc4958bb03e89cd4f99e49ef0899d2a7857d42",
+      "previous_pdf_bytes_match": false,
+      "rendered_page_sha256": [
+        "18e8981242b0c83d1f64c2af6bcdc0c5e4c5d0bd9e8fe23d694bd2e15a4a0633",
+        "cf05eda6d995037bec6a65ec6cf74cda4e98c75de7db5a1df32ba42e35f9c2ac",
+        "32f17bbbe7c611650548d3f12f0ff0b3f714b357d83f1f2e4ea0f5cda472a05e",
+        "cc915bbbcccf4dc3426baffb9894236377b9035bc906c5cc7eb2701a8ab86564"
+      ],
+      "rendered_pages_match_previous": true
+    }
+  },
+  "preflight": {
+    "article": {
+      "policy": "texlive-local-v1",
+      "status": "integrity_verified",
+      "exit_code": 0,
+      "driver_sha256": "8dcd919bcfd96ab6568339b7cc344020955cc8eb0a44f43030a4c7b48bae4783",
+      "timestamp_utc": "2026-11-28T01:34:34Z",
+      "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+      "release": "mactex-20260324"
+    },
+    "slides": {
+      "policy": "texlive-local-v1",
+      "status": "integrity_verified",
+      "exit_code": 0,
+      "driver_sha256": "8dcd919bcfd96ab6568339b7cc344020955cc8eb0a44f43030a4c7b48bae4783",
+      "timestamp_utc": "2026-11-28T01:34:34Z",
+      "lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+      "release": "mactex-20260324"
+    }
+  }
+}

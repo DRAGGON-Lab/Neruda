@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -107,6 +108,58 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(receipt['exit_code'], 1)
         self.assertTrue(receipt['errors'])
 
+    def initialize_repository(self, directory):
+        def git(*args):
+            return subprocess.check_output(
+                ['/usr/bin/git', *args], cwd=directory, text=True,
+                stderr=subprocess.PIPE,
+            ).strip()
+
+        git('init', '-q')
+        (directory / '.gitignore').write_text('build/\n')
+        git('add', '.')
+        git('-c', 'user.name=Neruda Test', '-c', 'user.email=neruda@example.test',
+            '-c', 'commit.gpgsign=false', 'commit', '-qm', 'Initial fixture')
+        return git('rev-parse', 'HEAD')
+
+    def build_receipt(self):
+        stdout = io.StringIO()
+        with redirect_stdout(stdout):
+            self.assertEqual(latex.main(['build', *self.args]), 1)
+        path = stdout.getvalue().strip().removeprefix('Build receipt: ')
+        return json.loads(Path(path).read_text())
+
+    def test_standalone_directory_has_null_git_provenance(self):
+        receipt = self.build_receipt()
+        self.assertIsNone(receipt['source_revision'])
+        self.assertIsNone(receipt['dirty_state'])
+
+    def test_independent_repository_records_its_revision_and_dirty_state(self):
+        revision = self.initialize_repository(self.project)
+        clean = self.build_receipt()
+        self.assertEqual(clean['source_revision'], revision)
+        self.assertEqual(clean['dirty_state'], '')
+
+        (self.project / 'src/main.tex').write_text('edited fixture')
+        dirty = self.build_receipt()
+        self.assertEqual(dirty['source_revision'], revision)
+        self.assertIn(' M src/main.tex', dirty['dirty_state'])
+
+    def test_nested_project_has_null_git_provenance(self):
+        self.initialize_repository(self.base)
+        (self.base / 'ancestor-only.txt').write_text('untracked ancestor file')
+        receipt = self.build_receipt()
+        self.assertIsNone(receipt['source_revision'])
+        self.assertIsNone(receipt['dirty_state'])
+
+    def test_git_environment_cannot_attribute_another_repository_to_the_project(self):
+        self.initialize_repository(self.base)
+        with patch.dict(os.environ, {'GIT_DIR': str(self.base / '.git'),
+                                    'GIT_WORK_TREE': str(self.project)}):
+            receipt = self.build_receipt()
+        self.assertIsNone(receipt['source_revision'])
+        self.assertIsNone(receipt['dirty_state'])
+
     def test_success_selects_verified_tools_and_disables_shell_escape(self):
         def execute(command, cwd, env, console, timeout):
             directory = console.parent
@@ -122,7 +175,6 @@ class DriverTests(unittest.TestCase):
             self.assertEqual(latex.main(['build', *self.args]), 0)
 
     def test_timeout_keeps_partial_evidence(self):
-        import subprocess
         with patch.object(latex, 'execute', side_effect=subprocess.TimeoutExpired('fixture', 1)):
             self.assertEqual(latex.main(['build', *self.args]), 1)
         run = next((self.project / 'build').iterdir())
@@ -185,7 +237,6 @@ class DriverTests(unittest.TestCase):
             self.assertEqual(latex.main(['build', *self.args, '--entry', 'src/-e.tex']), 1)
 
     def test_real_timeout_preserves_partial_console(self):
-        import subprocess
         import sys
         console = self.base / 'timeout.log'
         with self.assertRaises(subprocess.TimeoutExpired):

@@ -1,0 +1,24 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neruda-article}[2026/11/28 Neruda article layout]
+\RequirePackage[a4paper,margin=28mm]{geometry}
+\RequirePackage{microtype}
+\RequirePackage[colorlinks,linkcolor=NerudaTeal,citecolor=NerudaTeal,urlcolor=NerudaTeal]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.65em}
+\renewcommand{\section}{\@startsection{section}{1}{0pt}%
+  {-2.5ex plus -.8ex minus -.2ex}{.8ex plus .2ex}%
+  {\normalfont\sffamily\large\bfseries\color{NerudaNavy}}}
+
+\renewcommand{\maketitle}{%
+  {\sffamily
+    {\color{NerudaTeal}\bfseries\nerudalab\par}%
+    \vspace{1ex}%
+    {\color{NerudaNavy}\LARGE\bfseries\@title\par}%
+    \vspace{.5ex}%
+    {\small\@author\par\@date\par}%
+  }%
+  \vspace{.6em}%
+  {\color{NerudaTeal}\hrule height .8pt}%
+  \vspace{.5em}%
+}
