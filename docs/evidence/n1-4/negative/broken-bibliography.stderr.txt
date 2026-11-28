@@ -1,0 +1,10 @@
+missing or invalid output: broken-bibliography.blg
+missing or invalid output: broken-bibliography.bbl
+broken-bibliography.log: Package biblatex Info: ... file 'broken-bibliography.bbl' not found.
+broken-bibliography.log: No file broken-bibliography.bbl.
+broken-bibliography.log: LaTeX Warning: Citation 'latex-core-documentation' on page 1 undefined on input
+broken-bibliography.log: LaTeX Warning: There were undefined references.
+broken-bibliography.log: Package biblatex Warning: Please (re)run Biber on the file:
+broken-bibliography.log: (biblatex)                and rerun LaTeX afterwards.
+console.log: Bib file(s) not found in search path:
+  bib/missing-demo.bib

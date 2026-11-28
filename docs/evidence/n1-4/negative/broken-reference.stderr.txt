@@ -1,0 +1,2 @@
+broken-reference.log: LaTeX Warning: Reference `no-such-equation' on page 1 undefined on input line 3
+broken-reference.log: LaTeX Warning: There were undefined references.
