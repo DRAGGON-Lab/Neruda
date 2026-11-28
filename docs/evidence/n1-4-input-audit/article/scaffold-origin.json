@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "profile": "article",
+  "template_revision": "14ca9b9cdde1faaeb9e5d227c5937af27b9b77db",
+  "template_dirty": false,
+  "bundle_sha256": "0ce1a086cb6b58c75097ee769c68ecbeecb3983f7e9f90f318cb9a307a0785a2",
+  "initial_files": {
+    ".gitignore": "bc88b1dea41e950574b2aa48cf81fa1967839decfb8fdf239397e3aa83cbeda5",
+    "AGENTS.md": "cdf9def18809cda82b90e8462a4feae46213cbc9b794d1d16f69e995257c0086",
+    "LICENSE": "96a189df53be0a2b93cae9aaf9c45ec8175bc8fb5693233dd10bbe0b356243a5",
+    "README.md": "810087cd32f1f576b4ad64db2c8368fda51513055ea1d52a01ad7a1c3a1cc74f",
+    "figures/source/build.py": "aa358a02da3f6e2ae2ff4d47cb8e632cc6736158abf78b47085d124cfc4a9d0c",
+    "figures/source/scaling.json": "747786b4724aa8d998c00078738136e1e3bbb3a3fec1071051895257112922bf",
+    "scripts/latex.py": "6d8085ec7cb5bb6932c9b7f7795a9e72699750d37d25d8483727d0ffd2f0c171",
+    "src/bib/references.bib": "caf9c7aecb901f26683314c871258eb1f3474e0473f2c2f50b3eebb427b13101",
+    "src/main.tex": "a31ab823eb7da3377091c0988928a08fb06de38beb1f51442afafa0438ef63de",
+    "src/metadata.tex": "916e89a7a6f6b2d33b237941459753460afebbfd6f8edeb41532c0d536009105",
+    "src/neruda-article.sty": "e7814e6518be00c00805ac5b80320ba937f4917581704a5fb5ee6ab35f4e293e",
+    "src/neruda.sty": "2d8ce08fa793bbdb41d29d74734858257379a6cd951d2ce1ab8cda88ad4917e3",
+    "src/sections/introduction.tex": "fc7bdb95e5bd48ca6f1d71d23c5f73af91deb33348f7a4dc0c74fb1537412d23",
+    "src/sections/mathematical-concepts.tex": "fb273f4098a9a9176ca3d8fe709b28ca544cdd7432be8f06066066fa1251b8c3",
+    "src/sections/reproducibility.tex": "a2c6eedee39c8298b0dc9ffec6a4e7fa92f56c749940958baee637157137dba5",
+    "tools/texlive-lock.json": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536"
+  }
+}

@@ -103,3 +103,40 @@ references `no-such-equation`. Both received the same figure receipt
 argument. The missing-dependency test passed a nonexistent executable
 using `--biber`. The output-check negatives used copies of a successful
 run directory. See the manifest for the individual exits and diagnostics.
+
+## Provenance review follow-up
+
+The follow-up implementation was built from clean revision
+`14ca9b9cdde1faaeb9e5d227c5937af27b9b77db`. The
+[follow-up manifest](evidence/n1-4-input-audit/manifest.json) records the
+toolchain, source and artifact hashes, pass counts, and per-page render
+hashes. The native lock matches the original N1.4 lock.
+
+| Check | Status | Observation |
+|---|---|---|
+| Behavioral suites | pass | 47 driver and scaffold tests and 45 compatibility experiment tests. They include first-pass-only dependencies, path aliases, changed file identity, scaffold rollback, and legacy receipt and cache compatibility. |
+| Standalone starters | pass | Fresh article, presentation and handout projects passed two builds and checks each under macOS network denial. The input identities and rendered pages matched across repeats. The retained initial TeX records contain the font discovery inputs as well as the final-pass inputs. |
+| External TeX and Biber inputs | pass | A synthetic article with an absolute TeX include and bibliography outside the project failed without declarations. With SHA-256 declarations it built and checked successfully, and the receipt identified both inputs. A stale hash stopped before compilation. A remote bibliography was refused at the Biber invocation. |
+| Bibliography-free profile | pass | An article consuming a project-owned `scientific.dat` passed preflight, build and check with a nonexistent Biber override. Its receipt includes the data hash and has no Biber invocation. |
+| Input drift | pass | The bibliography-free fixture signalled after TeX read `scientific.dat`. A separate process changed the file while TeX was still running. The build exited 1 and named the changed input. |
+| Missing dependency, broken bibliography and unresolved reference | pass | Missing pinned Biber exited 2 before compilation. Both document failures exited 1 and named the failing input. |
+| Visual review | pass | PDFKit rendered all 12 successful pages at 1500 pixels wide. The starter outputs retain the figure, the ordered equation definitions, the slide overlays and the handout's completed content. Both synthetic follow-up fixtures rendered legibly, and the external-bibliography fixture resolved its citation. |
+| Independent review and maintainer acceptance | not_run | The updated PR identifies the exact revision for the independent tester. |
+
+Use the same native commands above for the three starters. For the
+external-input fixture, use the article's 11pt class and styles. Add an
+absolute `\input` path to a synthetic paragraph and an absolute
+`\addbibresource` path to a copy of the starter bibliography, both stored
+outside the project directory. Build with and without
+`--external-inputs PATH` using the [manifest format](latex-stack.md#figures-and-output-checks).
+For the bibliography-free fixture, use the 11pt class and styles with a
+section heading and `\input{scientific.dat}`. Run `preflight` and `build`
+with `--bibliography none` and point `NERUDA_BIBER` at a nonexistent file.
+Use the original `check` command with the resulting run.
+
+Early verification showed that a cold LuaLaTeX run scanned host fonts.
+The driver now sets the default font discovery policy to the pinned
+TeX Live tree in the run-local configuration. The original run retains all
+pass evidence. Exported receipts and final logs replace local paths with
+tokens, and exported PDFs preserve their bytes. Artifact hashes in the
+receipts refer to the original run files.

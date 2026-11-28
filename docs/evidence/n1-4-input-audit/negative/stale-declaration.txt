@@ -1,0 +1,1 @@
+external input hash mismatch: coordinate-note (<INPUT_VALIDATION>/external/coordinate-note.tex)
