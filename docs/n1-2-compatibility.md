@@ -66,8 +66,9 @@ reconstructed or authorized from sanitized receipts. A durable copy and verified
 installer/native executable are in the maintainer-selected
 `Neruda_artifacts/texlive-2026-native-20261127` store.
 
-Regression verification: 16 driver tests plus 41 N1.2 tests pass; YAML syntax and whitespace checks
-pass. Generated `build/` trees are now excluded from historical fixture hashing
+Regression verification: 16 driver tests plus 41 N1.2 tests pass; YAML syntax and handwritten-source whitespace checks
+pass. Literal compiler logs retain their original whitespace; the unrestricted
+whitespace scan flags those machine-generated data files. Generated `build/` trees are now excluded from historical fixture hashing
 and copying, preventing stale PDFs and caches from contaminating Tectonic tests.
 The earlier interrupted test run is not reported as passing; the corrected complete
 suite passed. Historical Tectonic evidence remains intact. HTTP 429 indicates a
