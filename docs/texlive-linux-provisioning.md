@@ -22,7 +22,7 @@ unit without changing the Mac installation. Adjacent dates were compared; none
 matched that entire set. Metadata authentication has not yet run locally because
 GnuPG is absent. Archive files remain quarantine data until official signatures pass.
 
-## Concrete CI procedure proposed for approval
+## Approved CI procedure
 
 Publish `.github/workflows/texlive-linux-compatibility.yml` and run it on PR #11
 using a fresh Ubuntu 24.04 x86_64 runner. Its source and profile are pinned in
@@ -77,7 +77,7 @@ Signed SHA-512 values and the reference-lock digest are in the source configurat
 These are measured identities, **not a claim that local GPG verification passed**.
 CI must establish that authentication before using this third-party archive.
 
-At preparation time no workflow had been published or executed. No supported Linux result or release
+The first approved execution is recorded below. No supported Linux result or release
 is asserted. There is no cross-platform distribution cache yet: first establish and
 review the Linux provisioning result before caching a trusted immutable installation.
 Compiler/font cache integrity and reuse are tested separately. Intel macOS remains
@@ -87,3 +87,30 @@ AGENT.md requires approval of the exact provisioning mutation. Earlier Ubuntu
 approvals covered Tectonic/Biber archives, not this TeX Live installation procedure.
 The approval recorded above concerns the workflow and its first execution; it does not
 accept the architecture, merge the PR, close issues or authorize a supported release.
+
+## First Ubuntu execution — blocked before installation
+
+[Run 46087960068](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46087960068)
+tested commit `3a1ede2df77076108d5e4dcf1dc6aabaa4943ee8` on Ubuntu 24.04.5,
+glibc 2.39 and GnuPG 2.4.4. Both regression suites passed (57 tests). Key import
+succeeded, but installer-signature verification failed with GPG `NODATA` / exit 2.
+No installer ran; shared-resource checks, Linux tool versions and all fixture builds
+are **not_run**, not failed compatibility tests.
+
+A separate read-only request to the exact signature endpoint returned HTTP 200,
+`text/html`, and a 2,402-byte HTML access-challenge page titled “Oh noes!”.
+This explains why HTTP success alone is insufficient. The downloader now rejects
+HTML explicitly, retains the raw response privately and exports its URL, MIME type,
+size and SHA-256. It does not solve challenges, fall back to another source or weaken
+the signature gate. Regression tests cover this response and exact-byte downloads.
+
+[Sanitized evidence](../experiments/n1_2/evidence/texlive-linux-20261128/46087960068/)
+and the [original artifact](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46087960068/artifacts/15239224827)
+retain the negative result. Downloaded export hashes were independently checked
+against the artifact manifest. The HTML body remains private.
+
+Progress requires accessible machine downloads from the approved dated source, or
+a separately reviewed authenticated copy of the same signed snapshot. No such
+alternative has been provisioned or approved. A current CTAN mirror or March 1 ISO
+would change the reviewed unit; neither is an automatic fallback. Do not repeat
+large installation attempts while this signature endpoint remains blocked.

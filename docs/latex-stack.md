@@ -58,7 +58,8 @@ are a separate exit-2 negative case. The matrix does not use `--only-cached`.
 The Linux adapter creates a new network namespace and restores the unprivileged
 runner identity. A successful boundary-ready command is required before accepting
 only curl DNS/connect/timeout failure codes as network-denial evidence. Linux
-execution and matching-source signature authentication are pending first CI results.
+compilation and matching-source signature authentication are blocked at provisioning:
+the first Ubuntu run received an HTML access challenge at the signature endpoint.
 
 `TEXMFOUTPUT` is the run directory, permitting private font-cache writes under
 TeX Live's existing `openout_any=p`; shell escape remains disabled. Environment
@@ -96,7 +97,7 @@ same Python command, using quoted explicit project/entry/root/lock/Biber paths.
 Its default pdfLaTeX recipe is inappropriate for these Unicode fixtures. Neither
 editor integration has been manually exercised in its GUI yet.
 
-Remaining: Linux signature/provisioning execution, Intel Mac validation,
+Remaining: resolve Linux signature-download access and complete provisioning/builds, Intel Mac validation,
 reviewed dependency cache keys, editor GUI checks, independent review and maintainer
 acceptance. The matching March 22 snapshot and Ubuntu procedure are prepared and approved for
 publication/execution; see [the exact procedure](texlive-linux-provisioning.md).

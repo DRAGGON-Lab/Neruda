@@ -1,0 +1,7 @@
+gpg: no valid OpenPGP data found.
+[GNUPG:] NODATA 1
+[GNUPG:] NODATA 2
+gpg: the signature could not be verified.
+Please remember that the signature file (.sig or .asc)
+should be the first file given on the command line.
+[GNUPG:] FAILURE gpg-exit 33554433

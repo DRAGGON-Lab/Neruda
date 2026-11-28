@@ -12,7 +12,14 @@ separate native Biber extraction. The observed unit is LuaHBTeX 1.24.0, latexmk
 |---|---|
 | macOS arm64, macOS 27.2.1 | local compatibility passes; independent acceptance pending |
 | macOS x86_64 | untested |
-| Linux x86_64 | prepared March 22 snapshot validation; execution approved, results pending |
+| Linux x86_64, Ubuntu 24.04.5 | provisioning blocked by HTML access challenge at signature endpoint; compilation not_run |
+
+The approved [Ubuntu execution](https://github.com/DRAGGON-Lab/Neruda/actions/runs/46087960068)
+passed its 57-test regression gate and correctly refused an unreadable installer
+signature. A read-only endpoint check identified an HTTP-200 HTML access challenge.
+No Linux tools were installed or fixtures compiled. See the
+[diagnosis and retained evidence](texlive-linux-provisioning.md#first-ubuntu-execution--blocked-before-installation).
+This is an acquisition blocker, not evidence against LuaLaTeX/Biber compatibility.
 
 The final local matrix uses the exact driver digest recorded in each receipt and
 the harness digest in its summary. It ran against HEAD
@@ -66,7 +73,7 @@ reconstructed or authorized from sanitized receipts. A durable copy and verified
 installer/native executable are in the maintainer-selected
 `Neruda_artifacts/texlive-2026-native-20261127` store.
 
-Regression verification: 16 driver tests plus 41 N1.2 tests pass; YAML syntax and handwritten-source whitespace checks
+Regression verification: 16 driver tests plus 43 N1.2 tests pass locally; the first Ubuntu run passed the prior 57-test suite. YAML syntax and handwritten-source whitespace checks
 pass. Literal compiler logs retain their original whitespace; the unrestricted
 whitespace scan flags those machine-generated data files. Generated `build/` trees are now excluded from historical fixture hashing
 and copying, preventing stale PDFs and caches from contaminating Tectonic tests.

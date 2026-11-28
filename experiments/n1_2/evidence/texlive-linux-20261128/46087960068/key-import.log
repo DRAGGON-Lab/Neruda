@@ -1,0 +1,7 @@
+gpg: keybox '<CI_WORK>/gnupg/pubring.kbx' created
+gpg: key 0D5E5D9106BAB6BC: 2 signatures not checked due to missing keys
+gpg: <CI_WORK>/gnupg/trustdb.gpg: trustdb created
+gpg: key 0D5E5D9106BAB6BC: public key "TeX Live Distribution <tex-live@tug.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+gpg: no ultimately trusted keys found

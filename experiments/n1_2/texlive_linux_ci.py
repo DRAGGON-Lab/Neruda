@@ -35,6 +35,7 @@ def download(url, destination, maximum):
         candidate = destination.with_name(destination.name + f'.attempt-{attempt}')
         try:
             with urllib.request.urlopen(url, timeout=60) as response, candidate.open('xb') as target:
+                content_type = response.headers.get('Content-Type', '') if hasattr(response, 'headers') else ''
                 length = 0
                 while True:
                     block = response.read(1048576)
@@ -47,6 +48,16 @@ def download(url, destination, maximum):
             if destination.exists():
                 raise ValueError('download destination already exists')
             candidate.rename(destination)
+            metadata = {'url': url, 'bytes': length, 'sha256': latex.digest(destination),
+                        'content_type': content_type, 'attempt': attempt}
+            destination.with_name(destination.name + '.download.json').write_text(
+                json.dumps(metadata, indent=2) + '\n')
+            with destination.open('rb') as downloaded:
+                prefix = downloaded.read(512).lstrip().lower()
+            if 'text/html' in content_type.lower() or prefix.startswith((b'<!doctype html', b'<html')):
+                raise ValueError('dependency endpoint returned HTML instead of an artifact: ' + url +
+                                 '; possible access challenge; raw response and download identity retained; '
+                                 'no installer was executed')
             return
         except (OSError, TimeoutError):
             if attempt == 2:

@@ -66,6 +66,23 @@ class ProvisioningTests(unittest.TestCase):
         self.assertFalse((self.root / 'download').exists())
         self.assertTrue((self.root / 'download.attempt-0').exists())
 
+    def test_html_success_response_is_refused_and_identity_is_preserved(self):
+        body = b'<!doctype html><html><title>Oh noes!</title></html>'
+        with patch.object(ci.urllib.request, 'urlopen', return_value=io.BytesIO(body)):
+            with self.assertRaisesRegex(ValueError, 'returned HTML instead of an artifact'):
+                ci.download('https://example.invalid/signature', self.root / 'signature.asc', 4096)
+        self.assertEqual((self.root / 'signature.asc').read_bytes(), body)
+        record = json.loads((self.root / 'signature.asc.download.json').read_text())
+        self.assertEqual(record['bytes'], len(body))
+        self.assertEqual(record['sha256'], ci.latex.digest(self.root / 'signature.asc'))
+
+    def test_artifact_download_preserves_exact_bytes_and_identity(self):
+        body = b'-----BEGIN PGP SIGNATURE-----\nfixture'
+        with patch.object(ci.urllib.request, 'urlopen', return_value=io.BytesIO(body)):
+            ci.download('https://example.invalid/signature', self.root / 'signature.asc', 4096)
+        self.assertEqual((self.root / 'signature.asc').read_bytes(), body)
+        self.assertTrue((self.root / 'signature.asc.download.json').is_file())
+
     def test_failed_command_keeps_log_and_nonzero_diagnostic(self):
         log = self.root / 'console.log'
         def execute(*args):
