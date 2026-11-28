@@ -25,7 +25,8 @@ SHARED = {
     "src/bib/references.bib": "templates/common/src/bib/references.bib",
 }
 ARTICLE = (
-    "README.md", "src/main.tex", "src/metadata.tex", "src/sections/introduction.tex",
+    "README.md", "figures/source/build.py", "figures/source/scaling.json",
+    "src/main.tex", "src/metadata.tex", "src/sections/introduction.tex",
     "src/sections/mathematical-concepts.tex", "src/sections/reproducibility.tex",
 )
 SLIDES = (
@@ -97,6 +98,21 @@ class ScaffoldTests(unittest.TestCase):
                 )
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assert_inventory(self.parent / profile, profile, root)
+
+    def test_article_figure_is_generated_explicitly_and_repeatably(self):
+        root = Path(scaffold.__file__).resolve().parents[1]
+        self.assertEqual(scaffold.main(self.args(), root=root), 0)
+        project = self.parent / "example"
+        generated = project / "src/figures/generated"
+        self.assertFalse(generated.exists())
+        results = []
+        for _ in range(2):
+            result = subprocess.run([sys.executable, "figures/source/build.py"], cwd=project,
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            results.append({path.name: path.read_bytes() for path in generated.iterdir()})
+        self.assertEqual(results[0], results[1])
+        self.assertTrue(results[0]["coordinate-scaling.png"].startswith(b"\x89PNG\r\n\x1a\n"))
 
     def test_invalid_names_and_traversal(self):
         for name in ("", "Upper", "under_score", "naïve", "a--b", "-foo", "foo-", "a/b",

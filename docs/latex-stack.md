@@ -49,19 +49,45 @@ publisher provenance. The locally derived slice has an invalid code signature
 and is selected by its separately pinned SHA-256. See the provisioning record
 for the source and derived identities.
 
-Every build creates a fresh project-local `build/<unique-id>` and prints the receipt
-path. It retains console/TeX/Biber logs, PDF, source and consumed-resource hashes,
-Git provenance, cache inventory and driver identity. The driver records the
-revision and dirty state of a Git worktree rooted at the document directory.
-Both fields are null for a directory without its own worktree, including
-projects nested in a larger repository. Sanitize operational receipts before
-uploading. `check --output PATH` rechecks a run's logs and expected files.
-Exit codes: 0 compilation checks passed; 1 compilation/output/log failure or timeout;
-2 configuration/dependency/cache refusal. Compatibility receipts remain partial
-until platform, rendered-page and independent acceptance checks are complete.
+## Figures and output checks
 
-The current checks require bibliography artifacts, as all three fixtures use Biber.
-Bibliography-free projects and automatic PDF preview integration are not validated.
+The article starter generates its synthetic coordinate-scaling PNG before
+compilation. From a newly scaffolded article project:
+
+```sh
+python3 figures/source/build.py
+python3 scripts/latex.py build --project . --lock tools/texlive-lock.json \
+  --figure-receipt src/figures/generated/coordinate-scaling.receipt.json
+```
+
+Pass one `--figure-receipt PATH` per generated image the entry uses. The
+receipt's generator, data and output paths are project-relative. The build
+verifies their hashes and checks the TeX recorder for the corresponding
+image. Every consumed input in `src/figures/generated/` requires a receipt.
+Projects without generated figures use the existing build command.
+
+Every build creates a fresh project-local `build/<unique-id>`. The versioned
+receipt includes the project-relative entry, pinned tool identities, source
+and consumed project/resource hashes, verified figures, console/TeX/Biber and
+other required artifact hashes, and PDF version and page count read by
+LuaLaTeX. A Git worktree rooted at the document project supplies its revision
+and dirty state. Both fields are null for projects without their own worktree.
+Sanitize paths and logs before uploading. Compare input identities, page
+counts and rendered pages across repeats. Timestamps and paths describe
+individual runs, and PDF bytes can vary.
+
+Run `check --project . --entry src/main.tex --lock tools/texlive-lock.json
+--output PATH` with the same pinned dependencies and the directory that
+contains the receipt. It checks logs, artifact hashes and PDF metadata
+without modifying the project or run. Older successful receipts use their
+recorded PDF hash and log checks. The current build profiles use Biber and
+require its bibliography artifacts.
+
+Exit 0 means mechanical checks passed. Exit 1 means compilation, output or
+receipt verification failed. Exit 2 means invalid inputs, unavailable pinned
+dependencies or a refused cache. On a compilation failure the driver retains
+available logs and includes the matching diagnostics in its output and
+receipt. Visual review and independent acceptance follow mechanical checks.
 
 ## Cache and offline experiments
 

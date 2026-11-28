@@ -24,6 +24,8 @@ COMMON = {
 PROFILES = {
     "article": (
         "README.md",
+        "figures/source/build.py",
+        "figures/source/scaling.json",
         "src/main.tex",
         "src/metadata.tex",
         "src/sections/introduction.tex",

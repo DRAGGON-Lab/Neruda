@@ -26,7 +26,8 @@ class DriverTests(unittest.TestCase):
         files = {}
         for name in ('lualatex', 'latexmk', 'biber'):
             path = self.root / name
-            path.write_text('#!/bin/sh\nexit 0\n')
+            script = "echo '1.7 1'\n" if name == 'lualatex' else 'exit 0\n'
+            path.write_text('#!/bin/sh\n' + script)
             path.chmod(0o700)
             tools[name] = name
             files[name] = latex.digest(path)
@@ -165,6 +166,7 @@ class DriverTests(unittest.TestCase):
             directory = console.parent
             for suffix in ('.pdf', '.log', '.blg', '.bbl', '.fls'):
                 (directory / ('main' + suffix)).write_text('fixture output')
+            (directory / 'main.pdf').write_bytes(b'%PDF-1.7\n%%EOF\n')
             console.write_text('fixture console')
             self.assertEqual(command[0], str((self.root / 'latexmk').resolve()))
             self.assertIn('-norc', command)
@@ -173,6 +175,149 @@ class DriverTests(unittest.TestCase):
             return 0
         with patch.object(latex, 'execute', side_effect=execute):
             self.assertEqual(latex.main(['build', *self.args]), 0)
+
+    def cli(self, operation, *args):
+        stdout, stderr = io.StringIO(), io.StringIO()
+        with redirect_stdout(stdout), redirect_stderr(stderr):
+            code = latex.main([operation, *self.args, *args])
+        return code, stdout.getvalue(), stderr.getvalue()
+
+    def fake_compile(self, command, cwd, env, console, timeout):
+        self.run = console.parent
+        for suffix in ('.bbl', '.log', '.blg'):
+            (self.run / ('main' + suffix)).write_text('fixture output')
+        (self.run / 'main.pdf').write_bytes(b'%PDF-1.7\n%%EOF\n')
+        (self.run / 'main.fls').write_text(f'PWD {cwd}\nINPUT ./main.tex\n')
+        console.write_text('fixture console')
+        return 0
+
+    def new_figure(self):
+        receipt = {'version': 1, 'runtime': 'fixture runtime'}
+        for role, relative in [('generator', 'figures/source/g.py'), ('data', 'figures/source/data.json'),
+                               ('output', 'src/figures/generated/figure with spaces.png')]:
+            path = self.project / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(role)
+            receipt[role] = {'path': relative, 'sha256': latex.digest(path)}
+        path = self.project / 'figure.json'
+        path.write_text(json.dumps(receipt))
+        return path, receipt
+
+    def test_generated_figure_requires_matching_consumed_receipt(self):
+        path, figure = self.new_figure()
+        relative = figure['output']['path']
+        def compile_with_figure(*args):
+            self.fake_compile(*args)
+            (self.run / 'main.fls').write_text(f'PWD {args[1]}\nINPUT ../{relative}\n')
+            return 0
+        for options, compiler, code, diagnostic in [
+            ([], compile_with_figure, 1, 'consumed generated figure has no matching receipt'),
+            (['--figure-receipt', str(path)], self.fake_compile, 1, 'declared figure was not consumed'),
+            (['--figure-receipt', str(path)], compile_with_figure, 0, ''),
+        ]:
+            with self.subTest(options=options, diagnostic=diagnostic):
+                with patch.object(latex, 'execute', side_effect=compiler):
+                    result, _, stderr = self.cli('build', *options)
+                self.assertEqual(result, code, stderr)
+                self.assertIn(diagnostic, stderr)
+                receipt = json.loads((self.run / 'receipt.json').read_text())
+                if not code:
+                    self.assertEqual(receipt['verified_figures'], {relative: figure})
+                    self.assertEqual(receipt['consumed_project_files'][relative], figure['output']['sha256'])
+
+    def test_missing_or_stale_figure_refuses_before_compile(self):
+        path, figure = self.new_figure()
+        with patch.object(latex, 'execute') as execute:
+            result, _, stderr = self.cli('build', '--figure-receipt', str(path.with_name('absent.json')))
+            self.assertEqual(result, 2)
+            self.assertIn('absent.json', stderr)
+            for role in ('generator', 'data', 'output'):
+                target = self.project / figure[role]['path']
+                original = target.read_bytes()
+                target.write_text('changed')
+                result, _, stderr = self.cli('build', '--figure-receipt', str(path))
+                self.assertEqual(result, 2)
+                self.assertIn('stale figure ' + role, stderr)
+                target.write_bytes(original)
+        execute.assert_not_called()
+        self.assertFalse((self.project / 'build').exists())
+
+    def test_final_logs_preserve_specific_diagnostics_in_failure(self):
+        tex = ('Package biblatex Warning: Please (re)run Biber on the file:\n'
+               "LaTeX Warning: Citation 'missing' on page 1 undefined on input line 5.\n"
+               "LaTeX Warning: Reference 'missing' on page 1\n"
+               '  undefined on input line 7.\n'
+               'LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.\n'
+               'Missing character: There is no Q in font Fixture!\n')
+        biber = "[4] Biber.pm:8> ERROR - Cannot find 'bib/missing.bib'!\n"
+        def broken(*args):
+            self.fake_compile(*args)
+            (self.run / 'main.log').write_text(tex)
+            (self.run / 'main.blg').write_text(biber)
+            args[3].write_text('Bib file(s) not found in search path:\n  bib/missing.bib\n')
+            return 1
+        with patch.object(latex, 'execute', side_effect=broken):
+            code, _, stderr = self.cli('build')
+        self.assertEqual(code, 1)
+        receipt = json.loads((self.run / 'receipt.json').read_text())
+        for message in ('Please (re)run Biber', "Citation 'missing'", "Reference 'missing'",
+                        'Label(s) may have changed', 'Missing character', "Cannot find 'bib/missing.bib'",
+                        'Bib file(s) not found in search path:'):
+            self.assertIn(message, stderr)
+            self.assertTrue(any(message in error for error in receipt['errors']), message)
+        self.assertEqual((self.run / 'main.log').read_text(), tex)
+        self.assertEqual((self.run / 'main.blg').read_text(), biber)
+
+    def test_pdf_metadata_requires_parser_and_rejects_malformed_output(self):
+        path = self.base / 'broken.pdf'
+        path.write_bytes(b'not a PDF')
+        with self.assertRaisesRegex(ValueError, 'invalid PDF header'):
+            latex.pdf_metadata(path, self.root / 'lualatex', 1)
+        path.write_bytes(b'%PDF-1.7\ntruncated')
+        with self.assertRaisesRegex(ValueError, 'missing PDF end marker'):
+            latex.pdf_metadata(path, self.root / 'lualatex', 1)
+        path.write_bytes(b'%PDF-1.7\n%%EOF\n')
+        reader = self.root / 'lualatex'
+        reader.write_text('#!/bin/sh\nexit 1\n')
+        with self.assertRaisesRegex(ValueError, 'LuaLaTeX could not read PDF'):
+            latex.pdf_metadata(path, reader, 1)
+
+    def test_check_validates_artifacts_and_leaves_run_unchanged(self):
+        with patch.object(latex, 'execute', side_effect=self.fake_compile):
+            self.assertEqual(self.cli('build')[0], 0)
+        args = ('--output', str(self.run))
+        before = {path: path.stat().st_mtime_ns for path in self.run.rglob('*')}
+        code, stdout, _ = self.cli('check', *args)
+        self.assertEqual((code, json.loads(stdout)), (0, {'errors': []}))
+        self.assertEqual({path: path.stat().st_mtime_ns for path in self.run.rglob('*')}, before)
+        raw = json.loads((self.run / 'receipt.json').read_text())
+        self.assertEqual(raw['version'], 1)
+        self.assertEqual(raw['entry'], 'src/main.tex')
+        self.assertEqual(raw['pdf_metadata'], {'version': '1.7', 'page_count': 1})
+        for name in ('main.pdf', 'main.log', 'main.blg', 'main.fls', 'main.bbl', 'console.log'):
+            path = self.run / name
+            original = path.read_bytes()
+            path.write_bytes(original + b'changed')
+            code, stdout, _ = self.cli('check', *args)
+            self.assertEqual(code, 1)
+            self.assertIn('artifact hash mismatch: ' + name, json.loads(stdout)['errors'])
+            path.write_bytes(original)
+
+    def test_legacy_receipt_still_checks_pdf_hash_and_logs(self):
+        with patch.object(latex, 'execute', side_effect=self.fake_compile):
+            self.assertEqual(self.cli('build')[0], 0)
+        path = self.run / 'receipt.json'
+        pdf = self.run / 'main.pdf'
+        path.write_text(json.dumps({'exit_code': 0, 'pdf_sha256': latex.digest(pdf)}))
+        (self.run / 'console.log').unlink()
+        args = ('--output', str(self.run))
+        self.assertEqual(self.cli('check', *args)[0], 0)
+        (self.run / 'main.log').write_text('LaTeX Warning: There were undefined references.')
+        pdf.write_bytes(b'changed')
+        code, stdout, _ = self.cli('check', *args)
+        self.assertEqual(code, 1)
+        self.assertIn('undefined references', stdout)
+        self.assertIn('artifact hash mismatch: main.pdf', stdout)
 
     def test_timeout_keeps_partial_evidence(self):
         with patch.object(latex, 'execute', side_effect=subprocess.TimeoutExpired('fixture', 1)):
