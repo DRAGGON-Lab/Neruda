@@ -29,6 +29,8 @@ def contained(root, relative):
 
 
 def verify(root, lock_path):
+    if not root.is_dir():
+        raise ValueError('missing TeX Live root: ' + str(root) + '; see docs/latex-stack.md')
     lock = json.loads(lock_path.read_text())
     if lock.get('policy') != 'texlive-local-v1' or not lock.get('verification_reference'):
         raise ValueError('reviewed texlive-local-v1 lock required')
@@ -38,7 +40,9 @@ def verify(root, lock_path):
         raise ValueError('incomplete dependency inventory')
     for relative, expected in files.items():
         path = contained(root, relative)
-        if not path.is_file() or digest(path) != expected:
+        if not path.is_file():
+            raise ValueError('missing pinned dependency: ' + str(root / relative))
+        if digest(path) != expected:
             raise ValueError('dependency integrity mismatch: ' + relative)
     for name, relative in tools.items():
         if relative not in files or not os.access(contained(root, relative), os.X_OK):
@@ -174,14 +178,19 @@ def main(argv=None):
         lock = verify(root, args.lock)
         if args.biber:
             expected = lock.get('biber_override', {}).get('sha256')
-            if not expected or digest(args.biber) != expected or not os.access(args.biber, os.X_OK):
+            if not expected:
+                raise ValueError('this lock does not pin a Biber override')
+            if not args.biber.is_file() or not os.access(args.biber, os.X_OK):
+                raise ValueError('missing or non-executable pinned Biber override: ' + str(args.biber) +
+                                 '; see docs/latex-stack.md')
+            if digest(args.biber) != expected:
                 raise ValueError('Biber override integrity mismatch')
         elif lock.get('biber_override'):
-            raise ValueError('this lock requires an explicit --biber executable')
+            raise ValueError('this lock requires --biber or NERUDA_BIBER; see docs/latex-stack.md')
         receipt['lock_sha256'] = digest(args.lock)
         receipt['release'] = lock['release']
         if args.operation == 'preflight':
-            print(json.dumps(receipt | {'status': 'integrity_verified'}, indent=2))
+            print(json.dumps(receipt | {'status': 'integrity_verified', 'exit_code': 0}, indent=2))
             return 0
         if args.operation == 'seal-cache':
             if not args.output:

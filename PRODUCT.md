@@ -38,7 +38,7 @@ Every equation is followed by vertical definitions of symbols in the order of fi
 
 ## Initial scope and success criteria
 
-N1.1 is documentation/extraction inventory only. The first independently useful Neruda slice (N1.5) will require N1.2 verified compatibility and subsequent scaffold/build/CI work. Integrated authoring/review (N2) depends on A3.1 and N2.1 versioned evidence interfaces. "v1" denotes staged product scope, not a promised version tag.
+Develop first on Apple Silicon. The native sequence is N1.1 (extraction inventory) → N1.2a (native compatibility) → N1.3 (scaffold and templates) → N1.4 (build and verification) → N1.5 (standalone release candidate). N1.2b tracks portable provisioning and is required before cross-platform support or release validation. Integrated authoring/review (N2) depends on A3.1 and N2.1 versioned evidence interfaces. "v1" denotes staged product scope, not a promised version tag.
 
 | Scope | Measurable acceptance evidence |
 |---|---|

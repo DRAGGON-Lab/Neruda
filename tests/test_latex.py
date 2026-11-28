@@ -1,4 +1,6 @@
 import importlib.util
+from contextlib import redirect_stderr, redirect_stdout
+import io
 import json
 import os
 from pathlib import Path
@@ -41,9 +43,40 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(latex.main(['build', *self.args]), 2)
         self.assertFalse((self.project / 'build').exists())
 
+    def test_successful_preflight_reports_zero_in_receipt(self):
+        stdout = io.StringIO()
+        with redirect_stdout(stdout), patch.object(latex, 'execute') as execute:
+            self.assertEqual(latex.main(['preflight', *self.args]), 0)
+        receipt = json.loads(stdout.getvalue())
+        self.assertEqual((receipt['status'], receipt['exit_code']), ('integrity_verified', 0))
+        execute.assert_not_called()
+
     def test_corrupt_dependency_refuses(self):
         (self.root / 'biber').write_text('corruption')
         self.assertEqual(latex.main(['build', *self.args]), 2)
+
+    def test_missing_distribution_file_reports_path_without_launching(self):
+        missing = self.root / 'lualatex'
+        missing.unlink()
+        stderr = io.StringIO()
+        with redirect_stderr(stderr), patch.object(latex, 'execute') as execute:
+            self.assertEqual(latex.main(['build', *self.args]), 2)
+        self.assertIn('missing pinned dependency:', stderr.getvalue())
+        self.assertIn(str(missing), stderr.getvalue())
+        self.assertFalse((self.project / 'build').exists())
+        execute.assert_not_called()
+
+    def test_pinned_biber_override_is_required_and_reports_missing_path(self):
+        lock = json.loads(self.lock.read_text())
+        lock['biber_override'] = {'sha256': latex.digest(self.root / 'biber')}
+        self.lock.write_text(json.dumps(lock))
+        missing = self.base / 'missing arm64 biber'
+        for args, expected in [([], '--biber or NERUDA_BIBER'),
+                               (['--biber', str(missing)], str(missing))]:
+            stderr = io.StringIO()
+            with self.subTest(args=args), redirect_stderr(stderr), patch.dict(os.environ, {}, clear=True):
+                self.assertEqual(latex.main(['preflight', *self.args, *args]), 2)
+            self.assertIn(expected, stderr.getvalue())
 
     def test_foreign_architecture_refuses(self):
         lock = json.loads(self.lock.read_text())

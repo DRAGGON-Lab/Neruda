@@ -3,25 +3,50 @@
 MacTeX / TeX Live → LuaLaTeX + latexmk → matched Biber/biblatex → PDF and logs.
 Native candidate: LuaHBTeX 1.24.0, latexmk 4.88, Biber 2.21, biblatex 3.21.
 See [ADR-003](decisions/ADR-003.md) and [provisioning](mactex-provisioning.md).
-This is experimental; local validation is not an accepted supported release.
+This is the N1.2a candidate for Apple Silicon. Maintainer acceptance is pending.
 
 ## Daily command
 
-Python 3.9 or later is required. From the repository root:
+On the provisioned lab Mac, start from the Neruda repository root. Check for
+`arm64` and Python 3.9 or later, then run the integrity preflight:
 
 ```sh
+uname -m
+python3 --version
 export NERUDA_TEX_ROOT=/usr/local/texlive/2026
 export NERUDA_BIBER="$PWD/.tools/texlive-provisioning-20261127/arm64/biber"
 python3 scripts/latex.py preflight --lock tools/texlive-lock.json
-python3 scripts/latex.py build --project experiments/n1_2/article --entry src/main.tex --lock tools/texlive-lock.json
 ```
 
-For slides, select project `experiments/n1_2/slides` and entry `src/main.tex`;
-for handouts use that project with `src/handout.tex`. Explicit `--tex-root` and
-`--biber` override the respective environment selections. All selected binaries
+For a fresh checkout beside the lab's `Neruda_artifacts` directory, the verified
+copy is at `../Neruda_artifacts/texlive-2026-native-20261127/biber-arm64`. Export
+its absolute path as follows, then run the same preflight:
+
+```sh
+export NERUDA_BIBER="$PWD/../Neruda_artifacts/texlive-2026-native-20261127/biber-arm64"
+```
+
+The preflight exits 0 with `integrity_verified` after checking architecture,
+locked file bytes and executable permissions. It exits 2 with a diagnostic on
+missing or mismatched dependencies. If the dependency is absent, consult the
+[approved provisioning record](mactex-provisioning.md) with the maintainer.
+
+After preflight succeeds, run the fixture build you need:
+
+```sh
+python3 scripts/latex.py build --project experiments/n1_2/article --entry src/main.tex --lock tools/texlive-lock.json
+python3 scripts/latex.py build --project experiments/n1_2/slides --entry src/main.tex --lock tools/texlive-lock.json
+python3 scripts/latex.py build --project experiments/n1_2/slides --entry src/handout.tex --lock tools/texlive-lock.json
+```
+
+The commands print the build receipt path. Explicit `--tex-root` and `--biber`
+override the respective environment selections. All selected binaries
 must match the lock; there is no installation, repair or alternative-engine fallback.
 The separate native Biber slice is required on this host; the installed universal
-loader fails on its unsupported lipo operation. The original remains unchanged.
+loader fails on its unsupported lipo operation. The MacTeX installer has verified
+publisher provenance. The locally derived slice has an invalid code signature
+and is selected by its separately pinned SHA-256. See the provisioning record
+for the source and derived identities.
 
 Every build creates a fresh project-local `build/<unique-id>` and prints the receipt
 path. It retains console/TeX/Biber logs, PDF, source and consumed-resource hashes,
@@ -97,8 +122,8 @@ same Python command, using quoted explicit project/entry/root/lock/Biber paths.
 Its default pdfLaTeX recipe is inappropriate for these Unicode fixtures. Neither
 editor integration has been manually exercised in its GUI yet.
 
-Remaining: resolve Linux signature-download access and complete provisioning/builds, Intel Mac validation,
-reviewed dependency cache keys, editor GUI checks, independent review and maintainer
-acceptance. The matching March 22 snapshot and Ubuntu procedure are prepared and approved for
-publication/execution; see [the exact procedure](texlive-linux-provisioning.md).
-No system updates, release, merge or issue closure is implied.
+Independent review and maintainer acceptance remain for N1.2a. Native build
+verification runs on a Mac with the pinned installation. CI runs both behavioral
+suites on each PR without a provisioned TeX installation. Linux and historical
+Tectonic compatibility workflows run on explicit dispatch for deferred N1.2b.
+See the [Ubuntu evidence and blockers](texlive-linux-provisioning.md).

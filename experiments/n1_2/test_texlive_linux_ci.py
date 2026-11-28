@@ -98,10 +98,16 @@ class ProvisioningTests(unittest.TestCase):
         run = self.root / 'matrix/article/build/run'
         run.mkdir(parents=True)
         (run / 'main.pdf').write_bytes(b'synthetic PDF bytes')
+        raw = {'dirty_state': '?? private-manuscript.tex\n'}
+        (run / 'receipt.json').write_text(json.dumps(raw))
         public = ci.public_export(self.root)
         self.assertEqual((public / 'failed.log').read_text(), '<CI_WORK>: failure')
         self.assertEqual((public / 'runs/article/run/main.pdf').read_bytes(), b'synthetic PDF bytes')
         self.assertIn('failed.log', json.loads((public / 'manifest.json').read_text()))
+        receipt = (public / 'runs/article/run/receipt.json').read_text()
+        self.assertNotIn('private-manuscript.tex', receipt)
+        self.assertTrue(json.loads(receipt)['source_dirty'])
+        self.assertEqual(json.loads((run / 'receipt.json').read_text()), raw)
 
     def test_wrapped_tex_and_json_paths_are_redacted(self):
         prefix = '/private/example-user-directory'

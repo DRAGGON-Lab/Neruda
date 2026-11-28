@@ -1,13 +1,6 @@
 name: TeX Live dated Linux compatibility
 
 on:
-  pull_request:
-    paths:
-      - 'scripts/latex.py'
-      - 'experiments/n1_2/texlive*.py'
-      - 'experiments/n1_2/test_texlive*.py'
-      - 'tools/texlive*'
-      - '.github/workflows/texlive-linux-compatibility.yml'
   workflow_dispatch:
 
 permissions:
