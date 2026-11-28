@@ -51,9 +51,11 @@ for the source and derived identities.
 
 Every build creates a fresh project-local `build/<unique-id>` and prints the receipt
 path. It retains console/TeX/Biber logs, PDF, source and consumed-resource hashes,
-Git provenance (or explicit unavailable metadata for portable snapshots), cache
-inventory and driver identity. Operational receipts are private; do not upload them
-without sanitization. `check --output PATH` rechecks a run's logs and expected files.
+Git provenance, cache inventory and driver identity. The driver records the
+revision and dirty state of a Git worktree rooted at the document directory.
+Both fields are null for a directory without its own worktree, including
+projects nested in a larger repository. Sanitize operational receipts before
+uploading. `check --output PATH` rechecks a run's logs and expected files.
 Exit codes: 0 compilation checks passed; 1 compilation/output/log failure or timeout;
 2 configuration/dependency/cache refusal. Compatibility receipts remain partial
 until platform, rendered-page and independent acceptance checks are complete.

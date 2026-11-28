@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import signal
 import subprocess
 import sys
@@ -93,7 +94,6 @@ def inspect_output(directory, stem):
             errors.append('missing output: ' + path.name)
     log = directory / (stem + '.log')
     if log.exists():
-        import re
         if re.search(r'undefined|Please \(re\)run Biber|Rerun to get|Missing character|Font .*not found',
                      log.read_text(errors='replace'), re.I):
             errors.append('unresolved references, fonts or rerun request')
@@ -141,6 +141,31 @@ def project_sources(project):
             if path.is_file() and path.suffix in ('.tex', '.bib', '.sty', '.cls'):
                 inventory[str(path.relative_to(project))] = digest(path)
     return inventory
+
+
+def project_git_metadata(project):
+    # Discover the worktree from the project path even when invoked by a Git hook.
+    git_env = {key: value for key, value in os.environ.items() if not key.startswith('GIT_')}
+    git_env['GIT_OPTIONAL_LOCKS'] = '0'
+    options = dict(cwd=project, env=git_env, capture_output=True, timeout=30)
+    root = subprocess.run(['/usr/bin/git', 'rev-parse', '--show-toplevel'], **options)
+    metadata = dict(source_revision=None, dirty_state=None, git_diagnostics=os.fsdecode(root.stderr))
+    if root.returncode:
+        return metadata
+    worktree = Path(os.fsdecode(root.stdout.removesuffix(b'\n'))).resolve()
+    if worktree != project:
+        metadata['git_diagnostics'] = 'Git worktree root differs from the document project'
+        return metadata
+
+    revision = subprocess.run(['/usr/bin/git', 'rev-parse', '--verify', 'HEAD^{commit}'], **options)
+    value = os.fsdecode(revision.stdout).strip()
+    if revision.returncode == 0 and re.fullmatch(r'[0-9a-f]{40}', value):
+        metadata['source_revision'] = value
+    metadata['git_diagnostics'] = os.fsdecode(revision.stderr)
+    dirty = subprocess.run(['/usr/bin/git', 'status', '--porcelain'], **options)
+    if dirty.returncode == 0:
+        metadata['dirty_state'] = os.fsdecode(dirty.stdout)
+    return metadata
 
 
 def cache_baseline(directory, lock_sha256):
@@ -253,14 +278,7 @@ def main(argv=None):
             receipt['cache_baseline_receipt_sha256'] = digest(args.cache_from / 'receipt.json')
         receipt.update(command=command, entry_sha256=digest(entry), status='fail', exit_code=1)
         receipt['source_inputs'] = project_sources(project)
-        git = subprocess.run(['/usr/bin/git', 'rev-parse', '--verify', 'HEAD^{commit}'],
-                             cwd=project, capture_output=True, text=True, timeout=30)
-        import re
-        receipt['source_revision'] = git.stdout.strip() if git.returncode == 0 and re.fullmatch(r'[0-9a-f]{40}', git.stdout.strip()) else None
-        receipt['git_diagnostics'] = git.stderr
-        dirty = subprocess.run(['/usr/bin/git', 'status', '--porcelain'], cwd=project,
-                               capture_output=True, text=True, timeout=30)
-        receipt['dirty_state'] = dirty.stdout if dirty.returncode == 0 else None
+        receipt.update(project_git_metadata(project))
         if args.cache_from and previous.get('source_inputs') != receipt['source_inputs']:
             receipt.update(status='not_run', exit_code=2)
             raise ValueError('cache project source mismatch')
