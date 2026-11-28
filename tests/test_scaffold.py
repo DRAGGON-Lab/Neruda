@@ -2,7 +2,9 @@
 
 from contextlib import redirect_stderr, redirect_stdout
 import errno
+import hashlib
 import io
+import json
 import os
 from pathlib import Path
 import shutil
@@ -72,7 +74,20 @@ class ScaffoldTests(unittest.TestCase):
                  for path in destination.rglob("*") if path.is_file()}
         expected = {name: (root / source).read_bytes()
                     for name, source in EXPECTED[profile].items()}
+        manifest = json.loads(files.pop('scaffold-origin.json'))
         self.assertEqual(files, expected)
+        self.assertEqual((manifest['version'], manifest['profile']), (1, profile))
+        hashes = {path: hashlib.sha256(contents).hexdigest() for path, contents in expected.items()}
+        self.assertEqual(manifest['initial_files'], hashes)
+        canonical = json.dumps(hashes, sort_keys=True, separators=(",", ":")).encode()
+        self.assertEqual(manifest['bundle_sha256'], hashlib.sha256(canonical).hexdigest())
+        if root == self.root:
+            self.assertIsNone(manifest['template_revision'])
+            self.assertIsNone(manifest['template_dirty'])
+        else:
+            revision = subprocess.check_output(['/usr/bin/git', 'rev-parse', 'HEAD'],
+                                               cwd=root, text=True).strip()
+            self.assertEqual(manifest['template_revision'], revision)
 
     def assert_parent_intact(self, *expected):
         self.assertEqual(set(self.parent.iterdir()), {self.sentinel, *expected})
@@ -213,6 +228,19 @@ class ScaffoldTests(unittest.TestCase):
         self.assertEqual(list(destination.iterdir()), [destination / "foreign.txt"])
         self.assertEqual((destination / "foreign.txt").read_bytes(), b"keep foreign")
         self.assert_parent_intact(destination)
+
+    def test_failure_writing_origin_rolls_back_scaffold(self):
+        write_file = scaffold.write_file
+
+        def fail_manifest(descriptor, contents):
+            if b'"bundle_sha256"' in contents:
+                os.write(descriptor, b"partial manifest")
+                raise OSError(errno.ENOSPC, "disk full")
+            write_file(descriptor, contents)
+
+        with patch.object(scaffold, "write_file", fail_manifest), redirect_stderr(io.StringIO()):
+            self.assertEqual(scaffold.main(self.args(), root=self.root), 1)
+        self.assert_parent_intact()
 
     def test_symlink_swapped_in_after_reservation_is_preserved(self):
         destination = self.parent / "example"

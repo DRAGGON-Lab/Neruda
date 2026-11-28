@@ -19,7 +19,7 @@ class DriverTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.base = Path(self.temp.name)
+        self.base = Path(self.temp.name).resolve()
         self.root = self.base / 'tex root'
         self.root.mkdir()
         tools = {}
@@ -166,8 +166,7 @@ class DriverTests(unittest.TestCase):
             directory = console.parent
             for suffix in ('.pdf', '.log', '.blg', '.bbl', '.fls'):
                 (directory / ('main' + suffix)).write_text('fixture output')
-            (directory / 'main.pdf').write_bytes(b'%PDF-1.7\n%%EOF\n')
-            console.write_text('fixture console')
+            self.fake_compile(command, cwd, env, console, timeout)
             self.assertEqual(command[0], str((self.root / 'latexmk').resolve()))
             self.assertIn('-norc', command)
             self.assertIn('-no-shell-escape', (directory / 'latexmkrc').read_text())
@@ -189,7 +188,21 @@ class DriverTests(unittest.TestCase):
         (self.run / 'main.pdf').write_bytes(b'%PDF-1.7\n%%EOF\n')
         (self.run / 'main.fls').write_text(f'PWD {cwd}\nINPUT ./main.tex\n')
         console.write_text('fixture console')
+        self.record_pass('tex', [cwd / 'main.tex'])
+        self.record_pass('biber', [])
         return 0
+
+    def record_pass(self, family, paths, number=None):
+        directory = self.run / 'passes'
+        sequence = number or len(list(directory.glob('*.json'))) + 1
+        prefix = directory / f'{sequence:04d}-{family}'
+        suffix = '.fls' if family == 'tex' else '.blg'
+        archived = prefix.with_suffix(suffix)
+        archived.write_bytes((self.run / ('main' + suffix)).read_bytes())
+        prefix.with_suffix('.json').write_text(json.dumps({
+            'tool': family, 'evidence': [str(archived.relative_to(self.run))],
+            'inputs': [{'path': str(p), 'resolved': str(p.resolve())} for p in paths], 'errors': [],
+        }))
 
     def new_figure(self):
         receipt = {'version': 1, 'runtime': 'fixture runtime'}
@@ -209,6 +222,7 @@ class DriverTests(unittest.TestCase):
         def compile_with_figure(*args):
             self.fake_compile(*args)
             (self.run / 'main.fls').write_text(f'PWD {args[1]}\nINPUT ../{relative}\n')
+            self.record_pass('tex', [args[1] / '..' / relative], 1)
             return 0
         for options, compiler, code, diagnostic in [
             ([], compile_with_figure, 1, 'consumed generated figure has no matching receipt'),
@@ -224,6 +238,148 @@ class DriverTests(unittest.TestCase):
                 if not code:
                     self.assertEqual(receipt['verified_figures'], {relative: figure})
                     self.assertEqual(receipt['consumed_project_files'][relative], figure['output']['sha256'])
+
+    def declared_input(self, path):
+        manifest = self.base / 'external.json'
+        manifest.write_text(json.dumps([{'id': 'study-input', 'path': str(path),
+                                        'sha256': latex.digest(path)}]))
+        return manifest
+
+    def test_external_first_pass_and_symlink_require_declaration(self):
+        target = self.base / 'outside data.csv'
+        target.write_text('x,y')
+        alias = self.project / 'src/data.csv'
+        alias.symlink_to(target)
+        manifest = self.declared_input(target)
+
+        def first_pass(*args):
+            self.fake_compile(*args)
+            self.record_pass('tex', [alias], 1)
+            self.record_pass('tex', [args[1] / 'main.tex'])
+            return 0
+
+        with patch.object(latex, 'execute', side_effect=first_pass):
+            code, _, diagnostic = self.cli('build')
+            self.assertEqual(code, 1)
+            self.assertIn('tex input ' + str(alias), diagnostic)
+            self.assertIn('undeclared external dependency', diagnostic)
+            self.assertEqual(self.cli('build', '--external-inputs', str(manifest))[0], 0)
+        raw = json.loads((self.run / 'receipt.json').read_text())
+        self.assertEqual(raw['consumed_external_inputs'], {'study-input': latex.digest(target)})
+        self.assertEqual(len(raw['pass_evidence']), 6)
+        target.write_text('changed')
+        with patch.object(latex, 'execute') as execute:
+            code, _, diagnostic = self.cli('build', '--external-inputs', str(manifest))
+        self.assertEqual(code, 2)
+        self.assertIn('external input hash mismatch', diagnostic)
+        execute.assert_not_called()
+
+    def test_biber_external_bibliography_is_classified(self):
+        outside = self.base / 'external.bib'
+        outside.write_text('bibliography')
+        manifest = self.declared_input(outside)
+
+        def compile_document(*args):
+            self.fake_compile(*args)
+            (self.run / 'main.blg').write_text(f"INFO - Found BibTeX data source '{outside}'\n")
+            self.record_pass('biber', list(latex.biber_paths(self.run / 'main.blg', args[1])), 2)
+            return 0
+
+        with patch.object(latex, 'execute', side_effect=compile_document):
+            code, _, diagnostic = self.cli('build')
+            self.assertEqual(code, 1)
+            self.assertIn(f'biber input {outside}: undeclared external dependency', diagnostic)
+            self.assertEqual(self.cli('build', '--external-inputs', str(manifest))[0], 0)
+        raw = json.loads((self.run / 'receipt.json').read_text())
+        self.assertEqual(raw['consumed_external_inputs']['study-input'], latex.digest(outside))
+
+    def test_changed_unlisted_extension_fails_build(self):
+        source = self.project / 'src/measurements.csv'
+        source.write_text('initial')
+
+        def compile_document(*args):
+            self.fake_compile(*args)
+            self.record_pass('tex', [source], 1)
+            # Rename changes file identity even when replacement bytes match.
+            replacement = source.with_suffix('.tmp')
+            replacement.write_bytes(source.read_bytes())
+            replacement.replace(source)
+            return 0
+
+        with patch.object(latex, 'execute', side_effect=compile_document):
+            code, _, diagnostic = self.cli('build')
+        self.assertEqual(code, 1)
+        self.assertIn('measurements.csv: input changed during compilation', diagnostic)
+
+    def test_capture_archives_each_tex_pass_and_blocks_remote_bibliography(self):
+        run = self.base / 'capture'
+        (run / 'passes').mkdir(parents=True)
+        fls = run / 'main.fls'
+        for filename in ('first.dat', 'second.dat'):
+            def fake_tool(*args):
+                fls.write_text(f'PWD {self.project}\nINPUT {filename}\n')
+                return subprocess.CompletedProcess([], 0)
+            with patch.object(latex.subprocess, 'run', side_effect=fake_tool):
+                self.assertEqual(latex.capture_tool(['tex', str(run), 'main', 'fixture']), 0)
+        for index, filename in enumerate(('first.dat', 'second.dat'), 1):
+            evidence = run / 'passes' / f'{index:04d}-tex.fls'
+            self.assertIn(f'INPUT {filename}', evidence.read_text())
+        (run / 'main.bcf').write_text(
+            '<controlfile><datasource type="file" datatype="bibtex">https://example.org/a.bib'
+            '</datasource></controlfile>')
+        with patch.object(latex.subprocess, 'run') as execute, redirect_stderr(io.StringIO()) as stderr:
+            self.assertEqual(latex.capture_tool(['biber', str(run), 'main', 'fixture']), 1)
+        execute.assert_not_called()
+        self.assertIn('remote bibliography source refused', stderr.getvalue())
+        self.assertTrue((run / 'passes/0003-biber.bcf').is_file())
+
+    def test_bibliography_none_skips_biber_and_checks_receipt(self):
+        (self.root / 'biber').unlink()
+
+        def no_bibliography(command, *args):
+            self.assertIn('-bibtex-', command)
+            self.fake_compile(command, *args)
+            for path in (self.run / 'passes').glob('*-biber.*'):
+                path.unlink()
+            for name in ('main.blg', 'main.bbl'):
+                (self.run / name).unlink()
+            return 0
+
+        args = ('--bibliography', 'none')
+        self.assertEqual(self.cli('preflight', *args)[0], 0)
+        with patch.object(latex, 'execute', side_effect=no_bibliography):
+            self.assertEqual(self.cli('build', *args)[0], 0)
+        raw = json.loads((self.run / 'receipt.json').read_text())
+        self.assertEqual(raw['bibliography'], 'none')
+        self.assertNotIn('biber', raw['tool_identities'])
+        self.assertEqual(self.cli('check', '--output', str(self.run))[0], 0)
+        self.assertEqual(self.cli('seal-cache', '--output', str(self.run))[0], 0)
+
+        def unexpected_bibliography(*args):
+            no_bibliography(*args)
+            (self.run / 'main.bcf').write_text('unexpected bibliography')
+            return 0
+
+        with patch.object(latex, 'execute', side_effect=unexpected_bibliography):
+            code, _, diagnostic = self.cli('build', '--bibliography', 'none')
+        self.assertEqual(code, 1)
+        self.assertIn('document requests bibliography processing', diagnostic)
+
+    def test_version_one_receipt_and_cache_still_work(self):
+        with patch.object(latex, 'execute', side_effect=self.fake_compile):
+            self.assertEqual(self.cli('build')[0], 0)
+            baseline = self.run
+            path = baseline / 'receipt.json'
+            receipt = json.loads(path.read_text())
+            receipt['version'] = 1
+            receipt.pop('bibliography')
+            receipt['artifacts'] = {name: value for name, value in receipt['artifacts'].items()
+                                    if not name.startswith('passes/')}
+            path.write_text(json.dumps(receipt))
+            self.assertEqual(self.cli('check', '--output', str(baseline))[0], 0)
+            self.assertEqual(self.cli('seal-cache', '--output', str(baseline))[0], 0)
+            self.assertEqual(self.cli('build', '--cache-from', str(baseline))[0], 0)
+        self.assertEqual(json.loads((self.run / 'receipt.json').read_text())['cache_baseline_receipt_version'], 1)
 
     def test_missing_or_stale_figure_refuses_before_compile(self):
         path, figure = self.new_figure()
@@ -291,10 +447,10 @@ class DriverTests(unittest.TestCase):
         self.assertEqual((code, json.loads(stdout)), (0, {'errors': []}))
         self.assertEqual({path: path.stat().st_mtime_ns for path in self.run.rglob('*')}, before)
         raw = json.loads((self.run / 'receipt.json').read_text())
-        self.assertEqual(raw['version'], 1)
+        self.assertEqual(raw['version'], 2)
         self.assertEqual(raw['entry'], 'src/main.tex')
         self.assertEqual(raw['pdf_metadata'], {'version': '1.7', 'page_count': 1})
-        for name in ('main.pdf', 'main.log', 'main.blg', 'main.fls', 'main.bbl', 'console.log'):
+        for name in raw['artifacts']:
             path = self.run / name
             original = path.read_bytes()
             path.write_bytes(original + b'changed')
@@ -363,15 +519,14 @@ class DriverTests(unittest.TestCase):
         path.write_text('font fixture')
         fls = self.base / 'input.fls'
         fls.write_text('INPUT ' + str(path.resolve()) + '\n')
-        self.assertEqual(latex.consumed_inputs(fls, self.root.resolve()),
-                         {'font with spaces.otf': latex.digest(path)})
+        self.assertEqual(list(latex.recorder_paths(fls)), [path.resolve()])
 
     def test_generated_dependency_sources_do_not_contaminate_project_identity(self):
         for name in ('build', '.tools'):
             path = self.project / name
             path.mkdir()
             (path / 'unrelated.tex').write_text('generated dependency source')
-        self.assertEqual(set(latex.project_sources(self.project)), {'src/main.tex'})
+        self.assertEqual(set(latex.project_sources(self.project, latex.snapshot_project(self.project))), {'src/main.tex'})
 
     def test_entry_name_is_not_interpreted_as_a_latexmk_option(self):
         (self.project / 'src/-e.tex').write_text('fixture')
