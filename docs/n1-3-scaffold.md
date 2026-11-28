@@ -54,6 +54,22 @@ revision. The manifest ties their source hashes to the clean Neruda revision
 used for scaffolding. Exported receipts and logs replace local paths with
 tokens and trim trailing whitespace. PDFs retain their original bytes.
 
+## Git provenance review follow-up
+
+The driver now checks that the document directory is the Git worktree root
+before recording its revision or dirty state. The regression suites passed
+78 tests, including standalone directories, independent repositories with
+clean and dirty state, nested projects, and inherited Git overrides.
+
+On the same Apple Silicon host, preflight, all three network-denied builds,
+and output checks passed using clean revision
+`437caddfac9ea647cb74a1e6ff141815de965bc3`. Both scaffolded projects were
+inside a temporary parent Git repository. All three receipts show null
+project-level Git fields. The new PDF bytes have different hashes, and all
+ten rendered-page hashes match the visually inspected originals. The
+[recheck record](evidence/n1-3-git-provenance-recheck.json) contains the
+driver, receipt fields and artifact identities.
+
 ## Reproduce the native review
 
 From Neruda on the provisioned lab Mac, use the exact build commands below.
