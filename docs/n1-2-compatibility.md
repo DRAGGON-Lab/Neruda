@@ -1,5 +1,90 @@
 # N1.2 compatibility report
 
+## New candidate: TeX Live / LuaLaTeX
+
+Native Apple Silicon validation **passes locally; cross-platform acceptance is
+pending**. The maintainer installed the verified MacTeX 2026 package and approved
+separate native Biber extraction. The observed unit is LuaHBTeX 1.24.0, latexmk
+4.88, Biber 2.21 and biblatex 3.21. See [ADR-003](decisions/ADR-003.md),
+[provisioning](mactex-provisioning.md), and [daily commands](latex-stack.md).
+
+| Platform | New candidate status |
+|---|---|
+| macOS arm64, macOS 27.2.1 | local compatibility passes; independent acceptance pending |
+| macOS x86_64 | untested |
+| Linux x86_64 | prepared March 22 snapshot validation; execution approved, results pending |
+
+The final local matrix uses the exact driver digest recorded in each receipt and
+the harness digest in its summary. It ran against HEAD
+`6e3624da58f31eb1904cfadd858118ebbf2a907e` with explicitly recorded dirty state;
+this is not an immutable release or a claim that uncommitted code is reviewed.
+
+| Scenario | Article | Presentation | Handout |
+|---|---|---|---|
+| Cold writable caches; local distribution installed | pass | pass | pass |
+| Warm sealed compiler/font caches; fresh outputs | pass | pass | pass |
+| OS-network-denied warm caches | pass | pass | pass |
+| OS-network-denied empty writable caches | pass | pass | pass |
+| Page count | 2 | 6 | 5 |
+
+A successful HTTPS control probe followed by a failing probe under macOS
+`sandbox-exec` `(deny network*)` validates the OS network boundary. No compiler
+`--only-cached` flag is involved. Missing installed dependencies refuse with exit
+2 before compilation. All final TeX/Biber checks pass, with actual Biber processing
+and resolved references; consumed package/font hashes match the lock. Shell escape
+remains disabled. Environment isolation is not a filesystem-access sandbox.
+
+All 13 reference pages were inspected at 1500-pixel width using macOS PDFKit:
+ordered equation definitions, Unicode/unit glyphs, table values, references,
+bibliography, clipping, overlap and handout overlay collapse. No clipping or
+overlap was observed. The article's bibliography occupies page 2; hyperlink boxes
+and default Beamer navigation remain unchanged fixture styling. All 52 final
+matrix raster pages match the inspected references, including the November 28
+rerun with literal filename handling and pruned generated-source directories. The standalone article adds
+2 matching pages, for 54 final comparison pages. Independent human/build review
+remains pending; this agent inspection does not substitute for it.
+
+PDF bytes were identical across the four local scenarios for each fixture:
+
+| Fixture | SHA-256 |
+|---|---|
+| Article | `46c7a5650ce7b35c382677be04c3776b5c8b51f77a32608f6dbe893e34ec190b` |
+| Presentation | `967f0adf9cea988dfbc29e423d1b009ebb8b40daef1344af20966ffac5987ebd` |
+| Handout | `ef397b582c25c734fd95f1b01219cb29252b92f644b009bb75c54e7fe8549432` |
+
+This demonstrates repeatability for these inputs on this host, not cross-platform
+byte identity. Previous command-line revisions have different PDF trailer IDs but
+identical rendered pages; their artifacts and hashes remain preserved. A copied article project outside the Neruda checkout also passed
+with local tools under OS network denial, without editor/AI dependencies.
+
+Sanitized [latest receipts, logs and PDFs](../experiments/n1_2/evidence/texlive-arm64-20261128/)
+include the [case summary](../experiments/n1_2/evidence/texlive-arm64-20261128/summary.json),
+[visual comparison](../experiments/n1_2/evidence/texlive-arm64-20261128/visual-comparison.json),
+and link to [preserved universal-Biber/font-cache failures](../experiments/n1_2/evidence/texlive-arm64-20261127/diagnostics/). Manifest hashes distinguish
+raw and sanitized exports. Operational caches/seals remain local and cannot be
+reconstructed or authorized from sanitized receipts. A durable copy and verified
+installer/native executable are in the maintainer-selected
+`Neruda_artifacts/texlive-2026-native-20261127` store.
+
+Regression verification: 16 driver tests plus 41 N1.2 tests pass; YAML syntax and whitespace checks
+pass. Generated `build/` trees are now excluded from historical fixture hashing
+and copying, preventing stale PDFs and caches from contaminating Tectonic tests.
+The earlier interrupted test run is not reported as passing; the corrected complete
+suite passed. Historical Tectonic evidence remains intact. HTTP 429 indicates a
+provisioning failure, not Tectonic/Biber incompatibility.
+
+The March 1 ISO is a different snapshot (including geometry 5.9 versus 6.0 and
+latexmk 4.87 versus 4.88). The TUG-documented March 22 archive matches all 4,478
+installed packages with shared runtime files. Signed-metadata authentication must
+run in CI before any archive code is executed. The maintainer approved publishing
+and running the [prepared Ubuntu procedure](texlive-linux-provisioning.md).
+At this report update execution is pending, so no new CI success or evidence link
+is asserted. Native Intel/Linux execution, editor GUI validation, independent review
+and maintainer acceptance remain open.
+N1.2 remains **not ready for acceptance**.
+
+## Historical Tectonic compatibility evidence
+
 Status: **engineering work through `fc00ab6` approved; compatibility acceptance pending**. Observations: 2026-11-27.
 Base Neruda revision: `7bdf17ce40577a15877ac8fe0d79ee9a9b4f985c`.
 Fixtures and runner were introduced for review in PR #11 at

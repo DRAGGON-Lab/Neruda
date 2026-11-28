@@ -1,0 +1,31 @@
+name: TeX Live candidate regression
+on:
+  pull_request:
+    paths:
+      - 'scripts/latex.py'
+      - 'tests/test_latex.py'
+      - 'experiments/n1_2/*.py'
+      - 'tools/texlive*'
+      - '.github/workflows/texlive-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - id: driver
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - id: experiment
+        if: always()
+        run: python3 -m unittest discover -s experiments/n1_2 -p 'test_*.py' -v
+      - name: Summarize independent regressions
+        if: always()
+        env:
+          DRIVER: ${{ steps.driver.outcome }}
+          EXPERIMENT: ${{ steps.experiment.outcome }}
+        run: |
+          printf '## Behavioral regression results\n\n| Suite | Result |\n|---|---|\n| Driver | %s |\n| Experiment | %s |\n\nCompilation is tested separately.\n' "$DRIVER" "$EXPERIMENT" >> "$GITHUB_STEP_SUMMARY"

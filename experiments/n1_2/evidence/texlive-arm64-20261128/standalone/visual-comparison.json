@@ -1,0 +1,17 @@
+{
+  "renderer": "macOS PDFKit; 1500 pixel width",
+  "pdf_sha256": "e46f6a8d3a57334ceb591b5871d894a467e1344b7c4ac3e127beed74bbf2f41a",
+  "page_count": 2,
+  "pages": [
+    {
+      "page": "page-1.png",
+      "sha256": "8da8178a3d74ec9108fb9a0077f69d8da031baf174148a1279fc9cc68d355b3a",
+      "matches_inspected_reference": true
+    },
+    {
+      "page": "page-2.png",
+      "sha256": "c56659a0c92c7c04e1b5c5e2d63c28ba33c4546ba2870f325b17099b2c9ae81d",
+      "matches_inspected_reference": true
+    }
+  ]
+}

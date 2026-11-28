@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is '<CI_WORK>/slides/build/1795824220303149000-44af2d3c/main.blg'
+[22] biber-darwin:342> INFO - === Sat Nov 28, 2026, 00:03:48
+[37] Biber.pm:421> INFO - Reading '<CI_WORK>/slides/build/1795824220303149000-44af2d3c/main.bcf'
+[58] Biber.pm:1002> INFO - Found 1 citekeys in bib section 0
+[62] Biber.pm:4487> INFO - Processing section 0
+[67] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[68] bibtex.pm:1713> INFO - LaTeX decoding ...
+[71] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[90] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[90] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[90] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[90] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[96] bbl.pm:676> INFO - Writing '<CI_WORK>/slides/build/1795824220303149000-44af2d3c/main.bbl' with encoding 'UTF-8'
+[97] bbl.pm:779> INFO - Output to <CI_WORK>/slides/build/1795824220303149000-44af2d3c/main.bbl

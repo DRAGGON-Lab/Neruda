@@ -1,0 +1,10 @@
+{
+  "native_database_sha256": "ca39e6791582be6bc55d34c5f82e72e1d2f97bffade5e892e7f0e537783d81d2",
+  "native_install_profile_date": "# texlive.profile written on Sun Mar 22 20:00:25 2026 UTC",
+  "archive_date": "2026-03-22",
+  "repository": "https://texlive.info/tlnet-archive/2026/03/22/tlnet",
+  "shared_runtime_packages_matched": 4478,
+  "mismatches": [],
+  "local_signature_authentication": "not_run: GnuPG unavailable; CI must verify before any code executes",
+  "source_pins_sha256": "0f6a5a357bba99a7b8d153e67cb2de14a94978481b301e6b37e0602af97299e4"
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/usr/local/texlive/2026/bin/universal-darwin/biber",
+    "--version"
+  ],
+  "exit_code": 255,
+  "source_sha256": "d3fb508fcd0623e2f8e802f8ff49acdf0fd6fe33874cf7ea9734d6b3334dfe17",
+  "expected": "startup reports version",
+  "observed": "unsupported lipo -extract_family; actual version unavailable from this executable",
+  "derived_version_observed": "2.21",
+  "derived_sha256": "a1a2784931d9156a9d4cc8cb609912d533f04365d2e4aa7b902001a2f1a65066",
+  "installed_original_unchanged": true
+}

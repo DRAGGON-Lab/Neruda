@@ -1,0 +1,31 @@
+{
+  "receipt_sha256": "a6d5ea5399921d425675f84eb71b1298ac4c01923bad187e670c1858f6f4394a",
+  "inventory": {
+    "font-cache/luatex-cache/generic/names/luaotfload-lookup-cache.luc": "e1b6cae5ff86c9cfa2a0d37d3a9e4f23d2708f93efb8d8e2d82e90cbce85c796",
+    "font-cache/luatex-cache/generic/names/luaotfload-names.lua.gz": "5c82ff616dcec8a6336cb75200d5b1c01fb91282e15f06c32af92df623ab5327",
+    "font-cache/luatex-cache/generic/names/luaotfload-lookup-cache.lua": "46135cf340eebe69457c1775b6e78a126bc0cd0d2d6182bf3fa1a9fdf5512e2c",
+    "font-cache/luatex-cache/generic/names/luaotfload-names.luc.gz": "e80c937923fabc1382e662cadc390e8e03cc758510f5b1394948bc1858dcfeae",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-italic.lua": "df272ea8317c8c52e477653e11ea6c98f04dbbc8205ddfcb818d9f8afe575601",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-bold.luc": "04bddb2f29094bb4d2d48f04c3a2c2db6926f00365b136e4452f7805433f7b23",
+    "font-cache/luatex-cache/generic/fonts/otl/lmmono10-regular.lua": "ac34ccf9655e2c8b55e5c383bdea8f8b7887e0a0188232898bf99a10b5431218",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-boldoblique.lua": "3f54551c09f4b3fc7d5aeb142fcaa4b8ac031c708753344eb190aa949e81049a",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.lua": "ac552ce74833e21fdc877b6ae40c7be49499cb6f1854bfce969a563e9400c077",
+    "font-cache/luatex-cache/generic/fonts/otl/lmmono10-italic.lua": "129ba5ca0507cf6d0158b7c10c63d128dc9b9d80ac6ed9ea1f9e0ced9063b89f",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-oblique.luc": "d42a62822d9868bc329bba467bdb05d7dbeee5065aaeb58964d5667c70c06bca",
+    "font-cache/luatex-cache/generic/fonts/otl/latinmodern-math.luc": "1d1e7e049a4549fbead093db76aca79b74ac3044b06f49b9a1227c887de5586e",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-regular.luc": "cfe197cc5cc190ade711fde74bfa1c87fca479e8e9eeadaffd2a0890e31105c3",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-regular.lua": "87a7592dcbac93ee74907ce4879ebc17fe2faf8a4243d189f460b439f2c37f3c",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-bold.luc": "cb420b1e7fff133756530f02a3bae11062ff9eae0b24457db179cdf59f8a7191",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-bold.lua": "5c1755c6f161f6882eb2ba096d96e84bf5b7d8035901e038c31b5d6fdcc0eb4d",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-italic.luc": "f024f42d6028f47bfa9fcac31c3ba9fcdf74570a8502c3c76de24c1a763322fe",
+    "font-cache/luatex-cache/generic/fonts/otl/lmmono10-regular.luc": "4cdd8b479240d075b53c28443d369634fe037db8a8733eacf55dea328ccdfc79",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-regular.luc": "435cf15271cde61a1d941b3d8269a7075f82a41a2ba63408c278a900c5d413aa",
+    "font-cache/luatex-cache/generic/fonts/otl/latinmodern-math.lua": "612f1d57290192feadaecde7043115cb97d492b22e0f0339e29dd264a06dfd20",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-regular.lua": "9c3efe5ad24b4d13171f065e21e6bf85cc92d43699dfca220ad1f1e786c21cc7",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-oblique.lua": "f91a93b007426d1dff8494a56c991134f94f9e128753ffffb64c72989bfc45dd",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc": "4256cac44349d34ed82942d12e10aa8e7e786328fee17a200656e41c2aa90e0d",
+    "font-cache/luatex-cache/generic/fonts/otl/lmmono10-italic.luc": "9ad0956e230e6b22d16da32971fd3a820bb6793a6c061affd8361935adf52ba0",
+    "font-cache/luatex-cache/generic/fonts/otl/lmsans10-boldoblique.luc": "d770016658aaa4b155441651aa395e018566b091d8309537ee98fd8bf7c308fc",
+    "font-cache/luatex-cache/generic/fonts/otl/lmroman10-bold.lua": "d4896208b0c837164a784fc6e3147248d73d33a19723062cf62f9aaadc6300e5"
+  }
+}

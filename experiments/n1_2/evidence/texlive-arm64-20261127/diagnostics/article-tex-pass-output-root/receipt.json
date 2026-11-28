@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/usr/local/texlive/2026/bin/universal-darwin/lualatex",
+    "-no-shell-escape",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-recorder",
+    "main.tex"
+  ],
+  "exit_code": 0,
+  "TEXMFOUTPUT": "<NERUDA>/.tools/texlive-provisioning-20261127/article-tex-pass-output-root",
+  "case": "TeX-only explicit output root"
+}

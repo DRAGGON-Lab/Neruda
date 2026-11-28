@@ -9,7 +9,7 @@ Human maintainer approves compatibility, migration, permissions, releases and sc
 ## Startup and task selection
 
 - Confirm repository, Git revision, dirty state, target document or infrastructure task, permitted paths and explicit authorization. Preserve unrelated edits and original LaTexProjects working projects.
-- Read task scope/acceptance, upstream provenance and any verified local preflight instructions. Bootstrap has no Neruda script, compiler wrapper or build runner; do not execute invented commands or upstream scripts as native Neruda commands.
+- Read task scope/acceptance, upstream provenance and any verified local preflight instructions. The current candidate commands and observed compatibility are documented in [the stack guide](docs/latex-stack.md). Do not execute invented commands or upstream scripts as native Neruda commands.
 - For ordinary changes use small verifiable slices with appropriate tests. L2/L3 tasks require explicit contract, design/acceptance, independent verification and human acceptance. Return ambiguous requirements, compatibility assumptions, substantial refactors and schema changes to planning and ADR review before implementation.
 - Do not install, upgrade, repair, synchronize, delete caches or regenerate dependency locks without approval of the exact mutation. Read-only diagnosis first: expected and actual version/error, command, network use, touched files/environment and validation plan. Do not set approval flags on the user's behalf.
 

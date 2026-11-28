@@ -1,0 +1,10 @@
+{
+  "/Distribution": {
+    "range_bytes_match_verified_archive": true,
+    "sha256": "e8d8a5e4d1a29561d3a81589007c73d443f0f1d9ef5c9f29dae73dcd5c09f3c4"
+  },
+  "/TeXLive-2026-Start.pkg/Scripts": {
+    "range_bytes_match_verified_archive": true,
+    "sha256": "ad12b0fa33d6eff0a9429eb9f88f27c6ee22bc462dd7cd4a2deff35a51827996"
+  }
+}

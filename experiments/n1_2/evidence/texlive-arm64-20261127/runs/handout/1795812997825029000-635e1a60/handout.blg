@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is '<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812997825029000-635e1a60/handout.blg'
+[23] biber-darwin:342> INFO - === Fri Nov 27, 2026, 20:56:57
+[39] Biber.pm:421> INFO - Reading '<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812997825029000-635e1a60/handout.bcf'
+[61] Biber.pm:1002> INFO - Found 1 citekeys in bib section 0
+[66] Biber.pm:4487> INFO - Processing section 0
+[70] Biber.pm:4678> INFO - Looking for bibtex file 'references.bib' for section 0
+[72] bibtex.pm:1713> INFO - LaTeX decoding ...
+[74] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[91] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[91] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[91] Biber.pm:4307> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[91] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[94] bbl.pm:676> INFO - Writing '<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812997825029000-635e1a60/handout.bbl' with encoding 'UTF-8'
+[95] bbl.pm:779> INFO - Output to <NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812997825029000-635e1a60/handout.bbl

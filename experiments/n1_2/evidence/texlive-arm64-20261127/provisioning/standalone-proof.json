@@ -1,0 +1,24 @@
+{
+  "snapshot": "<STANDALONE_PROJECT>",
+  "exit_code": 0,
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-p",
+    "(version 1) (allow default) (deny network*)",
+    "<PYTHON3>",
+    "<STANDALONE_PROJECT>/scripts/latex.py",
+    "build",
+    "--project",
+    "<STANDALONE_PROJECT>",
+    "--entry",
+    "src/main.tex",
+    "--tex-root",
+    "/usr/local/texlive/2026",
+    "--lock",
+    "<STANDALONE_PROJECT>/tools/texlive-lock.json",
+    "--biber",
+    "<STANDALONE_PROJECT>/tools/biber"
+  ],
+  "stdout": "Build receipt: <STANDALONE_PROJECT>/build/1795812865176671000-e83d1707/receipt.json\n",
+  "stderr": ""
+}

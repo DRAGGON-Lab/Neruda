@@ -1,0 +1,377 @@
+{
+  "cases": [
+    {
+      "case": "network-control",
+      "command": [
+        "/usr/bin/curl",
+        "--head",
+        "--fail",
+        "--max-time",
+        "15",
+        "https://tug.ctan.org/systems/mac/mactex/mactex-20260324.pkg.sha512"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "network-denied",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "/usr/bin/curl",
+        "--head",
+        "--fail",
+        "--max-time",
+        "15",
+        "https://tug.ctan.org/systems/mac/mactex/mactex-20260324.pkg.sha512"
+      ],
+      "exit_code": 6,
+      "expected_exit_code": 6
+    },
+    {
+      "case": "cold-article",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article",
+        "--entry",
+        "src/main.tex"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "cold-slides",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides",
+        "--entry",
+        "src/main.tex"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "cold-handout",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout",
+        "--entry",
+        "src/handout.tex"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "seal-article",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "seal-cache",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--output",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article/build/1795812933668332000-338ad01e"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "seal-slides",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "seal-cache",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--output",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides/build/1795812933668341000-c4e80d79"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "seal-handout",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "seal-cache",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--output",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812933668347000-6e923c7f"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "warm-article",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article",
+        "--entry",
+        "src/main.tex",
+        "--cache-from",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article/build/1795812933668332000-338ad01e"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "warm-slides",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides",
+        "--entry",
+        "src/main.tex",
+        "--cache-from",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides/build/1795812933668341000-c4e80d79"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "warm-handout",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout",
+        "--entry",
+        "src/handout.tex",
+        "--cache-from",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812933668347000-6e923c7f"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "offline-article",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article",
+        "--entry",
+        "src/main.tex",
+        "--cache-from",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article/build/1795812933668332000-338ad01e"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "offline-slides",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides",
+        "--entry",
+        "src/main.tex",
+        "--cache-from",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides/build/1795812933668341000-c4e80d79"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "offline-handout",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout",
+        "--entry",
+        "src/handout.tex",
+        "--cache-from",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout/build/1795812933668347000-6e923c7f"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "offline-empty-article",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/article",
+        "--entry",
+        "src/main.tex"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "offline-empty-slides",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/slides",
+        "--entry",
+        "src/main.tex"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "offline-empty-handout",
+      "command": [
+        "/usr/bin/sandbox-exec",
+        "-p",
+        "(version 1) (allow default) (deny network*)",
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "build",
+        "--tex-root",
+        "/usr/local/texlive/2026",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber",
+        "--project",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/handout",
+        "--entry",
+        "src/handout.tex"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0
+    },
+    {
+      "case": "missing-dependency",
+      "command": [
+        "<PYTHON3>",
+        "<NERUDA>/scripts/latex.py",
+        "preflight",
+        "--tex-root",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/matrix-final/missing-tex",
+        "--lock",
+        "<NERUDA>/tools/texlive-lock.json",
+        "--biber",
+        "<NERUDA>/.tools/texlive-provisioning-20261127/arm64/biber"
+      ],
+      "exit_code": 2,
+      "expected_exit_code": 2
+    }
+  ],
+  "exit_code": 0,
+  "harness_sha256": "385247d6676ae5c9be36a190269c62c3f9aa1ce4a502c03dd626d95ec9b378eb",
+  "platform": "macOS-27.2.1-arm64-arm-64bit",
+  "visual_review": "separate required check"
+}

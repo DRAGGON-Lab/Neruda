@@ -19,6 +19,19 @@ HERE = Path(__file__).resolve().parent
 BUNDLE = "https://data1.fullyjustified.net/tlextras-2022.0r0.tar"
 
 
+def fixture_inputs():
+    """Generated build trees are not source inputs or reusable fixture assets."""
+    inputs = {}
+    for kind in ('article', 'slides'):
+        for directory, subdirectories, names in os.walk(HERE / kind):
+            subdirectories[:] = sorted(name for name in subdirectories if name != 'build')
+            for name in sorted(names):
+                path = Path(directory) / name
+                if path.is_file():
+                    inputs[str(path.relative_to(HERE))] = digest(path)
+    return inputs
+
+
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -169,7 +182,7 @@ def main(argv=None):
                 "status": "not_run", "compilation": "not_run", "case": args.case,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 "architecture": platform.machine(), "platform": platform.platform(), "environment_policy": POLICY,
-                "inputs": {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides") for p in sorted((HERE / kind).rglob("*")) if p.is_file()},
+                "inputs": fixture_inputs(),
                 "tools": {name: {"sha256": digest(args.tool_dir.resolve() / name)} for name in ("tectonic", "biber") if (args.tool_dir.resolve() / name).is_file()},
                 "diagnostic": str(error), "bundle_url": BUNDLE,
                 "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py", "bundle.py")},
@@ -190,8 +203,7 @@ def main(argv=None):
             cold = json.loads((work / "cold" / "receipt.json").read_text())
         except (OSError, ValueError):
             parser.error("warm/offline requires a valid cold receipt")
-        current_inputs = {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides")
-                          for p in sorted((HERE / kind).rglob("*")) if p.is_file()}
+        current_inputs = fixture_inputs()
         if (not isinstance(cold, dict) or cold.get("environment_policy") != POLICY
                 or cold.get("bundle") != dependency
                 or cold.get("harness") != {name: digest(HERE / name) for name in ("run.py", "test_runner.py", "bundle.py")}
@@ -217,8 +229,7 @@ def main(argv=None):
         "timestamp": datetime.now(timezone.utc).isoformat(), "case": args.case,
         "platform": platform.platform(), "architecture": platform.machine(),
         "tools": tools, "bundle": dependency, "cache": str(cache),
-        "inputs": {str(p.relative_to(HERE)): digest(p) for kind in ("article", "slides")
-                   for p in sorted((HERE / kind).rglob("*")) if p.is_file()},
+        "inputs": fixture_inputs(),
         "harness": {name: digest(HERE / name) for name in ("run.py", "test_runner.py", "bundle.py")},
         "builds": [], "visual_review": "not_run", "status": "partial",
         "limitations": ["PDF inspection and font/bundle content identity require independent review",
@@ -235,7 +246,7 @@ def main(argv=None):
         bundle.verify(resource, args.bundle_lock)
         for kind in ("article", "slides"):
             project = run / kind
-            shutil.copytree(HERE / kind, project)
+            shutil.copytree(HERE / kind, project, ignore=shutil.ignore_patterns('build'))
             manifest = project / "Tectonic.toml"
             local_path = Path(os.path.relpath(resource, project)).as_posix()
             contents, count = re.subn(r'(?m)^bundle = .+$', 'bundle = ' + json.dumps(local_path), manifest.read_text())

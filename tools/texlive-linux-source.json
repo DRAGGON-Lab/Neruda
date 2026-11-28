@@ -1,0 +1,13 @@
+{
+  "repository": "https://texlive.info/tlnet-archive/2026/03/22/tlnet",
+  "key_url": "https://tug.org/texlive/files/texlive.asc",
+  "key_sha256": "f9fd0e1a8fb8f06b260a256c88a86244cb1913348d962e63e0b238371be71c64",
+  "primary_fingerprint": "C78B82D8C79512F79CC0D7C80D5E5D9106BAB6BC",
+  "database_xz_sha256": "f6dab808e04d7dc6bc8861b6801af4f8d2b62e7a171ffcd6fa05d8cfb1642a12",
+  "database_sha512": "09fd29acf66b3ffdbd12d382ffc14f56e621ab42ab842a1940b45d8ecfce5db657ae133930f9bfda019ee77032d5c95d9a7c956474566cab4d2bc8c1a4d5f272",
+  "installer_sha512": "24644a01251705a82987de520d3983fb6ac36f86b62ec3c61790f3b52f33baec68d457ca871a5b7dc214f8de01870a0eac7b6327ddba8a2a5fee55c97375331a",
+  "installer_sha256": "11877c9ba5356fdfd5a23747f95ad4f467169f3569dce065b1c5b0fe2a0c5052",
+  "native_lock_sha256": "c7495b4936a1eb16a40e8e64578463f091913426c98eb5831d2821f8e6b4f536",
+  "status": "candidate; official signatures must verify in CI before use",
+  "verification_reference": "https://tug.org/texlive/verify.html"
+}
